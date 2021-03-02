@@ -18,13 +18,24 @@
 
 </head>
 
+<style>
+    #footerText {
+        padding-left: 115px;
+        color: rgb(255, 0, 0);
+    }
+
+    .display-4 {
+        color: rgb(8, 8, 8);
+    }
+</style>
+
 <body>
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
     <!-------------------------------------->
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -37,13 +48,13 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing Sarah</a>
+                        <a class="nav-link" href="#">Statistics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
                     </li>
                 </ul>
             </div>
@@ -51,7 +62,7 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Hello, Jupiter!</h1>
+        <h1 class="display-4">Welcome, concerned Costco customer!</h1>
     </div>
 
     <!----------------------------------------------->
@@ -65,7 +76,7 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
 <footer>
-    <p>Sam's foot is definitely not smelly</p>
+    <p id="footerText">Sam's foot is definitely smelly</p>
 </footer>
 </body>
 
