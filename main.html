@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>crowdmApp</title>
+    <title>My BCIT Project</title>
     <meta name="comp1800 boilerplate code" content="my bcit project">
     <meta name="author" content="BCIT">
 
@@ -18,13 +18,26 @@
 
 </head>
 
+<style>
+    body {
+        text-align: center;
+    }
+    #footerText {
+        color: rgb(255, 0, 0);
+    }
+
+    .display-4 {
+        color: rgb(8, 8, 8);
+    }
+</style>
+
 <body>
 
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
     <!-------------------------------------->
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -40,7 +53,10 @@
                         <a class="nav-link" href="#">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Setting</a>
+                        <a class="nav-link" href="#">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
                     </li>
                 </ul>
             </div>
@@ -48,11 +64,11 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">HOMEPAGE</h1>
-    </div>
-
-    <div>
-        <img src="crowdmApp_homepage.jpg" alt="dummyimage.com">
+        <h1 class="display-4">Welcome, concerned Costco customer!<br/>You successfully logged in!</h1>
+        <p id="body">YOUR CONTENT GOES HERE</p>
+        <footer>
+            <p id="footerText">&#169; 2021 crowdmApp</p>
+        </footer>
     </div>
 
     <!----------------------------------------------->
@@ -65,9 +81,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-<footer>
-    <p>Sam's foot is definitely not smelly</p>
-</footer>
+
 </body>
 
 </html>
