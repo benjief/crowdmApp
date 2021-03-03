@@ -21,15 +21,43 @@
 <style>
     #footerText {
         color: rgb(255, 0, 0);
+        position: absolute;
+        bottom: 10px;
     }
 
     .display-4 {
         color: rgb(8, 8, 8);
     }
 
-    #body {
-        font-weight: bold;
+    #pageBody {
+        text-align: center;
     }
+
+    #daySelector {
+        grid-area: daySelector;
+        font-size: 15pt;
+    }
+
+    #statsChart {
+        grid-area: statsChart;
+        width: 100%;
+        height: auto;
+    }
+
+    #contentContainer {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 20% 90%;
+        grid-template-areas:
+            "daySelector"
+            "statsChart";
+        text-align: center;
+        align-items: center;
+        justify-items: center;
+        padding-bottom: 30px;
+    }
+    
+    
 </style>
 
 <body>
@@ -66,7 +94,11 @@
 
     <div class="container">
         <h1 class="display-4">Welcome, concerned Costco customer!</h1>
-        <p id="body">YOUR CONTENT GOES HERE</p>
+        <p id="pageBody"><b>This is our view statistics page</b></p>
+        <div id="contentContainer">
+            <p id="daySelector">&#9001;&nbsp;Monday&nbsp;&#9002;</p>
+            <img id="statsChart" src="images/stats_bar_graph.png">
+        </div>
         <footer>
             <p id="footerText">&#169; 2021 crowdmApp</p>
         </footer>
