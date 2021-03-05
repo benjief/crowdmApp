@@ -87,14 +87,14 @@
                 <option value="4">20499 64 Ave, Langley </option>
                 <option value="5">605 EXPO BLVD, Vancouver </option>
                 <option value="6">9151 Bridgeport Rd, Richmond</option>
-              </select>
-              <label for="floatingSelect">Costco Loctaion</label>
-          </div>
-          <div class="form-floating">
+            </select>
+            <label for="floatingSelect">Costco Loctaion</label>
+        </div>
+        <div class="form-floating">
             <input type="number" class="form-control" id="floatingPassword" placeholder="headcount" min="0">
             <label for="floatingPassword">Enter the headcount</label>
-          </div>
-          <button type="button" class="btn btn-success" id="next-button">Next</button>
+        </div>
+        <a role="button" class="btn btn-success" href="main_employee.html" id="next-button">Next</a>
         <footer>
             <p id="footerText">&#169; 2021 crowdmApp</p>
         </footer>
@@ -105,12 +105,19 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    </script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#next-button").click(function () {
+                alert("Headcount updated");
+            });
+        });
+    </script>
 </body>
 
 </html>
