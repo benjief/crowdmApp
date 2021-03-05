@@ -59,7 +59,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="main.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="login.html">Profile</a>
@@ -97,7 +97,7 @@
             <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
           </div>
-          <button type="button" class="btn btn-success" id="submit-button">Submit</button>
+          <a role="button" class="btn btn-success" href="main.html" id="submit-button">Submit</a>
         <footer>
             <p id="footerText">&#169; 2021 crowdmApp</p>
             
@@ -114,7 +114,14 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#submit-button").click(function () {
+                alert("Thanks for your feedback!");
+            });
+        });
+    </script>
 </body>
 
 </html>
