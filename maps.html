@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <title>My BCIT Project</title>
+    <meta name="comp1800 boilerplate code" content="my bcit project">
+    <meta name="author" content="BCIT">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+    <!-- Optional styles and scripts of your own -->
     <style>
+        body {
+            text-align: center;
+        }
+
+        #footer {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            text-align: center;
+        }
+
+        #footerText {
+            color: rgb(255, 0, 0);
+            height: 50%;
+            position: relative;
+            top: 50%;
+        }
+
+        .display-4 {
+            color: rgb(8, 8, 8);
+        }
+
+        .card {
+            margin-left: 40px;
+            margin-top: 50px;
+        }
+
         .map-container-5 {
             overflow: hidden;
             padding-bottom: 56.25%;
@@ -17,17 +52,51 @@
         .map-container-5 iframe {
             left: 0;
             top: 0;
-            height: 50%;
-            width: 50%;
+            height: 100%;
+            width: 100%;
             position: absolute;
-            margin-left: 350px;
         }
     </style>
+
 </head>
 
+
+
 <body>
+
+    <!-------------------------------------->
+    <!-- The following is HTML for layout -->
+    <!-------------------------------------->
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="maps.html">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="feedback.html" tabindex="-1"
+                            aria-disabled="true">Feedback</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!--Grid row-->
-    <div class="row">
+    <div class="row" style="margin-left: 350px;">
 
         <!--Grid column-->
         <div class="col-md-6 mb-4">
@@ -60,6 +129,18 @@
         <!--Grid column-->
     </div>
     <!--Grid row-->
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+
 </body>
 
 </html>
