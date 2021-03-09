@@ -73,11 +73,11 @@
     </nav>
 
     <div class="container">
-        <h1>Costco Member Login</h1>
+        <h1>Employee Login</h1>
         <h1 class="display-4">Let's get you logged in...</h1>
         <div id="firebaseui-auth-container"></div>
-        <p>If you were trying to login as a Costco employee, click the button below.</p>
-        <a class="btn btn-primary" href="login_employee.html" role="button">Costco Employee Login</a><br><br>
+        <p>If you are not a Costco Employee, please log in as a member below.</p>
+        <a class="btn btn-primary" href="login.html" role="button">Costco Member Login</a><br><br>
         <footer>
             <p id="footerText">&#169; 2021 crowdmApp</p>
         </footer>
@@ -129,7 +129,7 @@
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
-            signInSuccessUrl: 'main.html',
+            signInSuccessUrl: 'main_employee.html',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
