@@ -18,8 +18,8 @@
 
     <style>    
         .pageContainer {
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
         } 
         
         #footer {
@@ -45,23 +45,21 @@
             text-align: center;
         }
     
-        #daySelector {
+        /* #daySelector {
             display: flex;            
             grid-area: daySelector;
             font-size: 15pt;
             padding-top: 10px;
-        }
+        } */
     
-        #statsChart {
-            display: flex;
-            grid-area: statsChart;
+        #bar_chart {
             width: 100%;
             height: auto;
-            padding-top: 500px;
         }
     
         #contentContainer {
             display: grid;
+            padding-top: 50px;
             grid-template-columns: 100%;
             grid-template-rows: 40px 250px;
             grid-template-areas:
@@ -107,11 +105,8 @@
     </nav>
 
     <div class="pageContainer">
-        <h1 class="display-4">Welcome, concerned Costco customer!</h1>
-        <p id="pageBodyText"><b>This is our view statistics page</b></p>
         <div id="contentContainer">
-            <p id="daySelector">&#9001;&nbsp;Monday&nbsp;&#9002;</p>
-            <img id="statsChart" src="images/stats_bar_graph.png">
+            <div id="bar_chart"></div>
         </div>
         <div id="footer">
             <p id="footerText">&#169; 2021 crowdmApp</p>
@@ -136,6 +131,63 @@
     <script>
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth()); 
+    </script>
+
+     <!-- Bar Chart -->
+     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <script type="text/javascript">
+google.load("visualization", "1", {
+    packages: ["corechart"]
+});
+google.setOnLoadCallback(drawVisualization);
+
+$(window).on("throttledresize", function (event) {
+    drawVisualization();
+});
+
+function drawVisualization() {
+
+    var options = {
+        title: "",
+        width: '100%',
+        height: '100%',
+        axisTitlesPosition: 'out',
+        'isStacked': true,
+        pieSliceText: 'percentage',
+        colors: ['#0598d8', '#f97263'],
+        chartArea: {
+            left: "25%",
+            top: "3%",
+            height: "80%",
+            width: "100%"
+        },
+        vAxis: {
+            title: ""
+        },
+        hAxis: {
+            title: "Total Results"
+        }
+    };
+
+    // Create and populate the data table.
+    var data = google.visualization.arrayToDataTable([
+        ['State', 'Male', 'Female'],
+        ['Alaska', 500, 400],
+        ['Alabama', 300, 200],
+        ['California', 1500, 650],
+        ['Colorado', 1200, 470],
+        ['Illinois', 1000, 700],
+        ['Tennesse', 500, 400],
+        ['Texas', 1300, 500],
+        ['Utah', 176, 55],
+        ['Vermont', 310, 240],
+        ['Wyoming', 500, 400]
+    ]);
+
+    // Create and draw the visualization.
+    new google.visualization.BarChart(document.getElementById('bar_chart')).
+    draw(data,options);
+}
     </script>
 
 </body>
