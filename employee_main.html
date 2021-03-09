@@ -14,34 +14,29 @@
 
 
     <!-- Optional styles and scripts of your own -->
-    <style>
-        #footer {
+
+
+</head>
+
+<style>
+    body {
+        text-align: center;
+    }
+    #footerText {
+        color: rgb(255, 0, 0);
+    }
+
+    .display-4 {
+        color: rgb(8, 8, 8);
+    }
+    #footer {
             width: 100%;
             height: 50px;
             position: absolute;
             bottom: 10px;
             text-align: center;
         }
-
-        #footerText {
-            color: rgb(255, 0, 0);
-            height: 50%;
-            position: relative;
-            top: 50%;
-        }
-
-        .display-4 {
-            color: rgb(8, 8, 8);
-        }
-
-        #next-button {
-            margin-top: 20px;
-        }
-    </style>
-
-</head>
-
-
+</style>
 
 <body>
 
@@ -51,7 +46,7 @@
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">crowdmApp</a>
+            <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,16 +54,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="main_employee.html">Home</a>
+                        <a class="nav-link active" href="employee_main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Profile</a>
+                        <a class="nav-link active" href="employee_stats.html">Stats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Map</a>
+                        <a class="nav-link active" href="employee_map.html">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
+                        <a class="nav-link active" href="employee_headcount.html">Headcount</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -76,26 +74,11 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
-        <h2 id="body">Select a Costco Location</h2>
-        <div class="form-floating mb-3">
-            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option selected>Open this select menu</option>
-                <option value="1">3550 Brighton Ave, Burnaby</option>
-                <option value="2">4500 Still Creek Dr, Burnaby</option>
-                <option value="3">7423 King George BLVD, Surrey </option>
-                <option value="4">20499 64 Ave, Langley </option>
-                <option value="5">605 EXPO BLVD, Vancouver </option>
-                <option value="6">9151 Bridgeport Rd, Richmond</option>
-            </select>
-            <label for="floatingSelect">Costco Loctaion</label>
-        </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" id="floatingPassword" placeholder="headcount" min="0">
-            <label for="floatingPassword">Enter the headcount</label>
-        </div>
-        <a role="button" class="btn btn-success" href="main_employee.html" id="next-button">Next</a>
-        <footer>
+        <h1 class="display-4">Welcome, Costco employee!<br/>You successfully logged in!</h1>
+        <a class="btn btn-primary" href="employee_headcount.html" role="button">Head Counter</a><br><br>
+        <a class="btn btn-primary" href="employee_stats.html" role="button">View Statistics</a><br><br>
+        <a class="btn btn-primary" href="employee_map.html" role="button">View Map</a>
+        <footer id="footer">
             <p id="footerText">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
@@ -110,14 +93,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#next-button").click(function () {
-                alert("Headcount updated");
-            });
-        });
-    </script>
+
 </body>
 
 </html>
