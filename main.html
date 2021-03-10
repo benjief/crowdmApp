@@ -20,22 +20,19 @@
 
 <style>
     body {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         text-align: center;
     }
-    #footerText {
-        color: rgb(255, 0, 0);
-    }
-
     .display-4 {
         color: rgb(8, 8, 8);
     }
     #footer {
-            width: 100%;
-            height: 50px;
-            position: absolute;
-            bottom: 10px;
-            text-align: center;
-        }
+        height: 50px;
+        position: absolute;
+        bottom: 0px;
+        margin-left: 25%;
+        color: rgb(255, 0, 0);
+    }
 </style>
 
 <body>
@@ -74,14 +71,15 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Welcome, concerned Costco customer!<br/>You successfully logged in!</h1>
-        <br><br><br>
+        <h1 class="display-4">Welcome, concerned Costco customer!</h1>
+        <br><br>
+        <h4>Quick links:</h4>
         <a class="btn btn-primary" href="stats.html" role="button">View Statistics</a><br><br>
         <a class="btn btn-primary" href="maps.html" role="button">View Maps</a><br><br>
         <a class="btn btn-primary" href="feedback.html" role="button">Give Feedback</a>
         
         <footer id="footer">
-            <p id="footerText">&#169; 2021 crowdmApp</p>
+            <p>&#169; 2021 crowdmApp</p>
         </footer>
     </div>
 

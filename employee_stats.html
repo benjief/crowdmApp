@@ -17,58 +17,52 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
 
     <style>
-        .pageContainer {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        #footer {
+        body {
             width: 100%;
-            height: 50px;
-            position: absolute;
-            bottom: 10px;
-            text-align: center;
         }
 
-        #footerText {
-            color: rgb(255, 0, 0);
-            height: 50%;
-            position: relative;
-            top: 50%;
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 25pt;
+            color: #00bae8;
         }
 
-        .display-4 {
-            color: rgb(8, 8, 8);
+        #day_selector {
+            grid-area: day_selector;
+            font-size: 17pt;
         }
 
-        #pageBodyText {
-            text-align: center;
-        }
-
-        /* #daySelector {
-            display: flex;            
-            grid-area: daySelector;
-            font-size: 15pt;
-            padding-top: 10px;
-        }
-    
-        #statsChart {
-            display: flex;
-            grid-area: statsChart;
-            width: 100%;
-            height: auto;
-        } */
-
-        /* #contentContainer {
+        #content_wrap {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 40px 250px;
+            grid-template-rows: 80px calc(100vh - 150px);
             grid-template-areas:
-                "daySelector"
-                "statsChart";
-            align-items: center;
-            justify-items: center;
-        }  */
+                "day_selector"
+                "graph";
+            position: relative;
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        #graph_wrap {
+            grid-area: graph;
+            position: relative;
+            left: 0px;
+            padding-bottom: 80%;
+            height: 0;
+            overflow: hidden;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #graph {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -80,7 +74,7 @@
     <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
-            <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
+            <a class="navbar-brand" href="#">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -88,38 +82,28 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="employee_main.html">Homepage</a>
+                        <a class="nav-link active" aria-current="page" href="main.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="employee_stats.html">Stats</a>
+                        <a class="nav-link" href="#">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="employee_map.html">Map</a>
+                        <a class="nav-link active" href="maps.html">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="employee_headcount.html">Headcount</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Log out</a>
+                        <a class="nav-link active" href="feedback.html" tabindex="-1" aria-disabled="true">Feedback</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-    <div class="pageContainer">
-        <h1 class="display-4">Welcome, concerned Costco Employee!</h1>
-        <p id="pageBodyText"><b>This is our view statistics page</b></p>
-        <div id="contentContainer">
-            <div id="statsChart"></div>
-            <!-- <p id="daySelector">&#9001;&nbsp;Monday&nbsp;&#9002;</p>
-            <img id="statsChart" src="images/stats_bar_graph.png"> -->
-        </div>
-        <div id="footer">
-            <p id="footerText">&#169; 2021 crowdmApp</p>
+    <div id="content_wrap">
+        <p id="day_selector"><a href="stats_sunday">&lt;&nbsp;&nbsp;</a>Monday<a
+                href="stats_tuesday">&nbsp;&nbsp;&gt;</a></p>
+        <div id="graph_wrap">
+            <div id="graph"></div>
         </div>
     </div>
-
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->
@@ -140,43 +124,123 @@
         var ui = new firebaseui.auth.AuthUI(firebase.auth()); 
     </script>
 
-   
-    <!-- Bar Graph -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.setOnLoadCallback(drawStuff);
+    <!-- jQuery Mobile -->
+    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <!-- Bar Chart -->
+    <script>
+        google.load("visualization", "1", {
+            packages: ["corechart"]
+        });
+        google.setOnLoadCallback(drawVisualization);
 
-        function drawStuff() {
-            var data = new google.visualization.arrayToDataTable([
-                ['Opening Move', 'Percentage'],
-                ["King's pawn (e4)", 44],
-                ["Queen's pawn (d4)", 31],
-                ["Knight to King 3 (Nf3)", 12],
-                ["Queen's bishop pawn (c4)", 10],
-                ['Other', 3]
-            ]);
+        $(window).on("throttledresize", function (event) {
+            drawVisualization();
+        });
+
+        function drawVisualization() {
 
             var options = {
-                title: 'Chess opening moves',
-                width: 900,
-                legend: { position: 'none' },
-                chart: {
-                    title: 'Chess opening moves',
-                    subtitle: 'popularity by percentage'
+                title: "",
+                width: '100%',
+                height: '100%',
+                axisTitlesPosition: 'in',
+                'isStacked': true,
+                // pieSliceText: 'percentage',
+                colors: ['#f97263'],
+                chartArea: {
+                    left: "10%",
+                    top: "3%",
+                    height: "80%",
+                    width: "100%"
                 },
-                bars: 'horizontal', // Required for Material Bar Charts.
-                axes: {
-                    x: {
-                        0: { side: 'top', label: 'Percentage' } // Top x-axis.
+                vAxis: {
+                    title: "",
+                    textStyle: {
+                        bold: true
                     }
                 },
-                bar: { groupWidth: "90%" }
+                hAxis: {
+                    title: "Crowdedness",
+                    viewWindowMode: 'explicit',
+                    viewWindow: {           // eventually, want to set these to store capacities
+                        max: 300,
+                        min: 0
+                    }
+                },
+                annotations: {
+                    stem: {
+                        length:5
+                    }
+                },
+                bar: {
+                    groupWidth: "40%"
+                },
+                legend: {
+                    position: "none"
+                }
             };
 
-            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-            chart.draw(data, options);
-        };
+            // Create and populate the data table.
+            var data = google.visualization.arrayToDataTable([
+                ['Time', 'Crowdedness'],
+                ['8AM', 37],
+                ['9AM', 55],
+                ['10AM', 111],
+                ['11AM', 207],
+                ['12PM', 253],
+                ['1PM', 201],
+                ['2PM', 65],
+                ['3PM', 76],
+                ['4PM', 52],
+                ['5PM', 48],
+                ['6PM', 31],
+                ['7PM', 27],
+                ['8PM', 16]
+            ]);
+
+            // Create color ranges for crowdedness
+            var ranges = [
+                [0, 80, '#00ad1d'],         // green
+                [81, 200, '#eded00'],       // yellow     
+                [201, 1000, '#ed2700'],     // red
+            ]
+
+            // Column Calculations
+            var view = new google.visualization.DataView(data);
+
+            // Sp
+            view.setColumns([0, 1, {
+                calc: function (dt, row) {
+                    var rowValue = dt.getValue(row, 1);
+                    var color;
+                    ranges.forEach(function (range, index) {
+                        if ((rowValue >= range[0]) && ((rowValue < range[1]) || (range[1] === null))) {
+                            color = range[2];
+                        }
+                    });
+                    return color;
+                },
+                role: 'style',
+                type: 'string',
+            },
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+
+
+            // Create and draw the visualization.
+            new google.visualization.BarChart(document.getElementById('graph')).
+                draw(view, options);
+        }
+        // Hide loading message
+        $.mobile.loadingMessage = false;
     </script>
 
 </body>

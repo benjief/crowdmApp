@@ -15,25 +15,20 @@
 
     <!-- Optional styles and scripts of your own -->
     <style>
-        #footer {
-            width: 100%;
-            height: 50px;
-            position: absolute;
-            bottom: 10px;
+        body {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
         }
-
-        #footerText {
+        #footer {
+            height: 50px;
+            position: absolute;
+            bottom: 0px;
+            margin-left: 25%;
             color: rgb(255, 0, 0);
-            height: 50%;
-            position: relative;
-            top: 50%;
         }
-
         .display-4 {
             color: rgb(8, 8, 8);
         }
-
         #next-button {
             margin-top: 20px;
         }
@@ -98,8 +93,8 @@
             <label for="floatingPassword">Enter the headcount</label>
         </div>
         <a role="button" class="btn btn-success" href="employee_main.html" id="next-button">Next</a>
-        <footer>
-            <p id="footerText">&#169; 2021 crowdmApp</p>
+        <footer id="footer">
+            <p>&#169; 2021 crowdmApp</p>
         </footer>
     </div>
 
