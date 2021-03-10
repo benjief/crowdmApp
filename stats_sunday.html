@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Stats Monday</title>
-    <meta name="crowdmApp stats code" content="cumulative statistics for monday">
+    <title>Stats Sunday</title>
+    <meta name="crowdmApp stats code" content="cumulative statistics for sunday">
     <meta name="author" content="Benjie Friedman">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -98,8 +98,8 @@
         </div>
     </nav>
     <div id="content_wrap">
-        <p id="day_selector"><a href="stats_sunday.html">&lt;&nbsp;&nbsp;</a>Monday<a
-                href="stats_tuesday.html">&nbsp;&nbsp;&gt;</a></p>
+        <p id="day_selector"><a href="pagenotfound.html">&lt;&nbsp;&nbsp;</a>Sunday<a 
+            href="stats_monday.html">&nbsp;&nbsp;&gt;</a></p>
         <div id="graph_wrap">
             <div id="graph"></div>
         </div>
@@ -145,7 +145,7 @@
                 title: "",
                 width: '100%',
                 height: '100%',
-                axisTitlesPosition: 'in',
+                axisTitlesPosition: 'out',
                 'isStacked': true,
                 // pieSliceText: 'percentage',
                 colors: ['#f97263'],
@@ -180,7 +180,7 @@
                 legend: {
                     position: "none"
                 }
-            };
+            };     
 
             // Create and populate the data table.
             var data = google.visualization.arrayToDataTable([
