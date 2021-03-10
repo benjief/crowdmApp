@@ -34,9 +34,13 @@
         }
         .headcount {
             margin-top: 60px;
-            font-size: 5vw;
+            font-size: 20px;
             width: 40%;
             height: 150px;
+        }
+        .supersize {
+            font-family: Verdana, Geneva, Tahoma, sans-serif ;
+            font-size: 60px;
         }
     </style>
 
@@ -94,15 +98,13 @@
             </select>
             <label for="floatingSelect">Costco Loctaion</label>
         </div>
-        <div class="form-floating">
-            <input type="number" class="form-control" id="floatingPassword" placeholder="headcount" min="0">
-            <label for="floatingPassword">Current headcount</label>
+        <div>
+            <p>Current headcount: <a id="headcount">0</a></p>
         </div>
         <div>
-            <button class="headcount">Increase Headcount</button>
-            <button class="headcount">Decrease Headcount</button>
+            <button class="headcount" onclick="onClickIncrement()">Increase Headcount<br><h1 class="supersize">+</h1></button>
+            <button class="headcount" onclick="onClickDecrement()">Decrease Headcount<br><h1 class="supersize">-</h1></button>
         </div>
-        <a role="button" class="btn btn-success" href="employee_main.html" id="next-button">back</a>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
         </footer>
@@ -120,11 +122,18 @@
     <!--------------------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#next-button").click(function () {
-                alert("Headcount updated");
-            });
-        });
+        var headcount = 0;
+        function onClickIncrement() {
+        headcount += 1;
+        document.getElementById("headcount").innerHTML = headcount;
+        };
+        function onClickDecrement() {
+        headcount -= 1;
+        if (headcount < 0) {
+            headcount = 0;
+        }
+        document.getElementById("headcount").innerHTML = headcount;
+        };
     </script>
 </body>
 
