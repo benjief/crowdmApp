@@ -79,29 +79,20 @@
     </div>
 
     <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related    -->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyC_l7XMLoC3_Ld8XkTkGxiX4Ps_4mkv0kw",
-            authDomain: "march02demo-fbc37.firebaseapp.com",
-            projectId: "march02demo-fbc37",
-            storageBucket: "march02demo-fbc37.appspot.com",
-            messagingSenderId: "211490771654",
-            appId: "1:211490771654:web:178da4a266b326dc037dc7"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    <!-- Link to the api keys for your firebase project -->
+    <script src="scripts/firebase_api_crowdmapp.js"></script>
+
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
@@ -114,7 +105,30 @@
                     // User successfully signed in.
                     // Return type determines whether we continue the redirect automatically
                     // or whether we leave that to developer to handle.
-                    return true;
+                    //------------------------------------------------------------------------------------------
+                    // The code below is modified from default snippet provided by the FB documentation.
+                    //
+                    // If the user is a "brand new" user, then create a new "user" in your own database.
+                    // Assign this user with the name and email provided.
+                    // Before this works, you must enable "Firestore" from the firebase console.
+                    // The Firestore rules must allow the user to write. 
+                    //------------------------------------------------------------------------------------------
+                    var user = authResult.user;
+                    if (authResult.additionalUserInfo.isNewUser) {         //if new user
+                        db.collection("Users").doc(user.uid).set({         //write to firestore
+                                name: user.displayName,                    //"users" collection
+                                email: user.email                          //with authenticated user's ID (user.uid)
+                            }).then(function () {
+                                console.log("New user added to firestore");
+                                window.location.assign("employee_main.html");       //re-direct to main.html after signup
+                            })
+                            .catch(function (error) {
+                                console.log("Error adding new user: " + error);
+                            });
+                    } else {
+                        return true;
+                    }
+                    return false;
                 },
                 uiShown: function () {
                     // The widget is rendered.
@@ -124,7 +138,7 @@
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
-            signInSuccessUrl: 'employee_main.html',
+            signInSuccessUrl: 'main.html',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
