@@ -234,6 +234,7 @@
                                         break;
                                     case 6:
                                         weekday = "Saturday";
+                                        break;
                                 }
                                 // Add timestamp to correct day collection
                                 db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
