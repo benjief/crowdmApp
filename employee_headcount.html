@@ -136,6 +136,7 @@
                 <h1 class="supersize">-</h1>
             </button>
             <button id="update_headcount" class="btn btn-primary" onclick="onClickUpdate()">Update Headcount</button>
+            <p id="updated"></p>
         </div>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
@@ -161,6 +162,7 @@
         }
     </script>
 
+    <script src="scripts/firebase_api_crowdmapp.js"></script>
     <!-- Change headcount when buttons are pressed -->
     <script>
         var headcount = 0;
@@ -178,7 +180,10 @@
         };
 
         function onClickUpdate() {
-            
+            document.getElementById("updated").innerHTML = "Headcount updated";
+            db.collection("Stores").doc("Costco_Burnaby").update({
+                Current_Headcount: headcount
+            });
         }
     </script>
 
