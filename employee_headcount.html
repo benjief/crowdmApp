@@ -173,10 +173,12 @@
     <!-- Change headcount when user clicks on "Increment Headcount" or "Decrement Headcount" -->
     <script>
         var headcount = 0;
+
         function onClickIncrement() {
             headcount += 1;
             document.getElementById("current_headcount").innerHTML = headcount;
         };
+
         function onClickDecrement() {
             if (headcount > 0) {
                 headcount -= 1;
