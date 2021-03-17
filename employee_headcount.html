@@ -189,8 +189,8 @@
             console.log(currentUser);
             // Get timestamp at time of click
             var timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            // Add timestamp to "Temp_Updates" collection
-            db.collection("Stores").doc(storeToUpdate).collection("Temp_Updates").doc("temp").set({
+            // Add timestamp to "Latest_Update" collection
+            db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
                 Current_Headcount: headcount,
                 Date_Time: timestamp,
                 Updater: currentUser
@@ -198,9 +198,9 @@
                 .then(() => {
                     console.log("Document successfully written!");
                     // Get correct day of the week
-                    var docRef = db.collection("Stores").doc(storeToUpdate).collection("Temp_Updates").doc("temp");
+                    var docRef = db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest");
                     var weekday;
-                    docRef.get().then((doc) => {                           // Get the temp document
+                    docRef.get().then((doc) => {                           // Get the latest update
                         if (doc.exists) {                                  
                             weekday = doc.data().Date_Time;                // Read the Date_Time entry
                             weekday = weekday.toDate();                    // Convert it to a JS date object
@@ -253,7 +253,7 @@
                 });
         }
     </script>
-    
+
 </body>
 
 </html>
