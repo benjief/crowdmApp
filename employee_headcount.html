@@ -19,6 +19,7 @@
             font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
         }
+
         #footer {
             height: 50px;
             position: absolute;
@@ -26,18 +27,22 @@
             margin-left: 25%;
             color: rgb(255, 0, 0);
         }
+        
         .display-4 {
             color: rgb(8, 8, 8);
         }
+
         #next-button {
             margin-top: 80px;
         }
-        .headcount {
+
+        .headcount_button {
             margin-top: 60px;
             font-size: 20px;
             width: 40%;
             height: 150px;
         }
+
         .supersize {
             font-family: Verdana, Geneva, Tahoma, sans-serif ;
             font-size: 60px;
@@ -84,26 +89,23 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
-        <h2 id="body">Select a Costco Location</h2>
+        <h1 class="display-4">Welcome, Costco employee!</h1> <br>
+        <!-- <h2 id="body">Select a Costco Location</h2> -->
         <div class="form-floating mb-3">
-            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option selected>Open this select menu</option>
-                <option value="1">3550 Brighton Ave, Burnaby</option>
-                <option value="2">4500 Still Creek Dr, Burnaby</option>
-                <option value="3">7423 King George BLVD, Surrey </option>
-                <option value="4">20499 64 Ave, Langley </option>
-                <option value="5">605 EXPO BLVD, Vancouver </option>
-                <option value="6">9151 Bridgeport Rd, Richmond</option>
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onchange="getSelectedStore(this)">
+                <option selected>Select a Costco Location</option>
+                <option value="Burnaby">4500 Still Creek Dr, Burnaby, BC - V5C 0B5</option>
+                <option value="Vancouver">605 Expo Blvd, Vancouver, BC - V6B 1V4 </option>
+                <option value="Richmond">9151 Bridgeport Rd, Richmond - V6X 3L9</option>
             </select>
-            <label for="floatingSelect">Costco Loctaion</label>
+            <label for="floatingSelect">Costco Location</label>
         </div>
         <div>
-            <p>Current headcount: <a id="headcount">0</a></p>
+            <p>Current Headcount: <a id="current_headcount">0</a></p>
         </div>
         <div>
-            <button class="headcount" onclick="onClickIncrement()">Increase Headcount<br><h1 class="supersize">+</h1></button>
-            <button class="headcount" onclick="onClickDecrement()">Decrease Headcount<br><h1 class="supersize">-</h1></button>
+            <button class="headcount_button" onclick="onClickIncrement()">Increase Headcount<br><h1 class="supersize">+</h1></button>
+            <button class="headcount_button" onclick="onClickDecrement()">Decrease Headcount<br><h1 class="supersize">-</h1></button>
         </div>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
@@ -121,11 +123,20 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Get store selected from dropdown menu -->
+    <script type="text/javascript">
+        function getSelectedStore(floatingSelect) {
+            var selectedStore = floatingSelect.value;            
+        }
+    </script>
+
+    <!-- Change headcount when buttons are pressed -->
     <script>
         var headcount = 0;
         function onClickIncrement() {
         headcount += 1;
-        document.getElementById("headcount").innerHTML = headcount;
+        document.getElementById("current_headcount").innerHTML = headcount;
         };
         function onClickDecrement() {
         headcount -= 1;
@@ -135,6 +146,7 @@
         document.getElementById("headcount").innerHTML = headcount;
         };
     </script>
+
 </body>
 
 </html>
