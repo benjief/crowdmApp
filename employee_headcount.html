@@ -207,13 +207,13 @@
                     var docRef = db.collection("Stores").doc(storeToUpdate).collection("Temp_Updates").doc("temp");
                     var weekday;
 
-                    docRef.get().then((doc) => {
-                        if (doc.exists) {
-                            // console.log("Document data:", doc.data().Date_Time);
-                            weekday = doc.data().Date_Time;
-                            weekday = weekday.toDate();
-                            weekday = weekday.getDay();
-                                switch (weekday) {
+
+                    docRef.get().then((doc) => {                           // Get the temp document
+                        if (doc.exists) {                                  
+                            weekday = doc.data().Date_Time;                // Read the Date_Time entry
+                            weekday = weekday.toDate();                    // Convert it to a JS date object
+                            weekday = weekday.getDay();                    // Get the day from this JS date object (0 = Sunday, ..., 6 = Saturday)
+                                switch (weekday) {                         // Fetch the correct weekday
                                     case 0:
                                         weekday = "Sunday";
                                         break;
@@ -235,7 +235,7 @@
                                     case 6:
                                         weekday = "Saturday";
                                 }
-                                // Add timestamp to correct day
+                                // Add timestamp to correct day collection
                                 db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
                                     Current_Headcount: headcount,
                                     Date_Time: timestamp,
