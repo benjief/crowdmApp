@@ -170,10 +170,10 @@
         }
     </script>
 
-    <!-- Change headcount when user clicks on "Increment Headcount" or "Decrement Headcount" -->
-    <script>
-        var headcount = 0;
 
+    <script>
+        // Change headcount when user clicks on "Increment Headcount" or "Decrement Headcount"
+        var headcount = 0;
         function onClickIncrement() {
             headcount += 1;
             document.getElementById("current_headcount").innerHTML = headcount;
@@ -185,19 +185,21 @@
             }
             document.getElementById("current_headcount").innerHTML = headcount;
         };
-
+        var currentUser = "thisisnotworking@bogus.net";
         // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
         function onClickUpdate() {
             // Get correct store name (in DB format)
             var storeToUpdate = "Costco_" + selectedStore;
-            console.log(storeToUpdate);
+            // Fetch current user
+            currentUser = firebase.auth().currentUser.email;
+            console.log(currentUser);
             // Get timestamp at time of click
             var timestamp = firebase.firestore.FieldValue.serverTimestamp();
             // Add timestamp to database
             db.collection("Stores").doc(storeToUpdate).collection("Tuesday").add({
                 Current_Headcount: headcount,
                 Date_Time: timestamp,
-                Updater: "benjie@bogus.net"
+                Updater: currentUser
             })
                 .then((docRef) => {
                     console.log("Document written with ID: ", docRef.id);
