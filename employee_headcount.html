@@ -195,18 +195,73 @@
             console.log(currentUser);
             // Get timestamp at time of click
             var timestamp = firebase.firestore.FieldValue.serverTimestamp();
-            // Add timestamp to database
-            db.collection("Stores").doc(storeToUpdate).collection("Tuesday").add({
+            // Add timestamp to "Temp_Updates" collection
+            db.collection("Stores").doc(storeToUpdate).collection("Temp_Updates").doc("temp").set({
                 Current_Headcount: headcount,
                 Date_Time: timestamp,
                 Updater: currentUser
             })
-                .then((docRef) => {
-                    console.log("Document written with ID: ", docRef.id);
+                .then(() => {
+                    console.log("Document successfully written!");
+                    // Get correct day of the week
+                    var docRef = db.collection("Stores").doc(storeToUpdate).collection("Temp_Updates").doc("temp");
+                    var weekday;
+
+                    docRef.get().then((doc) => {
+                        if (doc.exists) {
+                            // console.log("Document data:", doc.data().Date_Time);
+                            weekday = doc.data().Date_Time;
+                            weekday = weekday.toDate();
+                            weekday = weekday.getDay();
+                                switch (weekday) {
+                                    case 0:
+                                        weekday = "Sunday";
+                                        break;
+                                    case 1:
+                                        weekday = "Monday";
+                                        break;
+                                    case 2:
+                                        weekday = "Tuesday";
+                                        break;
+                                    case 3:
+                                        weekday = "Wednesday";
+                                        break;
+                                    case 4:
+                                        weekday = "Thursday";
+                                        break;
+                                    case 5:
+                                        weekday = "Friday";
+                                        break;
+                                    case 6:
+                                        weekday = "Saturday";
+                                }
+                                // Add timestamp to correct day
+                                db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
+                                    Current_Headcount: headcount,
+                                    Date_Time: timestamp,
+                                    Updater: currentUser
+                                })
+                                    .then((docRef) => {
+                                        console.log("Document written with ID: ", docRef.id);
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error adding document: ", error);
+                                    });
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("No such document!");
+                        }
+                    }).catch((error) => {
+                        console.log("Error getting document:", error);
+                    });
                 })
                 .catch((error) => {
-                    console.error("Error adding document: ", error);
+                    console.error("Error writing document: ", error);
                 });
+
+
+
+
         }
     </script>
 

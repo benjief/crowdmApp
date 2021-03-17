@@ -19,16 +19,18 @@
 </head>
 
 <style>
-        body {
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align: center;
-        }
+    body {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+    }
+
     #footer {
         height: 50px;
         position: relative;
         bottom: 0px;
         color: rgb(255, 0, 0);
     }
+
     .display-4 {
         color: rgb(8, 8, 8);
         padding: 20px;
@@ -116,11 +118,12 @@
                     var user = authResult.user;
                     if (authResult.additionalUserInfo.isNewUser) {         //if new user
                         db.collection("Users").doc(user.uid).set({         //write to firestore
-                                name: user.displayName,                    //"users" collection
-                                email: user.email                          //with authenticated user's ID (user.uid)
-                            }).then(function () {
+                            name: user.displayName,                    //"users" collection
+                            email: user.email                          //with authenticated user's ID (user.uid)
+                        })
+                            .then(function () {
                                 console.log("New user added to firestore");
-                                window.location.assign("employee_main.html");       //re-direct to main.html after signup
+                                window.location.assign("employee_main.html");       //re-direct to employee_main.html after signup
                             })
                             .catch(function (error) {
                                 console.log("Error adding new user: " + error);
