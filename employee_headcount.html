@@ -16,7 +16,7 @@
     <!-- Optional styles and scripts of your own -->
     <style>
         body {
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
         }
 
@@ -27,26 +27,50 @@
             margin-left: 25%;
             color: rgb(255, 0, 0);
         }
-        
+
         .display-4 {
             color: rgb(8, 8, 8);
         }
 
-        #next-button {
-            margin-top: 80px;
-        }
-
         .headcount_button {
-            margin-top: 60px;
+            /* margin-top: 60px; */
             font-size: 20px;
-            width: 40%;
+            width: 95%;
             height: 150px;
         }
 
+        #increase_headcount {
+            grid-area: increase_headcount;
+        }
+        
+        #decrease_headcount {
+            grid-area: decrease_headcount;
+        }
+
         .supersize {
-            font-family: Verdana, Geneva, Tahoma, sans-serif ;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
             font-size: 60px;
         }
+
+        #update_headcount {
+            grid-area: update_headcount;
+            margin-top: 20px;
+            width: 50%;
+            font-size: 25px;
+            letter-spacing: 1px;
+        }
+
+        #button_container {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            grid-template-rows: auto;
+            grid-template-areas: 
+                "increase_headcount decrease_headcount"
+                "update_headcount update_headcount";
+            justify-items: center;
+        }
+
+
     </style>
 
 </head>
@@ -92,7 +116,8 @@
         <h1 class="display-4">Welcome, Costco employee!</h1> <br>
         <!-- <h2 id="body">Select a Costco Location</h2> -->
         <div class="form-floating mb-3">
-            <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onchange="getSelectedStore(this)">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                onchange="getSelectedStore(this)">
                 <option selected>Select a Costco Location</option>
                 <option value="Burnaby">4500 Still Creek Dr, Burnaby, BC - V5C 0B5</option>
                 <option value="Vancouver">605 Expo Blvd, Vancouver, BC - V6B 1V4 </option>
@@ -103,9 +128,14 @@
         <div>
             <p>Current Headcount: <a id="current_headcount">0</a></p>
         </div>
-        <div>
-            <button class="headcount_button" onclick="onClickIncrement()">Increase Headcount<br><h1 class="supersize">+</h1></button>
-            <button class="headcount_button" onclick="onClickDecrement()">Decrease Headcount<br><h1 class="supersize">-</h1></button>
+        <div id="button_container">
+            <button class="headcount_button" id="increase_headcount" onclick="onClickIncrement()">Increase Headcount<br/>
+                <h1 class="supersize">+</h1>
+            </button>
+            <button class="headcount_button" id="decrease_headcount" onclick="onClickDecrement()">Decrease Headcount<br/>
+                <h1 class="supersize">-</h1>
+            </button>
+            <button id="update_headcount" class="btn btn-primary">Update Headcount</button>
         </div>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
@@ -117,7 +147,7 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
@@ -127,7 +157,7 @@
     <!-- Get store selected from dropdown menu -->
     <script type="text/javascript">
         function getSelectedStore(floatingSelect) {
-            var selectedStore = floatingSelect.value;            
+            var selectedStore = floatingSelect.value;
         }
     </script>
 
@@ -135,15 +165,14 @@
     <script>
         var headcount = 0;
         function onClickIncrement() {
-        headcount += 1;
-        document.getElementById("current_headcount").innerHTML = headcount;
+            headcount += 1;
+            document.getElementById("current_headcount").innerHTML = headcount;
         };
         function onClickDecrement() {
-        headcount -= 1;
-        if (headcount < 0) {
-            headcount = 0;
-        }
-        document.getElementById("headcount").innerHTML = headcount;
+            if (headcount > 0) {
+                headcount -= 1;
+            }
+            document.getElementById("current_headcount").innerHTML = headcount;
         };
     </script>
 
