@@ -116,10 +116,11 @@
                     // The Firestore rules must allow the user to write. 
                     //------------------------------------------------------------------------------------------
                     var user = authResult.user;
-                    if (authResult.additionalUserInfo.isNewUser) {         //if new user
-                        db.collection("Users").doc(user.uid).set({         //write to firestore
-                            name: user.displayName,                    //"users" collection
-                            email: user.email                          //with authenticated user's ID (user.uid)
+                    if (authResult.additionalUserInfo.isNewUser) {     //if new user
+                        db.collection("Users").doc(user.uid).set({     //write to firestore
+                            Name: user.displayName,                    //"users" collection
+                            Email: user.email,                         //with authenticated user's ID (user.uid)
+                            User_Group: "employee"                    
                         })
                             .then(function () {
                                 console.log("New user added to firestore");

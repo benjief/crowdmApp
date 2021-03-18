@@ -70,7 +70,7 @@
     </nav>
 
     <div class="container">
-        <h1>Costco Member Login</h1>
+        <h1>Costco Customer Login</h1>
         <h1 class="display-4">Let's get you logged in...</h1>
         <div id="firebaseui-auth-container"></div>
         <p>If you were trying to login as a Costco employee, click the button below.</p>
@@ -118,8 +118,9 @@
                     var user = authResult.user;
                     if (authResult.additionalUserInfo.isNewUser) {         //if new user
                         db.collection("Users").doc(user.uid).set({         //write to firestore
-                            name: user.displayName,                    //"users" collection
-                            email: user.email                          //with authenticated user's ID (user.uid)
+                            Name: user.displayName,                        //"users" collection
+                            Email: user.email,                             //with authenticated user's ID (user.uid)
+                            User_Group: "customer"
                         })
                             .then(function () {
                                 console.log("New user added to firestore");
