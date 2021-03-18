@@ -32,23 +32,61 @@
             color: rgb(255, 0, 0);
         }
 
-        .form-check {
-            width: 50px;
-            margin-left: auto;
-            margin-right: auto;
+        #question {
+            grid-area: question;
         }
 
-        .form-check-label {
-            float: left;
+        #star_rating {
+            grid-area: star_rating;
         }
 
-        #submit-button {
-            margin-top: 20px;
+        #comment_box {
+            grid-area: comment_box;
+        }
+
+        .characters_remaining {
+            display: flex;
+            grid-area: characters_remaining;
+            flex-direction: row;
+            height: 30px;
+            justify-content: flex-start;
+            font-size: 10pt;
+        }
+
+        .characters_remaining p {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-right: 5px;
         }
 
         input {
-            text-align: center;
+            border: none;
+            background-color: white;
         }
+
+        #submit-button {
+            grid-area: submit_button;
+            margin-top: 20px;
+        }
+
+        #feedback {
+            grid-area: feedback;
+        }
+
+        #content_container {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "question"
+                "star_rating"
+                "comment_box"
+                "characters_remaining"
+                "submit_button"
+                "feedback";
+        }
+
     </style>
 
 </head>
@@ -100,8 +138,8 @@
             </select>
             <label for="floatingSelect">Costco Location</label>
         </div>
-        <div class="mb-3">
-            <p>How safe did you feel at this location?</p>
+        <div id="content_container">
+            <p id="question">How safe did you feel at this location?</p>
             <select id="star_rating" onchange="getRating(this)">
                 <option value=""></option>
                 <option value="1">1</option>
@@ -110,28 +148,18 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Yes
-                </label>
+            <div class="comment_box">
+                <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+                <textarea class="form-control" id="comment_box" rows="3" maxlength="100"
+                    onkeyup="textCounter(this,'counter',100);"></textarea>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                    No
-                </label>
-            </div> -->
+            <div class="characters_remaining">
+                <p>Characters Remaining:</p>
+                <input disabled id="counter" maxlength="3" size="3" value="100">
+            </div>
+            <button id="submit-button" role="button" class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
+            <p id="feedback"></p>
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
-            <textarea class="form-control" id="comment_box" rows="3" maxlength="100"
-                onkeyup="textCounter(this,'counter',100);"></textarea>
-            <p>Characters Remaining:</p>
-            <input disabled maxlength="3" size="3" value="100" id="counter">
-        </div>
-        <button role="button" class="btn btn-primary" id="submit-button" onclick="onClickSubmit()">Submit</button>
-        <p id="feedback"></p>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
         </footer>
@@ -206,7 +234,7 @@
                 $(feedback).css({ color: "red" });
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
-              // Make sure a rating has been given
+                // Make sure a rating has been given
             } else if (!rating) {
                 feedback.innerHTML = "Please rate your experience."
                 $(feedback).css({ color: "red" });
