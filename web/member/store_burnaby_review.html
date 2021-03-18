@@ -11,27 +11,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/styles/stylesheet.css">
 
     <!-- Optional styles and scripts of your own -->
     <style>
-        body {
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align: center;
-        }
-        #footer {
-            height: 50px;
-            position: relative;
-            bottom: 0px;
-            color: rgb(255, 0, 0);
-        }
-        .display-4 {
-            color: rgb(8, 8, 8);
-        }
         .card {
             margin-left: auto;
             margin-right: auto;
             margin-top: 10px;
+        }
+        #storefront {
+            width: 100%;
+            max-width: 700px;
+        }
+        #store_details {
+            list-style-type: none;
+        }
+        .store-description {
+            width: 90%;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -39,14 +37,10 @@
 
 
 <body>
-
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">crowdmApp</a>
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -54,16 +48,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Homepage</a>
+                        <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Stats</a>
+                        <a class="nav-link active" href="#">Stats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Map</a>
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Feedback</a>
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -71,23 +68,15 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Welcome to crowdmApp</h1>
-        <a class="btn btn-primary" href="login.html" role="button">Costco Customer Login</a><br><br>
-        <a class="btn btn-primary" href="employee_login.html" role="button">Costco Employee Login</a>
-        <div class="card" style="width: 18rem;">
-            <img src="images/costco.jpg" class="card-img-top" alt="image">
-            <div class="card-body">
-                <h5 class="card-title">Costco safety precautions</h5>
-                <p class="card-text">Costco is firmly committed to helping protect the health and safety of our members
-                    and employees,
-                    and to serving our communities. We are closely monitoring the changing situation, and complying with
-                    Public Health
-                    guidance.</p>
-                <a href="moreInfo.html" class="btn btn-primary">Click to get more information</a>
-            </div>
+        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
+        <div>
+            <p>felt so sos o sosososossososssos safe - "sam 2021"</p>
         </div>
-        <footer id="footer">
-            <p>&#169; 2021 crowdmApp</p>
+
+        <footer>
+            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
 

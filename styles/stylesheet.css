@@ -1,0 +1,20 @@
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.center-text {
+    text-align: center;
+}
+#trademark {
+    color: rgb(255, 0, 0);
+}
+#back_button {
+    height: 30px;
+    width: auto;
+}
+footer {
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}

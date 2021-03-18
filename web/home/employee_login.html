@@ -15,35 +15,15 @@
 
     <!-- Optional styles and scripts of your own -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
-
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <style>
+        
+    </style>
 </head>
 
-<style>
-    body {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        text-align: center;
-    }
-
-    .display-4 {
-        color: rgb(8, 8, 8);
-        padding: 20px;
-    }
-
-    #footer {
-        height: 50px;
-        position: relative;
-        bottom: 0px;
-        color: rgb(255, 0, 0);
-    }
-</style>
-
-<body>
-
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
+<body class="center-text">
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -56,13 +36,16 @@
                         <a class="nav-link active" href="index.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Stats</a>
+                        <a class="nav-link active" href="member_login.html">Stats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Map</a>
+                        <a class="nav-link active" href="member_login.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="login.html">Feedback</a>
+                        <a class="nav-link active" href="member_login.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="member_login.html">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -70,13 +53,15 @@
     </nav>
 
     <div class="container">
-        <h1>Costco Customer Login</h1>
+        <h1>Employee Login</h1>
         <h1 class="display-4">Let's get you logged in...</h1>
         <div id="firebaseui-auth-container"></div>
-        <p>If you were trying to login as a Costco employee, click the button below.</p>
-        <a class="btn btn-primary" href="employee_login.html" role="button">Costco Employee Login</a><br><br>
-        <footer id="footer">
-            <p>&#169; 2021 crowdmApp</p>
+        <p>If you are not a Costco Employee, please log in as a member below.</p>
+        <a class="btn btn-primary" href="member_login.html" role="button">Costco Member Login</a><br><br>
+        <footer>
+            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
 
@@ -93,7 +78,7 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
     <!-- Link to the api keys for your firebase project -->
-    <script src="scripts/firebase_api_crowdmapp.js"></script>
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
@@ -116,15 +101,15 @@
                     // The Firestore rules must allow the user to write. 
                     //------------------------------------------------------------------------------------------
                     var user = authResult.user;
-                    if (authResult.additionalUserInfo.isNewUser) {         //if new user
-                        db.collection("Users").doc(user.uid).set({         //write to firestore
-                            Name: user.displayName,                        //"users" collection
-                            Email: user.email,                             //with authenticated user's ID (user.uid)
-                            User_Group: "customer"
+                    if (authResult.additionalUserInfo.isNewUser) {     //if new user
+                        db.collection("Users").doc(user.uid).set({     //write to firestore
+                            Name: user.displayName,                    //"users" collection
+                            Email: user.email,                         //with authenticated user's ID (user.uid)
+                            User_Group: "employee"                    
                         })
                             .then(function () {
                                 console.log("New user added to firestore");
-                                window.location.assign("employee_main.html");       //re-direct to main.html after signup
+                                window.location.assign("employee_main.html");       //re-direct to employee_main.html after signup
                             })
                             .catch(function (error) {
                                 console.log("Error adding new user: " + error);
@@ -142,7 +127,7 @@
             },
             // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
             signInFlow: 'popup',
-            signInSuccessUrl: 'main.html',
+            signInSuccessUrl: '../employee/employee_main.html',
             signInOptions: [
                 // Leave the lines as is for the providers you want to offer your users.
                 //firebase.auth.GoogleAuthProvider.PROVIDER_ID,

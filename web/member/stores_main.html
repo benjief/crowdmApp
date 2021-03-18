@@ -14,23 +14,8 @@
 
 
     <!-- Optional styles and scripts of your own -->
+    <link rel="stylesheet" href="../../styles/stylesheet.css">
     <style>
-        body {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align: center;
-        }
-
-        #footer {
-            height: 50px;
-            position: relative;
-            bottom: 0px;
-            color: rgb(255, 0, 0);
-        }
-
-        .display-4 {
-            color: rgb(8, 8, 8);
-        }
-
         small {
             font-size: 8pt;
         }
@@ -45,12 +30,8 @@
 
 
 <body>
-
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -63,16 +44,16 @@
                         <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="stats.html">Stats</a>
+                        <a class="nav-link active" href="#">Stats</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="maps.html">Map</a>
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="feedback.html">Feedback</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Log out</a>
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -110,8 +91,10 @@
                 <h3 id="headcount_richmond"></h3>
             </a>
         </div>
-        <footer id="footer">
-            <p>&#169; 2021 crowdmApp</p>
+        <footer>
+            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
 
@@ -133,7 +116,7 @@
 </body>
 
 </html>
-<script src="scripts/firebase_api_crowdmapp.js"></script>
+<script src="/scripts/firebase_api_crowdmapp.js"></script>
 
 
 
