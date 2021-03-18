@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>My BCIT Project</title>
-    <meta name="crowdMapp feedback form" content="feedback input/submission">
+    <meta name="crowdMapp feedback form" content="feedback input/submission for all Costco locations">
     <meta name="author" content="Group 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -44,6 +44,10 @@
 
         #submit-button {
             margin-top: 20px;
+        }
+
+        input {
+            text-align: center;
         }
     </style>
 
@@ -86,9 +90,20 @@
     <div class="container">
         <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
         <h2>Please give your Feedback!</h2> <br>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                onchange="getSelectedStore(this)">
+                <option value="invalid">Select a Costco Location</option>
+                <option value="Burnaby">4500 Still Creek Dr, Burnaby, BC - V5C 0B5</option>
+                <option value="Downtown">605 Expo Blvd, Vancouver, BC - V6B 1V4 </option>
+                <option value="Richmond">9151 Bridgeport Rd, Richmond - V6X 3L9</option>
+            </select>
+            <label for="floatingSelect">Costco Location</label>
+        </div>
         <div class="mb-3">
             <p>How safe did you feel at this location?</p>
-            <select id="star_rating"  onchange="getRating(this)">
+            <select id="star_rating" onchange="getRating(this)">
+                <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -110,9 +125,13 @@
         </div>
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="comment_box" rows="3" maxlength="100"
+                onkeyup="textCounter(this,'counter',100);"></textarea>
+            <p>Characters Remaining:</p>
+            <input disabled maxlength="3" size="3" value="100" id="counter">
         </div>
-        <a role="button" class="btn btn-primary" href="main.html" id="submit-button">Submit</a>
+        <button role="button" class="btn btn-primary" id="submit-button" onclick="onClickSubmit()">Submit</button>
+        <p id="feedback"></p>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
         </footer>
@@ -129,12 +148,36 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
+    <!-- Link to the api keys for your firebase project -->
+    <script src="scripts/firebase_api_crowdmapp.js"></script>
+
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-    
+
+    <!-- Get store selected from dropdown menu -->
+    <script type="text/javascript">
+        var selectedStore;
+        function getSelectedStore(floatingSelect) {
+            selectedStore = floatingSelect.value;
+        }
+    </script>
+
+    <script>
+        // Implement a character limit counter
+        function textCounter(field, field2, maxlimit) {
+            var countfield = document.getElementById(field2);
+            if (field.value.length > maxlimit) {
+                field.value = field.value.substring(0, maxlimit);
+                return false;
+            } else {
+                countfield.value = maxlimit - field.value.length;
+            }
+        }
+    </script>
+
     <script type="text/javascript">
         // Star rating bar
         $(function () {
@@ -147,6 +190,43 @@
         var rating;
         function getRating(star_rating) {
             rating = star_rating.value;
+        }
+
+        // Write review to database
+        // Add a new document in collection "cities"
+        function onClickSubmit() {
+            // Grab comment
+            console.log(document.getElementById("comment_box").value);
+            // Get correct store name (in DB format)
+            var storeToUpdate = "Costco_" + selectedStore;
+            var feedback = document.getElementById("feedback");
+            // Make sure a store has been selected
+            if (!selectedStore || selectedStore === "invalid") {
+                feedback.innerHTML = "Please select a valid Costco location from the dropdown list."
+                $(feedback).css({ color: "red" });
+                $(feedback).show(0);
+                $(feedback).fadeOut(2500);
+              // Make sure a rating has been given
+            } else if (!rating) {
+                feedback.innerHTML = "Please rate your experience."
+                $(feedback).css({ color: "red" });
+                $(feedback).show(0);
+                $(feedback).fadeOut(2500);
+            } else {
+                db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
+                    Reviewer_Name: firebase.auth().currentUser.displayName,
+                    Reviewer_Email: firebase.auth().currentUser.email,
+                    Reviewer_Rating: parseInt(rating),
+                    Reviewer_Comment: document.getElementById("comment_box").value,
+                    Date_Time: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                    .then((docRef) => {
+                        console.log("Document written with ID: ", docRef.id);
+                    })
+                    .catch((error) => {
+                        console.error("Error adding document: ", error);
+                    });
+            }
         }
     </script>
     <!-- <script>
