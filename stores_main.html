@@ -78,7 +78,7 @@
     </nav>
 
     <div class="container">
-        <h1 id="heading">Head count of Costco Stores</h1>
+        <h1 id="heading">Real-Time Headcount Data</h1>
         <div class="list-group">
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
@@ -87,7 +87,7 @@
                     <small>Today</small>
                 </div>
                 <p id="address1" class="mb-1"></p><br>
-                <h3 id="headcount1"></h3>
+                <h3 id="headcount_burnaby"></h3>
 
             </a>
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
@@ -97,7 +97,7 @@
                     <small>Today</small>
                 </div>
                 <p id="address2" class="mb-1"></p><br>
-                <h3 id="headcount2"></h3>
+                <h3 id="headcount_downtown"></h3>
 
             </a>
             <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
@@ -107,7 +107,7 @@
                     <small>Today</small>
                 </div>
                 <p id="address3" class="mb-1"></p><br>
-                <h3 id="headcount3"></h3>
+                <h3 id="headcount_richmond"></h3>
 
             </a>
         </div>
@@ -121,7 +121,7 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
@@ -136,32 +136,45 @@
 </html>
 <script src="scripts/firebase_api_crowdmapp.js"></script>
 
+
+
 <script>
-    function readHeadcount(storeName, number) {
-        db.collection("Stores").doc(storeName)
-            .onSnapshot(function (snap) {
-                console.log(snap.data());
-                document.getElementById(number).innerHTML = "Headcount: " + snap.data().Current_Headcount;
-            })
+    var headcountBurnaby;
+    var headcountDowntown;
+    var headcountRichmond;
+    // Read real-time Burnaby headcount data and write it to the screen
+    function updateHeadcountBurnaby() {
+        db.collection("Stores").doc("Costco_Burnaby").collection("Latest_Update").doc("latest")
+            .onSnapshot((doc) => {
+                headcountBurnaby = doc.data().Current_Headcount;
+                console.log(headcountBurnaby);
+                document.getElementById("headcount_burnaby").innerHTML = headcountBurnaby;
+            });
     }
 
-    function readAddress(storeName, number) {
-        db.collection("Stores").doc(storeName)
-            .onSnapshot(function (snap) {
-                console.log(snap.data());
-                document.getElementById(number).innerHTML = snap.data().Address;
-            })
+    // Read real-time Downtown headcount data and write it to the screen
+    function updateHeadcountDowntown() {
+        db.collection("Stores").doc("Costco_Downtown").collection("Latest_Update").doc("latest")
+            .onSnapshot((doc) => {
+                headcountDowntown = doc.data().Current_Headcount;
+                console.log(headcountDowntown);
+                document.getElementById("headcount_downtown").innerHTML = headcountDowntown;
+            });
     }
 
-    readHeadcount("Costco_Burnaby", "headcount1");
-    readAddress("Costco_Burnaby", "address1");
+    // Read real-time Richmond headcount data and write it to the screen
+    function updateHeadcountRichmond() {
+        db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
+            .onSnapshot((doc) => {
+                headcountRichmond = doc.data().Current_Headcount;
+                console.log(headcountRichmond);
+                document.getElementById("headcount_richmond").innerHTML = headcountRichmond;
+            });
+    }
 
-    readHeadcount("Costco_Downtown", "headcount2");
-    readAddress("Costco_Downtown", "address2");
+    // Call functions
+    updateHeadcountBurnaby();
+    updateHeadcountDowntown();
+    updateHeadcountRichmond();
 
-    readHeadcount("Costco_Richmond", "headcount3");
-    readAddress("Costco_Richmond", "address3");
-
-
-    
 </script>
