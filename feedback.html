@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>My BCIT Project</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <meta name="crowdMapp feedback form" content="feedback input/submission">
+    <meta name="author" content="Group 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,12 +14,16 @@
 
 
     <!-- Optional styles and scripts of your own -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/jquery_plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
+
     <style>
         body {
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
             align-items: center;
         }
+
         #footer {
             height: 50px;
             position: absolute;
@@ -27,14 +31,17 @@
             margin-left: 25%;
             color: rgb(255, 0, 0);
         }
+
         .form-check {
             width: 50px;
             margin-left: auto;
             margin-right: auto;
         }
+
         .form-check-label {
             float: left;
         }
+
         #submit-button {
             margin-top: 20px;
         }
@@ -42,10 +49,7 @@
 
 </head>
 
-
-
 <body>
-
     <!-------------------------------------->
     <!-- The following is HTML for layout -->
     <!-------------------------------------->
@@ -83,25 +87,32 @@
         <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
         <h2>Please give your Feedback!</h2> <br>
         <div class="mb-3">
-            <p> Did you feel safe at Costco?</p>
-            <div class="form-check">
+            <p>How safe did you feel at this location?</p>
+            <select id="star_rating"  onchange="getRating(this)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <!-- <div class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                 <label class="form-check-label" for="flexRadioDefault1">
-                  Yes
+                    Yes
                 </label>
-              </div>
-              <div class="form-check">
+            </div>
+            <div class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                 <label class="form-check-label" for="flexRadioDefault2">
-                  No
+                    No
                 </label>
-              </div>
-          </div>
-          <div class="mb-3">
+            </div> -->
+        </div>
+        <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-          <a role="button" class="btn btn-success" href="main.html" id="submit-button">Submit</a>
+        </div>
+        <a role="button" class="btn btn-primary" href="main.html" id="submit-button">Submit</a>
         <footer id="footer">
             <p>&#169; 2021 crowdmApp</p>
         </footer>
@@ -113,18 +124,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
         </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    
+    <script type="text/javascript">
+        // Star rating bar
+        $(function () {
+            $('#star_rating').barrating({
+                theme: 'fontawesome-stars'
+            });
+        });
+
+        // Record rating
+        var rating;
+        function getRating(star_rating) {
+            rating = star_rating.value;
+        }
+    </script>
+    <!-- <script>
         $(document).ready(function () {
             $("#submit-button").click(function () {
                 alert("Thanks for your feedback!");
             });
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
