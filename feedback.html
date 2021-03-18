@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>My BCIT Project</title>
-    <meta name="crowdMapp feedback form" content="feedback input/submission">
+    <meta name="crowdMapp feedback form" content="feedback input/submission for all Costco locations">
     <meta name="author" content="Group 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -25,26 +25,75 @@
         }
 
         #footer {
-            height: 50px;
-            position: absolute;
-            bottom: 0px;
-            margin-left: 25%;
-            color: rgb(255, 0, 0);
+            grid-area: footer;
+            font-size: 10pt;
         }
 
-        .form-check {
-            width: 50px;
-            margin-left: auto;
-            margin-right: auto;
+        #back_button {
+            height: 30px;
+            width: auto;
         }
 
-        .form-check-label {
-            float: left;
+        #question {
+            grid-area: question;
+        }
+
+        #star_rating {
+            grid-area: star_rating;
+        }
+
+        #comment_box {
+            grid-area: comment_box;
+        }
+
+        .characters_remaining {
+            display: flex;
+            grid-area: characters_remaining;
+            flex-direction: row;
+            justify-content: flex-start;
+            height: 30px;
+            font-size: 10pt;
+        }
+
+        .characters_remaining p {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-right: 5px;
+        }
+
+        input {
+            border: none;
+            background-color: white;
+            color: black;
         }
 
         #submit-button {
+            grid-area: submit_button;
             margin-top: 20px;
         }
+
+        .control {
+            grid-area: feedback;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 20px;
+        }
+
+        #content_container {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "question"
+                "star_rating"
+                "comment_box"
+                "characters_remaining"
+                "submit_button"
+                "feedback"
+                "footer";
+        }
+
     </style>
 
 </head>
@@ -86,36 +135,44 @@
     <div class="container">
         <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
         <h2>Please give your Feedback!</h2> <br>
-        <div class="mb-3">
-            <p>How safe did you feel at this location?</p>
-            <select id="star_rating"  onchange="getRating(this)">
+        <div class="form-floating mb-3">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
+                onchange="getSelectedStore(this)">
+                <option value="invalid">Select a Costco Location</option>
+                <option value="Burnaby">4500 Still Creek Dr, Burnaby, BC - V5C 0B5</option>
+                <option value="Downtown">605 Expo Blvd, Vancouver, BC - V6B 1V4 </option>
+                <option value="Richmond">9151 Bridgeport Rd, Richmond - V6X 3L9</option>
+            </select>
+            <label for="floatingSelect">Costco Location</label>
+        </div>
+        <div id="content_container">
+            <p id="question">How safe did you feel at this location?</p>
+            <select id="star_rating" onchange="getRating(this)">
+                <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Yes
-                </label>
+            <div class="comment_box">
+                <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
+                <textarea class="form-control" id="comment_box" rows="3" maxlength="100"
+                    onkeyup="textCounter(this,'counter',100);"></textarea>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                <label class="form-check-label" for="flexRadioDefault2">
-                    No
-                </label>
-            </div> -->
+            <div class="characters_remaining">
+                <p>Characters Remaining:</p>
+                <input disabled id="counter" maxlength="3" size="3" value="100">
+            </div>
+            <button id="submit-button" role="button" class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
+            <div class="control">
+                <p id="feedback"></p>
+            </div>
+            <footer id="footer">
+                <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+                <p>Back</p>
+            </footer>
         </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Comments</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <a role="button" class="btn btn-primary" href="main.html" id="submit-button">Submit</a>
-        <footer id="footer">
-            <p>&#169; 2021 crowdmApp</p>
-        </footer>
     </div>
 
     <!----------------------------------------------->
@@ -129,12 +186,36 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
+    <!-- Link to the api keys for your firebase project -->
+    <script src="scripts/firebase_api_crowdmapp.js"></script>
+
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
-    
+
+    <!-- Get store selected from dropdown menu -->
+    <script type="text/javascript">
+        var selectedStore;
+        function getSelectedStore(floatingSelect) {
+            selectedStore = floatingSelect.value;
+        }
+    </script>
+
+    <script>
+        // Implement a character limit counter
+        function textCounter(field, field2, maxlimit) {
+            var countfield = document.getElementById(field2);
+            if (field.value.length > maxlimit) {
+                field.value = field.value.substring(0, maxlimit);
+                return false;
+            } else {
+                countfield.value = maxlimit - field.value.length;
+            }
+        }
+    </script>
+
     <script type="text/javascript">
         // Star rating bar
         $(function () {
@@ -147,6 +228,43 @@
         var rating;
         function getRating(star_rating) {
             rating = star_rating.value;
+        }
+
+        // Write review to database
+        // Add a new document in collection "cities"
+        function onClickSubmit() {
+            // Grab comment
+            console.log(document.getElementById("comment_box").value);
+            // Get correct store name (in DB format)
+            var storeToUpdate = "Costco_" + selectedStore;
+            var feedback = document.getElementById("feedback");
+            // Make sure a store has been selected
+            if (!selectedStore || selectedStore === "invalid") {
+                feedback.innerHTML = "Please select a valid Costco location from the dropdown list."
+                $(feedback).css({ color: "red" });
+                $(feedback).show(0);
+                $(feedback).fadeOut(2500);
+                // Make sure a rating has been given
+            } else if (!rating) {
+                feedback.innerHTML = "Please rate your experience."
+                $(feedback).css({ color: "red" });
+                $(feedback).show(0);
+                $(feedback).fadeOut(2500);
+            } else {
+                db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
+                    Reviewer_Name: firebase.auth().currentUser.displayName,
+                    Reviewer_Email: firebase.auth().currentUser.email,
+                    Reviewer_Rating: parseInt(rating),
+                    Reviewer_Comment: document.getElementById("comment_box").value,
+                    Date_Time: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                    .then((docRef) => {
+                        console.log("Document written with ID: ", docRef.id);
+                    })
+                    .catch((error) => {
+                        console.error("Error adding document: ", error);
+                    });
+            }
         }
     </script>
     <!-- <script>

@@ -198,10 +198,10 @@
                 // Get correct store name (in DB format)
                 var storeToUpdate = "Costco_" + selectedStore;
                 // Fetch current user
-                currentUser = firebase.auth().currentUser.email;
-                console.log(currentUser);
+                currentUser = firebase.auth().currentUser.email;        // delete and change code below (or use variables on other pages)
+                console.log(currentUser);                               // delete
                 // Get timestamp at time of click
-                var timestamp = firebase.firestore.FieldValue.serverTimestamp();
+                var timestamp = firebase.firestore.FieldValue.serverTimestamp(); // delete and change code below?
                 // Add timestamp to "Latest_Update" collection
                 db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
                     Current_Headcount: headcount,
