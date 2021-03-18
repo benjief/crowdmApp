@@ -25,11 +25,13 @@
         }
 
         #footer {
-            height: 50px;
-            position: absolute;
-            bottom: 0px;
-            margin-left: 25%;
-            color: rgb(255, 0, 0);
+            grid-area: footer;
+            font-size: 10pt;
+        }
+
+        #back_button {
+            height: 30px;
+            width: auto;
         }
 
         #question {
@@ -48,8 +50,8 @@
             display: flex;
             grid-area: characters_remaining;
             flex-direction: row;
-            height: 30px;
             justify-content: flex-start;
+            height: 30px;
             font-size: 10pt;
         }
 
@@ -63,6 +65,7 @@
         input {
             border: none;
             background-color: white;
+            color: black;
         }
 
         #submit-button {
@@ -70,8 +73,11 @@
             margin-top: 20px;
         }
 
-        #feedback {
+        .control {
             grid-area: feedback;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 20px;
         }
 
         #content_container {
@@ -84,7 +90,8 @@
                 "comment_box"
                 "characters_remaining"
                 "submit_button"
-                "feedback";
+                "feedback"
+                "footer";
         }
 
     </style>
@@ -158,11 +165,14 @@
                 <input disabled id="counter" maxlength="3" size="3" value="100">
             </div>
             <button id="submit-button" role="button" class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
-            <p id="feedback"></p>
+            <div class="control">
+                <p id="feedback"></p>
+            </div>
+            <footer id="footer">
+                <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+                <p>Back</p>
+            </footer>
         </div>
-        <footer id="footer">
-            <p>&#169; 2021 crowdmApp</p>
-        </footer>
     </div>
 
     <!----------------------------------------------->
