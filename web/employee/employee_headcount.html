@@ -320,7 +320,7 @@
                                 console.error("Error writing document: ", error);
                             });
                     } else {
-                        // Add update to "Latest_Update" collection
+                        // Add update to "Latest_Update" collection - this code will run if there isn't already an initial update
                         db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
                             Current_Headcount: headcount,
                             Date_Time: timestamp,

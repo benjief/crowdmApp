@@ -28,7 +28,7 @@
             font-size: var(--star-size);
             font-family: Times;
             line-height: 1;
-            padding-left: 7px;
+            margin-left: 7px;
             height: 100%;
             align-items: center;
         }
@@ -53,6 +53,25 @@
             display: flex;
             height: 100%;
             align-items: center;
+        }
+
+        .headcount_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            height: 30px;
+        }
+
+        .headcount_container h3 {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            margin-right: 7px;
+        }
+
+        .ticker {
+            height: 20px;
+            width: auto;
         }
 
         small {
@@ -112,9 +131,11 @@
                     <p id="current_rating_burnaby"></p>
                     <div id="burnaby_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <div id="headcount_container">
+                <div class="headcount_container">
                     <h3 id="headcount_burnaby"></h3>
-                    <img id="burnaby_ticker" class="ticker">
+                    <div class="ticker_container">
+                        <img id="burnaby_ticker" class="ticker">
+                    </div>
                 </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
@@ -127,9 +148,11 @@
                     <p id="current_rating_downtown"></p>
                     <div id="downtown_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <div id="headcount_container">
+                <div class="headcount_container">
                     <h3 id="headcount_downtown"></h3>
-                    <img id="downtown_ticker" class="ticker">
+                    <div class="ticker_container">
+                        <img id="downtown_ticker" class="ticker">
+                    </div>
                 </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
@@ -142,9 +165,11 @@
                     <p id="current_rating_richmond"></p>
                     <div id="richmond_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <div id="headcount_container">
+                <div class="headcount_container">
                     <h3 id="headcount_richmond"></h3>
-                    <img id="richmond_ticker" class="ticker">
+                    <div class="ticker_container">
+                        <img id="richmond_ticker" class="ticker">
+                    </div>
                 </div>
             </a>
         </div>
@@ -179,6 +204,15 @@
                 .onSnapshot((doc) => {
                     document.getElementById("headcount_burnaby").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_burnaby").innerHTML = doc.data().Date_Time.toDate();
+                    if (doc.get("Previous_Headcount") != null) {
+                        if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
+                            document.getElementById("burnaby_ticker").setAttribute("src", "/images/down_arrow.png");
+                        } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
+                            document.getElementById("burnaby_ticker").setAttribute("src", "/images/up_arrow.png");
+                        } else {
+                            document.getElementById("burnaby_ticker").removeAttribute("src");
+                        }
+                    }
                 });
         }
 
@@ -188,6 +222,15 @@
                 .onSnapshot((doc) => {
                     document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
+                    if (doc.get("Previous_Headcount") != null) {
+                        if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
+                            document.getElementById("downtown_ticker").setAttribute("src", "/images/down_arrow.png");
+                        } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
+                            document.getElementById("downtown_ticker").setAttribute("src", "/images/up_arrow.png");
+                        } else {
+                            document.getElementById("downtown_ticker").removeAttribute("src");
+                        }
+                    }
                 });
         }
 
@@ -197,10 +240,19 @@
                 .onSnapshot((doc) => {
                     document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
+                    if (doc.get("Previous_Headcount") != null) {
+                        if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
+                            document.getElementById("richmond_ticker").setAttribute("src", "/images/down_arrow.png");
+                        } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
+                            document.getElementById("richmond_ticker").setAttribute("src", "/images/up_arrow.png");
+                        } else {
+                            document.getElementById("richmond_ticker").removeAttribute("src");
+                        }
+                    }
                 });
         }
 
-        // Get, update and postaverage ratings for Burnaby
+        // Get, update and post average ratings for Burnaby
         function updateRatingBurnaby() {
             db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
                 .onSnapshot((querySnapshot) => {
@@ -218,8 +270,8 @@
                 });
         }
 
-                // Get, update and postaverage ratings for Downtown
-                function updateRatingDowntown() {
+        // Get, update and post average ratings for Downtown
+        function updateRatingDowntown() {
             db.collection("Stores").doc("Costco_Downtown").collection("Reviews")
                 .onSnapshot((querySnapshot) => {
                     var ratings = [];
@@ -236,8 +288,8 @@
                 });
         }
 
-                // Get, update and postaverage ratings for Richmond
-                function updateRatingRichmond() {
+        // Get, update and post average ratings for Richmond
+        function updateRatingRichmond() {
             db.collection("Stores").doc("Costco_Richmond").collection("Reviews")
                 .onSnapshot((querySnapshot) => {
                     var ratings = [];
@@ -254,7 +306,6 @@
                 });
         }
 
-
         // Call functions
         updateHeadcountBurnaby();
         updateHeadcountDowntown();
@@ -266,5 +317,6 @@
 
     </script>
 
+</body>
 
 </html>
