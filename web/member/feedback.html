@@ -82,7 +82,6 @@
                 "submit_button"
                 "feedback"
         }
-
     </style>
 
 </head>
@@ -155,11 +154,11 @@
             </div>
         </div>
     </div>
-        <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
-            <p id="trademark">&#169; 2021 crowdmApp</p>
-        </footer>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
 
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
@@ -246,6 +245,7 @@
                 })
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
+                        alert("Thanks for your feedback!");
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
@@ -253,13 +253,9 @@
             }
         }
     </script>
-    <!-- <script>
-        $(document).ready(function () {
-            $("#submit-button").click(function () {
-                alert("Thanks for your feedback!");
-            });
-        });
-    </script> -->
+
+
+
 </body>
 
 </html>
