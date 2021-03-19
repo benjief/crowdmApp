@@ -44,9 +44,11 @@
             letter-spacing: 1px;
         }
 
-        #feedback {
+        #feedback_placeholder {
             grid-area: feedback;
-            margin-top: 15px;
+            height: 10px;
+            margin-top: 10px;
+            margin-bottom: 30px;
         }
 
         #button_container {
@@ -119,7 +121,9 @@
                 <b class="supersize">-</b>
             </button>
             <button id="update_headcount" class="btn btn-primary" onclick="onClickUpdate()">Update Headcount</button>
-            <p id="feedback"></p>
+            <div id="feedback_placeholder">
+                <p id="feedback"></p>
+            </div>
         </div>
 
         <footer>
@@ -161,14 +165,14 @@
         var timeout, interval, headcount = 0;
 
         // Addition
-        [].forEach.call(document.querySelectorAll('.add'), function(button) {
-            button.addEventListener('mousedown', function() {
+        [].forEach.call(document.querySelectorAll('.add'), function (button) {
+            button.addEventListener('mousedown', function () {
                 document.getElementById("increase_headcount").style.backgroundColor = "green";
                 var x = button.dataset.target;
                 incrementValue(x);
 
-                timeout = setTimeout(function() {
-                    interval = setInterval(function() {
+                timeout = setTimeout(function () {
+                    interval = setInterval(function () {
                         incrementValue(x);
                     }, 80); //counting speed set in milliseconds.
                 }, 600);//hold down delay set in milliseconds. 
@@ -189,14 +193,14 @@
         };
 
         // Substraction
-        [].forEach.call(document.querySelectorAll('.subtract'), function(button) {
-            button.addEventListener('mousedown', function() {
+        [].forEach.call(document.querySelectorAll('.subtract'), function (button) {
+            button.addEventListener('mousedown', function () {
                 document.getElementById("decrease_headcount").style.backgroundColor = "red";
                 var y = button.dataset.target;
                 decrementValue(y);
 
-                timeout = setTimeout(function() {
-                    interval = setInterval(function() {
+                timeout = setTimeout(function () {
+                    interval = setInterval(function () {
                         decrementValue(y);
                     }, 80); //counting speed set in milliseconds.
                 }, 600); //hold down delay set in milliseconds. 
@@ -212,14 +216,14 @@
                 document.getElementById("decrease_headcount").style.backgroundColor = "transparent";
             }
         });
-        
+
         function decrementValue(y) {
             if (headcount > 0) {
                 document.getElementById(y).textContent = --headcount;
             };
         };
-        
-        var currentUser = "thisisnotworking@bogus.net";
+
+        var currentUser = "thisisnotworking@bogus.net";         // delete this
         // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
         function onClickUpdate() {
             var feedback = document.getElementById("feedback");
@@ -238,76 +242,95 @@
                 console.log(currentUser);                               // delete
                 // Get timestamp at time of click
                 var timestamp = firebase.firestore.FieldValue.serverTimestamp(); // delete and change code below?
-                // Add timestamp to "Latest_Update" collection
-                db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
-                    Current_Headcount: headcount,
-                    Date_Time: timestamp,
-                    Updater: currentUser
-                })
-                    .then(() => {
-                        console.log("Document successfully written!");
-                        // Get correct day of the week
-                        var docRef = db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest");
-                        var weekday;
-                        docRef.get().then((doc) => {                           // Get the latest update
-                            if (doc.exists) {
-                                weekday = doc.data().Date_Time;                // Read the Date_Time entry
-                                weekday = weekday.toDate();                    // Convert it to a JS date object
-                                weekday = weekday.getDay();                    // Get the day from this JS date object (0 = Sunday, ..., 6 = Saturday)
-                                switch (weekday) {                             // Fetch the correct weekday
-                                    case 0:
-                                        weekday = "Sunday";
-                                        break;
-                                    case 1:
-                                        weekday = "Monday";
-                                        break;
-                                    case 2:
-                                        weekday = "Tuesday";
-                                        break;
-                                    case 3:
-                                        weekday = "Wednesday";
-                                        break;
-                                    case 4:
-                                        weekday = "Thursday";
-                                        break;
-                                    case 5:
-                                        weekday = "Friday";
-                                        break;
-                                    case 6:
-                                        weekday = "Saturday";
-                                        break;
-                                }
-                                // Add timestamp to correct day collection
-                                db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
-                                    Current_Headcount: headcount,
-                                    Date_Time: timestamp,
-                                    Updater: currentUser
-                                })
-                                    .then((docRef) => {
-                                        console.log("Document written with ID: ", docRef.id);
-                                        // Display successful update message
-                                        function displaySuccessfulFeedback() {
-                                            feedback.innerHTML = "Update Successful.";
-                                            $(feedback).css({ color: "green" });
-                                            $(feedback).show(0);
-                                            $(feedback).fadeOut(2500);
+                // Get previous headcount
+                var docRef = db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest");
+                var previousHeadcount;
+                docRef.get().then((doc) => {
+                    if (doc.exists) {
+                        previousHeadcount = doc.data().Current_Headcount;      // Get headcount for entry being replaced
+                        // Add update to "Latest_Update" collection
+                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
+                            Current_Headcount: headcount,
+                            Date_Time: timestamp,
+                            Updater: currentUser,
+                            Previous_Headcount: previousHeadcount
+                        })
+                            .then(() => {
+                                console.log("Document successfully written!");
+                                // Get correct day of the week
+                                var weekday;
+                                docRef.get().then((doc) => {                           // Get the latest update
+                                    if (doc.exists) {
+                                        weekday = doc.data().Date_Time;                // Read the Date_Time entry
+                                        weekday = weekday.toDate();                    // Convert it to a JS date object
+                                        weekday = weekday.getDay();                    // Get the day from this JS date object (0 = Sunday, ..., 6 = Saturday)
+                                        switch (weekday) {                             // Fetch the correct weekday
+                                            case 0:
+                                                weekday = "Sunday";
+                                                break;
+                                            case 1:
+                                                weekday = "Monday";
+                                                break;
+                                            case 2:
+                                                weekday = "Tuesday";
+                                                break;
+                                            case 3:
+                                                weekday = "Wednesday";
+                                                break;
+                                            case 4:
+                                                weekday = "Thursday";
+                                                break;
+                                            case 5:
+                                                weekday = "Friday";
+                                                break;
+                                            case 6:
+                                                weekday = "Saturday";
+                                                break;
                                         }
-                                        displaySuccessfulFeedback();
-                                    })
-                                    .catch((error) => {
-                                        console.error("Error adding document: ", error);
-                                    });
-                            } else {
-                                // doc.data() will be undefined in this case
-                                console.log("No such document!");
-                            }
-                        }).catch((error) => {
-                            console.log("Error getting document:", error);
-                        });
-                    })
-                    .catch((error) => {
-                        console.error("Error writing document: ", error);
-                    });
+                                        // Add timestamp to correct day collection
+                                        db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
+                                            Current_Headcount: headcount,
+                                            Date_Time: timestamp,
+                                            Updater: currentUser,
+                                            Previous_Headcount: previousHeadcount
+                                        })
+                                            .then((docRef) => {
+                                                console.log("Document written with ID: ", docRef.id);
+                                                // Display successful update message
+                                                function displaySuccessfulFeedback() {
+                                                    feedback.innerHTML = "Update Successful.";
+                                                    $(feedback).css({ color: "green" });
+                                                    $(feedback).show(0);
+                                                    $(feedback).fadeOut(2500);
+                                                }
+                                                displaySuccessfulFeedback();
+                                            })
+                                            .catch((error) => {
+                                                console.error("Error adding document: ", error);
+                                            });
+                                    } else {
+                                        // doc.data() will be undefined in this case
+                                        console.log("No such document!");
+                                    }
+                                }).catch((error) => {
+                                    console.log("Error getting document:", error);
+                                });
+                            })
+                            .catch((error) => {
+                                console.error("Error writing document: ", error);
+                            });
+                    } else {
+                        // Add update to "Latest_Update" collection - this code will run if there isn't already an initial update
+                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
+                            Current_Headcount: headcount,
+                            Date_Time: timestamp,
+                            Updater: currentUser
+                        })
+                        console.log("An initial 'latest update' has been added!");
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                })
             }
         }
     </script>

@@ -133,6 +133,7 @@
         <div id="content_container">
             <p id="question">How safe did you feel at this location?</p>
             <select id="star_rating" onchange="getRating(this)">
+                <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -257,6 +258,7 @@
                     })
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
+                        alert("Thanks for your feedback!");
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
@@ -264,13 +266,9 @@
             }
         }
     </script>
-    <script>
-        // $(document).ready(function () {
-        //     $("#submit-button").click(function () {
-        //         $("#response").html("Thanks for your feedback");
-        //     });
-        // });
-    </script>
+
+
+
 </body>
 
 </html>
