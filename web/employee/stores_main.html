@@ -16,6 +16,45 @@
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <style>
+        :root {
+            --star-size: 25px;
+            --star-color: #fff;
+            --star-background: #fc0;
+        }
+
+        .stars {
+            display: flex;
+            --percent: calc(var(--rating) / 5 * 105%);
+            font-size: var(--star-size);
+            font-family: Times;
+            line-height: 1;
+            padding-left: 7px;
+            height: 100%;
+            align-items: center;
+        }
+
+        .stars::before {
+            content: '🟊🟊🟊🟊🟊';
+            letter-spacing: -3px;
+            background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+            background-clip: unset;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .star_container {
+            display: flex;
+            flex-direction: row;
+            height: 30px;
+            justify-content: flex-start;
+        }
+
+        .star_container p {
+            display: flex;
+            height: 100%;
+            align-items: center;
+        }
+
         small {
             font-size: 8pt;
         }
@@ -63,31 +102,40 @@
     <div class="container">
         <h1 id="heading">Real-Time Headcount Data</h1>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
+            <a href="#" class="list-group-item list-group-item-action active" id="box_burnaby" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">Costco Burnaby</h5>
                     <small id="update_time_burnaby"></small>
                 </div>
-                <p id="address1" class="mb-1"></p><br>
+                <div class="star_container">
+                    <p id="current_rating_burnaby"></p>
+                    <div id="burnaby_stars" class="stars" style="--rating: 0;"></div>
+                </div>
                 <h3 id="headcount_burnaby"></h3>
             </a>
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
+            <a href="#" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="update_downtown">Costco Downtown</h5>
                     <small id="update_time_downtown"></small>
                 </div>
-                <p id="address2" class="mb-1"></p><br>
+                <div class="star_container">
+                    <p id="current_rating_downtown"></p>
+                    <div id="downtown_stars" class="stars" style="--rating: 0;"></div>
+                </div>
                 <h3 id="headcount_downtown"></h3>
             </a>
-            <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
+            <a href="#" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">Costco Richmond</h5>
                     <small id="update_time_richmond"></small>
                 </div>
-                <p id="address3" class="mb-1"></p><br>
+                <div class="star_container">
+                    <p id="current_rating_richmond"></p>
+                    <div id="richmond_stars" class="stars" style="--rating: 0;"></div>
+                </div>
                 <h3 id="headcount_richmond"></h3>
             </a>
         </div>
@@ -112,46 +160,103 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        // Read real-time Burnaby headcount data and write it to the screen
+        function updateHeadcountBurnaby() {
+            db.collection("Stores").doc("Costco_Burnaby").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_burnaby").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_burnaby").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Read real-time Downtown headcount data and write it to the screen
+        function updateHeadcountDowntown() {
+            db.collection("Stores").doc("Costco_Downtown").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Read real-time Richmond headcount data and write it to the screen
+        function updateHeadcountRichmond() {
+            db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Get, update and postaverage ratings for Burnaby
+        function updateRatingBurnaby() {
+            db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
+                .onSnapshot((querySnapshot) => {
+                    var ratings = [];
+                    querySnapshot.forEach((doc) => {
+                        ratings.push(doc.data().Reviewer_Rating);
+                    });
+                    var sum = 0;
+                    for (var j = 0; j < ratings.length; j++) {
+                        sum += ratings[j];
+                    }
+                    var avgRating = sum / ratings.length;
+                    document.getElementById("burnaby_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
+                    document.getElementById("current_rating_burnaby").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                });
+        }
+
+                // Get, update and postaverage ratings for Downtown
+                function updateRatingDowntown() {
+            db.collection("Stores").doc("Costco_Downtown").collection("Reviews")
+                .onSnapshot((querySnapshot) => {
+                    var ratings = [];
+                    querySnapshot.forEach((doc) => {
+                        ratings.push(doc.data().Reviewer_Rating);
+                    });
+                    var sum = 0;
+                    for (var j = 0; j < ratings.length; j++) {
+                        sum += ratings[j];
+                    }
+                    var avgRating = sum / ratings.length;
+                    document.getElementById("downtown_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
+                    document.getElementById("current_rating_downtown").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                });
+        }
+
+                // Get, update and postaverage ratings for Richmond
+                function updateRatingRichmond() {
+            db.collection("Stores").doc("Costco_Richmond").collection("Reviews")
+                .onSnapshot((querySnapshot) => {
+                    var ratings = [];
+                    querySnapshot.forEach((doc) => {
+                        ratings.push(doc.data().Reviewer_Rating);
+                    });
+                    var sum = 0;
+                    for (var j = 0; j < ratings.length; j++) {
+                        sum += ratings[j];
+                    }
+                    var avgRating = sum / ratings.length;
+                    document.getElementById("richmond_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
+                    document.getElementById("current_rating_richmond").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                });
+        }
+
+
+        // Call functions
+        updateHeadcountBurnaby();
+        updateHeadcountDowntown();
+        updateHeadcountRichmond();
+        updateRatingBurnaby();
+        updateRatingDowntown();
+        updateRatingRichmond();
+
+
+    </script>
 
 </body>
 
 </html>
-<script src="/scripts/firebase_api_crowdmapp.js"></script>
-
-
-
-<script>
-    // Read real-time Burnaby headcount data and write it to the screen
-    function updateHeadcountBurnaby() {
-        db.collection("Stores").doc("Costco_Burnaby").collection("Latest_Update").doc("latest")
-            .onSnapshot((doc) => {
-                document.getElementById("headcount_burnaby").innerHTML = doc.data().Current_Headcount;
-                document.getElementById("update_time_burnaby").innerHTML = doc.data().Date_Time.toDate();
-            });
-    }
-
-    // Read real-time Downtown headcount data and write it to the screen
-    function updateHeadcountDowntown() {
-        db.collection("Stores").doc("Costco_Downtown").collection("Latest_Update").doc("latest")
-            .onSnapshot((doc) => {
-                document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
-                document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
-            });
-    }
-
-    // Read real-time Richmond headcount data and write it to the screen
-    function updateHeadcountRichmond() {
-        db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
-            .onSnapshot((doc) => {
-                document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
-                console.log(doc.data().Current_Headcount);
-                document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
-            });
-    }
-
-    // Call functions
-    updateHeadcountBurnaby();
-    updateHeadcountDowntown();
-    updateHeadcountRichmond();
-
-</script>
