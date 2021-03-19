@@ -69,7 +69,7 @@
                     <small id="update_time_burnaby"></small>
                 </div>
                 <p id="address1" class="mb-1"></p><br>
-                <h3 id="headcount_burnaby"></h3>
+                <h3 id="headcount_burnaby">0</h3>
             </a>
             <a href="store_downtown.html" class="list-group-item list-group-item-action active" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
@@ -78,7 +78,7 @@
                     <small id="update_time_downtown"></small>
                 </div>
                 <p id="address2" class="mb-1"></p><br>
-                <h3 id="headcount_downtown"></h3>
+                <h3 id="headcount_downtown">0</h3>
             </a>
             <a href="store_richmond.html" class="list-group-item list-group-item-action active" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
@@ -87,11 +87,11 @@
                     <small id="update_time_richmond"></small>
                 </div>
                 <p id="address3" class="mb-1"></p><br>
-                <h3 id="headcount_richmond"></h3>
+                <h3 id="headcount_richmond">0</h3>
             </a>
         </div>
         <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
@@ -112,7 +112,6 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
 
-</body>
 <script src="/scripts/firebase_api_crowdmapp.js"></script>
 
 <script>
@@ -150,4 +149,5 @@
     updateHeadcountRichmond();
 
 </script>
+</body>
 </html>
