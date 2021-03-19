@@ -82,7 +82,6 @@
                 "submit_button"
                 "feedback"
         }
-
     </style>
 
 </head>
@@ -150,23 +149,24 @@
                 <input disabled id="counter" maxlength="3" size="3" value="100">
             </div>
             <button id="submit-button" role="button" class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
+            <p id="response"></p>
             <div class="control">
                 <p id="feedback"></p>
             </div>
         </div>
     </div>
-        <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
-            <p id="trademark">&#169; 2021 crowdmApp</p>
-        </footer>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
 
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
@@ -184,6 +184,7 @@
     <!-- Get store selected from dropdown menu -->
     <script type="text/javascript">
         var selectedStore;
+
         function getSelectedStore(floatingSelect) {
             selectedStore = floatingSelect.value;
         }
@@ -212,6 +213,7 @@
 
         // Record rating
         var rating;
+
         function getRating(star_rating) {
             rating = star_rating.value;
         }
@@ -227,23 +229,32 @@
             // Make sure a store has been selected
             if (!selectedStore || selectedStore === "invalid") {
                 feedback.innerHTML = "Please select a valid Costco location from the dropdown list."
-                $(feedback).css({ color: "red" });
+                $(feedback).css({
+                    color: "red"
+                });
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
                 // Make sure a rating has been given
             } else if (!rating) {
                 feedback.innerHTML = "Please rate your experience."
-                $(feedback).css({ color: "red" });
+                $(feedback).css({
+                    color: "red"
+                });
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
             } else {
+                $(document).ready(function () {
+                    $("#submit-button").click(function () {
+                        $("#response").html("Thanks for your feedback");
+                    });
+                });
                 db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
-                    Reviewer_Name: firebase.auth().currentUser.displayName,
-                    Reviewer_Email: firebase.auth().currentUser.email,
-                    Reviewer_Rating: parseInt(rating),
-                    Reviewer_Comment: document.getElementById("comment_box").value,
-                    Date_Time: firebase.firestore.FieldValue.serverTimestamp()
-                })
+                        Reviewer_Name: firebase.auth().currentUser.displayName,
+                        Reviewer_Email: firebase.auth().currentUser.email,
+                        Reviewer_Rating: parseInt(rating),
+                        Reviewer_Comment: document.getElementById("comment_box").value,
+                        Date_Time: firebase.firestore.FieldValue.serverTimestamp()
+                    })
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
                     })
@@ -253,13 +264,13 @@
             }
         }
     </script>
-    <!-- <script>
-        $(document).ready(function () {
-            $("#submit-button").click(function () {
-                alert("Thanks for your feedback!");
-            });
-        });
-    </script> -->
+    <script>
+        // $(document).ready(function () {
+        //     $("#submit-button").click(function () {
+        //         $("#response").html("Thanks for your feedback");
+        //     });
+        // });
+    </script>
 </body>
 
 </html>
