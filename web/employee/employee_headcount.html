@@ -44,9 +44,11 @@
             letter-spacing: 1px;
         }
 
-        #feedback {
+        #feedback_placeholder {
             grid-area: feedback;
-            margin-top: 15px;
+            height: 10px;
+            margin-top: 10px;
+            margin-bottom: 30px;
         }
 
         #button_container {
@@ -119,7 +121,9 @@
                 <b class="supersize">-</b>
             </button>
             <button id="update_headcount" class="btn btn-primary" onclick="onClickUpdate()">Update Headcount</button>
-            <p id="feedback"></p>
+            <div id="feedback_placeholder">
+                <p id="feedback"></p>
+            </div>
         </div>
 
         <footer>
@@ -161,14 +165,14 @@
         var timeout, interval, headcount = 0;
 
         // Addition
-        [].forEach.call(document.querySelectorAll('.add'), function(button) {
-            button.addEventListener('mousedown', function() {
+        [].forEach.call(document.querySelectorAll('.add'), function (button) {
+            button.addEventListener('mousedown', function () {
                 document.getElementById("increase_headcount").style.backgroundColor = "green";
                 var x = button.dataset.target;
                 incrementValue(x);
 
-                timeout = setTimeout(function() {
-                    interval = setInterval(function() {
+                timeout = setTimeout(function () {
+                    interval = setInterval(function () {
                         incrementValue(x);
                     }, 80); //counting speed set in milliseconds.
                 }, 600);//hold down delay set in milliseconds. 
@@ -189,14 +193,14 @@
         };
 
         // Substraction
-        [].forEach.call(document.querySelectorAll('.subtract'), function(button) {
-            button.addEventListener('mousedown', function() {
+        [].forEach.call(document.querySelectorAll('.subtract'), function (button) {
+            button.addEventListener('mousedown', function () {
                 document.getElementById("decrease_headcount").style.backgroundColor = "red";
                 var y = button.dataset.target;
                 decrementValue(y);
 
-                timeout = setTimeout(function() {
-                    interval = setInterval(function() {
+                timeout = setTimeout(function () {
+                    interval = setInterval(function () {
                         decrementValue(y);
                     }, 80); //counting speed set in milliseconds.
                 }, 600); //hold down delay set in milliseconds. 
@@ -212,13 +216,13 @@
                 document.getElementById("decrease_headcount").style.backgroundColor = "transparent";
             }
         });
-        
+
         function decrementValue(y) {
             if (headcount > 0) {
                 document.getElementById(y).textContent = --headcount;
             };
         };
-        
+
         var currentUser = "thisisnotworking@bogus.net";
         // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
         function onClickUpdate() {

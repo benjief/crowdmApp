@@ -19,7 +19,7 @@
         :root {
             --star-size: 25px;
             --star-color: #fff;
-            --star-background: #fc0;
+            --star-background: #edb767;
         }
 
         .stars {
@@ -112,7 +112,10 @@
                     <p id="current_rating_burnaby"></p>
                     <div id="burnaby_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <h3 id="headcount_burnaby"></h3>
+                <div id="headcount_container">
+                    <h3 id="headcount_burnaby"></h3>
+                    <img id="burnaby_ticker" class="ticker">
+                </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
@@ -124,7 +127,10 @@
                     <p id="current_rating_downtown"></p>
                     <div id="downtown_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <h3 id="headcount_downtown"></h3>
+                <div id="headcount_container">
+                    <h3 id="headcount_downtown"></h3>
+                    <img id="downtown_ticker" class="ticker">
+                </div>
             </a>
             <a href="#" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
@@ -136,7 +142,10 @@
                     <p id="current_rating_richmond"></p>
                     <div id="richmond_stars" class="stars" style="--rating: 0;"></div>
                 </div>
-                <h3 id="headcount_richmond"></h3>
+                <div id="headcount_container">
+                    <h3 id="headcount_richmond"></h3>
+                    <img id="richmond_ticker" class="ticker">
+                </div>
             </a>
         </div>
         <footer>
