@@ -41,7 +41,7 @@
         #content_wrap {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 80px calc(100vh - 150px);
+            grid-template-rows: 80px calc(80vh - 150px);
             grid-template-areas:
                 "day_selector"
                 "graph";
@@ -109,7 +109,11 @@
             <div id="graph"></div>
         </div>
     </div>
-
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->

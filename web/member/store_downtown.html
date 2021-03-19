@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/stylesheet.css">
 
     <!-- Optional styles and scripts of your own -->
+    <link rel="stylesheet" href="/styles/stylesheet.css">
     <style>
         #storefront {
             width: 100%;
@@ -27,10 +27,19 @@
             width: 90%;
             margin-top: 20px;
         }
+        #address {
+            font-size: 14px;
+        }
+        #copy {
+            height: 20px;
+            width: 20px;
+        }
+        #small {
+            width: 100px;
+        }
+
     </style>
 </head>
-
-
 
 <body>
     <!-- Header Navigation Bar -->
@@ -64,10 +73,31 @@
     </nav>
 
     <div class="container">
-        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
-        <div>
-            <p>felt so sos o sosososossososssos safe - "sam 2021"</p>
-        </div>
+        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
+        <ul id="store_details">
+            <lh>
+                <h1 class="center-text">Downtown Costco</h1> 
+            </lh>
+            <li>
+                <p id="address">605 Expo Blvd, Vancouver, BC V6B 1V4 <img id="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p1')"></p>
+                <p id="p1" style="display: none;">605 Expo Blvd, Vancouver, BC V6B 1V4</p>
+            </li>
+            <li>
+                <p>Open hours: 9:00 AM - 8:30 PM</p>
+            </li>
+            <li>
+                <p>(604) 622-5050 <img id="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')"></p>
+                <p id="p2" style="display: none;">+16046225050</p>
+            </li>
+            <a class="btn btn-primary store-description" href="store_burnaby_review.html" role="button">See Reviews</a>
+            <a class="btn btn-primary store-description" href="stats_monday.html" role="button">View Historial Statistics</a>
+        </ul>
+        <a class="list-group-item list-group-item-action active center-text" aria-current="true"
+            style="background-color: white; color: black; border: 1px solid black;">
+            <p>Last update: <span id="update_time_downtown"></span></p>
+                
+            <p>Current Occupancy: <span id="headcount_downtown"></span> / 300</p>
+        </a>
 
         <footer>
             <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
@@ -81,12 +111,32 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+        </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+    <script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+    function updateHeadcountDowntown() {
+        db.collection("Stores").doc("Costco_Downtown").collection("Latest_Update").doc("latest")
+            .onSnapshot((doc) => {
+                document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
+                document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
+            });
+    }
+    // Call functions
+    updateHeadcountDowntown();
+    </script>
 </body>
 
 </html>

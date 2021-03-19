@@ -16,6 +16,7 @@
 
     <!-- Optional styles and scripts of your own -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="/styles/stylesheet.css">
 
     <style>
         body {
@@ -37,7 +38,7 @@
         #content_wrap {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 80px calc(100vh - 150px);
+            grid-template-rows: 80px calc(80vh - 150px);
             grid-template-areas:
                 "day_selector"
                 "graph";
@@ -105,6 +106,11 @@
             <div id="graph"></div>
         </div>
     </div>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
     <!----------------------------------------------->

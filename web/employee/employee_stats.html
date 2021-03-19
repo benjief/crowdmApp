@@ -15,13 +15,15 @@
 
     <!-- Optional styles and scripts of your own -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+
 
     <style>
         body {
             width: 100%;
         }
 
-        a {
+        p a {
             text-decoration: none;
             font-weight: bold;
             font-size: 25pt;
@@ -36,7 +38,7 @@
         #content_wrap {
             display: grid;
             grid-template-columns: 100%;
-            grid-template-rows: 80px calc(100vh - 150px);
+            grid-template-rows: 80px calc(80vh - 150px);
             grid-template-areas:
                 "day_selector"
                 "graph";
@@ -68,7 +70,7 @@
 
 <body>
     <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -103,6 +105,11 @@
             <div id="graph"></div>
         </div>
     </div>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
     
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
