@@ -30,7 +30,7 @@
         #address {
             font-size: 14px;
         }
-        #copy {
+        .copy {
             height: 20px;
             width: 20px;
         }
@@ -75,11 +75,11 @@
     <div class="container">
         <img id="storefront" src="/images/store_richmond_storefront.png" alt="storefront">
         <ul id="store_details">
-            <lh>
-                <h1 class="center-text">Richmond Costco</h1> 
-            </lh>
             <li>
-                <p id="address">9151 Bridgeport Rd, Richmond, BC V6X 3L9 <img id="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p1')"></p>
+                <h1 class="center-text">Richmond Costco</h1> 
+            </li>
+            <li>
+                <p id="address">9151 Bridgeport Rd, Richmond, BC V6X 3L9 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p1')"></p>
                 
                 <p id="p1" style="display: none;">9151 Bridgeport Rd, Richmond, BC V6X 3L9</p>
             </li>
@@ -87,21 +87,21 @@
                 <p>Open hours: 9:00 AM - 8:30 PM</p>
             </li>
             <li>
-                <p>(604) 270-3647 <img id="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')"></p>
+                <p>(604) 270-3647 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')"></p>
                 <p id="p2" style="display: none;">+16042703647</p>
             </li>
-            <a class="btn btn-primary store-description" href="#" role="button">See Reviews</a>
-            <a class="btn btn-primary store-description" href="stats_monday.html" role="button">View Historial Statistics</a>
         </ul>
+        <a class="btn btn-primary store-description" href="#" role="button">See Reviews</a>
+        <a class="btn btn-primary store-description" href="stats_monday.html" role="button">View Historial Statistics</a>
         <a class="list-group-item list-group-item-action active center-text" aria-current="true"
-            style="background-color: white; color: black; border: 1px solid black;">
+            style="background-color: white; color: black; border: 1px solid white;">
             <p>Last update: <span id="update_time_richmond"></span></p>
                 
             <p>Current Occupancy: <span id="headcount_richmond"></span> / 300</p>
         </a>
 
         <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
