@@ -110,20 +110,20 @@
             <p>Current Headcount: <a id="current_headcount">0</a></p>
         </div>
         <div id="button_container">
-            <button class="headcount_button add" data-target="current_headcount" id="increase_headcount" onmousedown="mouseDown()" onmouseup="mouseUp()">Increase
+            <button class="headcount_button add" data-target="current_headcount" id="increase_headcount">Increase
                 Headcount<br />
-                <h1 class="supersize">+</h1>
+                <b class="supersize">+</b>
             </button>
-            <button class="headcount_button subtract" data-target="current_headcount" id="decrease_headcount" onmousedown="mouseDown()" onmouseup="mouseUp()">Decrease
+            <button class="headcount_button subtract" data-target="current_headcount" id="decrease_headcount">Decrease
                 Headcount<br />
-                <h1 class="supersize">-</h1>
+                <b class="supersize">-</b>
             </button>
             <button id="update_headcount" class="btn btn-primary" onclick="onClickUpdate()">Update Headcount</button>
             <p id="feedback"></p>
         </div>
 
         <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" onclick="history.back()"></a>
+            <a><img id="back_button" src="/images/back_arrow.png" alt="back_arrow" onclick="history.back()"></a>
             <p>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
@@ -136,8 +136,10 @@
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
         </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
     <!-- Link to the api keys for your firebase project -->
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
@@ -155,70 +157,70 @@
 
 
     <script>
-        // Change headcount when user clicks on "Increment Headcount" or "Decrement Headcount"
-        function onClickDecrement() {
-            if (headcount > 0) {
-                headcount -= 1;
-            }
-            document.getElementById("current_headcount").innerHTML = headcount;
-        };
-        // Change headcount quickly when user holds the button
-        var timer, interval, headcount = 0;
+        // Head Counter
+        var timeout, interval, headcount = 0;
 
-        // Add headcount value
+        // Addition
         [].forEach.call(document.querySelectorAll('.add'), function(button) {
             button.addEventListener('mousedown', function() {
-                var id = button.dataset.target;
-                incrementValue(id);
+                document.getElementById("increase_headcount").style.backgroundColor = "green";
+                var x = button.dataset.target;
+                incrementValue(x);
 
                 timeout = setTimeout(function() {
                     interval = setInterval(function() {
-                        incrementValue(id);
-                    }, 100);
-                }, 700);
+                        incrementValue(x);
+                    }, 80); //counting speed set in milliseconds.
+                }, 600);//hold down delay set in milliseconds. 
             });
 
             button.addEventListener('mouseup', clearTimers);
             button.addEventListener('mouseleave', clearTimers);
 
+            //stops counter when not pressing the button
             function clearTimers() {
                 clearTimeout(timeout);
                 clearInterval(interval);
+                document.getElementById("increase_headcount").style.backgroundColor = "transparent";
             }
         });
+        function incrementValue(x) {
+            document.getElementById(x).textContent = ++headcount;
+        };
 
-        // Subtract headcount value
+        // Substraction
         [].forEach.call(document.querySelectorAll('.subtract'), function(button) {
             button.addEventListener('mousedown', function() {
-                var id = button.dataset.target;
-                decrementValue(id);
+                document.getElementById("decrease_headcount").style.backgroundColor = "red";
+                var y = button.dataset.target;
+                decrementValue(y);
 
                 timeout = setTimeout(function() {
                     interval = setInterval(function() {
-                        decrementValue(id);
-                    }, 100);
-                }, 700);
+                        decrementValue(y);
+                    }, 80); //counting speed set in milliseconds.
+                }, 600); //hold down delay set in milliseconds. 
             });
 
             button.addEventListener('mouseup', clearTimers);
             button.addEventListener('mouseleave', clearTimers);
 
+            //stops counter when not pressing the button
             function clearTimers() {
                 clearTimeout(timeout);
                 clearInterval(interval);
+                document.getElementById("decrease_headcount").style.backgroundColor = "transparent";
             }
         });
-
-        function decrementValue(id) {
-            var el = document.getElementById(id);
-            var value = parseInt(el.textContent, 10);
-            document.getElementById(id).textContent = --headcount;
-        }
-
-
-
-        // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
+        
+        function decrementValue(y) {
+            if (headcount > 0) {
+                document.getElementById(y).textContent = --headcount;
+            };
+        };
+        
         var currentUser = "thisisnotworking@bogus.net";
+        // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
         function onClickUpdate() {
             var feedback = document.getElementById("feedback");
             if (!selectedStore || selectedStore === "invalid") {
