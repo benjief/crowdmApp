@@ -150,7 +150,6 @@
                 <input disabled id="counter" maxlength="3" size="3" value="100">
             </div>
             <button id="submit-button" role="button" class="btn btn-primary" onclick="onClickSubmit()">Submit</button>
-            <p id="response"></p>
             <div class="control">
                 <p id="feedback"></p>
             </div>
@@ -244,11 +243,7 @@
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
             } else {
-                $(document).ready(function () {
-                    $("#submit-button").click(function () {
-                        $("#response").html("Thanks for your feedback");
-                    });
-                });
+                document.getElementById("feedback").innerHTML = "Thanks for your feedback!";
                 db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
                         Reviewer_Name: firebase.auth().currentUser.displayName,
                         Reviewer_Email: firebase.auth().currentUser.email,
@@ -258,7 +253,6 @@
                     })
                     .then((docRef) => {
                         console.log("Document written with ID: ", docRef.id);
-                        alert("Thanks for your feedback!");
                     })
                     .catch((error) => {
                         console.error("Error adding document: ", error);
