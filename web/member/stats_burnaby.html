@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Stats Monday</title>
+    <meta name="crowdmApp stats code" content="cumulative statistics for monday">
+    <meta name="author" content="Group 11">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" /> -->
+
+
+    <!-- Optional styles and scripts of your own -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+
+    <style>
+        body {
+            width: 100%;
+            text-align: center;
+        }
+
+
+        .day_selector_container {
+            display: flex;
+            grid-area: day_selector;
+            justify-content: center;
+            /* align-items: center; */
+            font-size: 25pt;
+        }
+
+        .day_selector {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            font-weight: bold;
+            font-size: 30pt;
+            color: #ff9100;
+        }
+
+        #current_day {
+            display: flex;
+            width: 170px;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .stats_container {
+            display: flex;
+            grid-area: stats_table;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #stats_table {
+            width: 50%;
+            table-layout: fixed;
+        }
+
+        #stats_table th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align: center;
+        }
+
+        #content_container {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "day_selector"
+                "stats_table";
+            position: relative;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content_container">
+        <div class="day_selector_container">
+            <p class="day_selector" onclick="moveDayBack()">&lt;&nbsp;&nbsp;</p>
+            <p id="current_day">Monday</p>
+            <p class="day_selector" onclick="moveDayForward()">&nbsp;&nbsp;&gt;</p>
+        </div>
+        <div class="stats_container">
+            <table id="stats_table">
+                <tr id="table_header">
+                    <th>Time</th>
+                    <th>Headcount</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+
+    <!-- Link to the api keys for your firebase project -->
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+
+    <script>
+        var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var currentDay = weekdays[1];
+
+        function moveDayBack() {
+            if (currentDay === weekdays[0]) {
+                currentDay = weekdays[weekdays.length - 1];
+            } else {
+                currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
+            }
+            document.getElementById("current_day").innerHTML = currentDay;
+        }
+
+        function moveDayForward() {
+            if (currentDay === weekdays[weekdays.length - 1]) {
+                currentDay = weekdays[0];
+            } else {
+                currentDay = weekdays[weekdays.indexOf(currentDay) + 1];
+            }
+            document.getElementById("current_day").innerHTML = currentDay;
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
