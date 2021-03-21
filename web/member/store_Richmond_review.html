@@ -58,6 +58,24 @@
             padding: 10px;
             border-color: black;
         }
+
+        #review div {
+            margin-bottom: 20px;
+        }
+
+        .head {
+            color: green;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .review-box {
+            background-color: lightgrey;
+        }
+
+        .value {
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -134,13 +152,21 @@
                         ratings.push(doc.data().Reviewer_Comment);
                     });
 
-                    let t2 =
-                        "<table><tr><th>Name</th><th>Rating</th><th>Comment</th>";
+                    // let t2 =
+                    //     "<table><tr><th>Name</th><th>Rating</th><th>Comment</th>";
+                    // for (let i = 0; i < ratings.length; i++) {
+                    //     t2 += "<tr><td>" + ratings[i++] + "</td><td>" +
+                    //         ratings[i++] + "</td><td>" + ratings[i] + "</td></tr>";
+                    // }
+                    // t2 += "</table>";
+                    // document.getElementById("review").innerHTML = t2;
+
+                    let t2 = "<div>"
                     for (let i = 0; i < ratings.length; i++) {
-                        t2 += "<tr><td>" + ratings[i++] + "</td><td>" +
-                            ratings[i++] + "</td><td>" + ratings[i] + "</td></tr>";
+                        t2 += "<div class='review-box'><h5 class='head'>" + "Name: " + "</h5><h5 class='value'>" + ratings[i++] + "</h5><br><h5 class='head'>" + "Ratings: " + "</h5><h5 class='value'>" +
+                            ratings[i++] + "</h5><br><h5 class='head'>" + "Comments: " + "</h5><h5 class='value'>" + ratings[i] + "</h5></div>";
                     }
-                    t2 += "</table>";
+                    t2 += "</div>";
                     document.getElementById("review").innerHTML = t2;
 
                 });
