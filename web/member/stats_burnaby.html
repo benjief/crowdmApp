@@ -171,36 +171,18 @@
                             data_table.push(time_hc);
                         }
                     });
-                    // Separate headcounts by time (only done for the early hours of the morning thus far)
-                    var _00 = [];
-                    var _01 = [];
-                    var _02 = [];
-                    var _03 = [];
-                    var _04 = [];
-                    for (var i = 0; i < data_table.length; i++) {
-                        switch (data_table[i][0]) {
-                            case 0:
-                                _00.push(data_table[i]);
-                                break;
-                            case 1:
-                                _01.push(data_table[i]);
-                                break;
-                            case 2:
-                                _02.push(data_table[i]);
-                                break;
-                            case 3:
-                                _03.push(data_table[i]);
-                                break;
-                            case 4:
-                                _04.push(data_table[i]);
-                                break;
-                        }
+                    // Separate headcounts by time by storing them in a master table whose rows contain arrays for different hours of the day
+                    // Each row of hours contains multiple arrays for headcount updates made at that hour
+                    var master_table = [];
+                    var hoursInADay = 24;
+                    for (var i = 0; i < hoursInADay; i++) {
+                        master_table[i] = [];
                     }
-                    console.log(_00);
-                    console.log(_01);
-                    console.log(_02);
-                    console.log(_03);
-                    console.log(_04);
+                    //
+                    for (var i = 0; i < data_table.length; i++) {
+                        master_table[data_table[i][0]].push(data_table[i]);
+                    }
+                    console.log(master_table);
                 });
         }
 
