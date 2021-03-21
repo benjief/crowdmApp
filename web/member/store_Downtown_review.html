@@ -95,7 +95,7 @@
     </nav>
 
     <div class="container">
-        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
+        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
         <div>
             <p id="review"></p>
         </div>
@@ -123,9 +123,9 @@
 
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
     <script>
-        function viewReviewsBurnaby() {
+        function viewReviewsDowntown() {
 
-            db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
+            db.collection("Stores").doc("Costco_Downtown").collection("Reviews")
                 .onSnapshot((querySnapshot) => {
                     var ratings = [];
                     querySnapshot.forEach((doc) => {
@@ -133,7 +133,6 @@
                         ratings.push(doc.data().Reviewer_Rating);
                         ratings.push(doc.data().Reviewer_Comment);
                     });
-
                     let t2 =
                         "<table><tr><th>Name</th><th>Rating</th><th>Comment</th>";
                     for (let i = 0; i < ratings.length; i++) {
@@ -147,7 +146,7 @@
 
         }
         //Call functions
-        viewReviewsBurnaby();
+        viewReviewsDowntown();
     </script>
 
 </body>
