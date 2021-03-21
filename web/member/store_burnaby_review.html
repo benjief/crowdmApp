@@ -20,12 +20,43 @@
             max-width: 700px;
             margin-top: 10px;
         }
+
         #store_details {
             list-style-type: none;
         }
+
         .store-description {
             width: 90%;
             margin-top: 20px;
+        }
+
+        #review {
+            margin-top: 5%;
+        }
+
+        #review table {
+            width: 100%;
+            font-size: 25px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        #review th {
+            color: green;
+            font-size: 25px;
+            border-bottom: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            border-color: black;
+        }
+
+        #review td {
+            font-size: 25px;
+            border-bottom: 1px solid black;
+            border-collapse: collapse;
+            color: black;
+            padding: 10px;
+            border-color: black;
         }
     </style>
 </head>
@@ -66,7 +97,7 @@
     <div class="container">
         <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
         <div>
-            <p>felt so sos o sosososossososssos safe - "sam 2021"</p>
+            <p id="review"></p>
         </div>
 
         <footer>
@@ -82,10 +113,63 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+
 
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
+
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+    <script>
+        function viewReviewsBurnaby() {
+
+            //     // db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
+
+            // db.collection("Stores").doc("Costco_Burnaby").collection("Reviews").get().then((querySnapshot) => {
+            //     querySnapshot.forEach((doc) => {
+            //         // doc.data() is never undefined for query doc snapshots
+            //          console.log(doc.id, " => ", doc.data());
+            //          document.getElementById("review").innerHTML = doc.data().Reviewer_Comment;
+            //      });
+            //  });
+
+            db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
+                .onSnapshot((querySnapshot) => {
+                    var ratings = [];
+                    querySnapshot.forEach((doc) => {
+                        ratings.push(doc.data().Reviewer_Name);
+                        ratings.push(doc.data().Reviewer_Rating);
+                        ratings.push(doc.data().Reviewer_Comment);
+                    });
+                    // for(var i=0; i<=ratings.length; i++) {
+                    //     document.getElementById("review").innerHTML = ratings[0];
+                    // }
+                    // var text = "";
+                    // var i;
+                    // for (i = 0; i < ratings.length; i++) {
+                    //     text += ratings[i] + "<br>";
+                    // }
+                    // document.getElementById("review").innerHTML = text;
+
+                    let t2 =
+                        "<table><tr><th>Name</th><th>Rating</th><th>Comment</th>";
+                    for (let i = 0; i < ratings.length; i++) {
+                        //console.log(data[i]['name']);
+                        //console.log(data[i].credits);
+                        t2 += "<tr><td>" + ratings[i++] + "</td><td>" +
+                            ratings[i++] + "</td><td>" + ratings[i] + "</td></tr>";
+                    }
+                    t2 += "</table>";
+                    document.getElementById("review").innerHTML = t2;
+
+                });
+
+        }
+        //Call functions
+        viewReviewsBurnaby();
+    </script>
 
 </body>
 
