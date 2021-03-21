@@ -244,6 +244,8 @@
                 $(feedback).fadeOut(2500);
             } else {
                 document.getElementById("feedback").innerHTML = "Thanks for your feedback!";
+                $(feedback).show(0);
+                $(feedback).fadeOut(2500);
                 db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
                         Reviewer_Name: firebase.auth().currentUser.displayName,
                         Reviewer_Email: firebase.auth().currentUser.email,
