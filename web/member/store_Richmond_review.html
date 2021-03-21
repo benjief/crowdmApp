@@ -113,7 +113,7 @@
     </nav>
 
     <div class="container">
-        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
+        <img id="storefront" src="/images/store_richmond_storefront.png" alt="storefront">
         <div>
             <p id="review"></p>
         </div>
@@ -141,9 +141,9 @@
 
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
     <script>
-        function viewReviewsBurnaby() {
+        function viewReviewsRichmond() {
 
-            db.collection("Stores").doc("Costco_Burnaby").collection("Reviews")
+            db.collection("Stores").doc("Costco_Richmond").collection("Reviews")
                 .onSnapshot((querySnapshot) => {
                     var ratings = [];
                     querySnapshot.forEach((doc) => {
@@ -154,6 +154,12 @@
 
                     // let t2 =
                     //     "<table><tr><th>Name</th><th>Rating</th><th>Comment</th>";
+                    // for (let i = 0; i < ratings.length; i++) {
+                    //     t2 += "<tr><td>" + ratings[i++] + "</td><td>" +
+                    //         ratings[i++] + "</td><td>" + ratings[i] + "</td></tr>";
+                    // }
+                    // t2 += "</table>";
+                    // document.getElementById("review").innerHTML = t2;
 
                     let t2 = "<div>"
                     for (let i = 0; i < ratings.length; i++) {
@@ -167,7 +173,7 @@
 
         }
         //Call functions
-        viewReviewsBurnaby();
+        viewReviewsRichmond();
     </script>
 
 </body>
