@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Stats Burnaby</title>
-    <meta name="crowdmApp stats code" content="statistics for burnaby costco location">
+    <title>Stats Downtown</title>
+    <meta name="crowdmApp stats code" content="statistics for downtown costco location">
     <meta name="author" content="Group 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -135,7 +135,7 @@
 
     <div id="content_container">
         <div id="store_name_container">
-            <p id="store_name">Burnaby</p>
+            <p id="store_name">Downtown</p>
         </div>
     
         <div class="day_selector_container">
@@ -184,7 +184,7 @@
         var currentDay = weekdays[1];
 
         function getNumbers() {
-            db.collection("Stores").doc("Costco_Burnaby").collection(currentDay)
+            db.collection("Stores").doc("Costco_Downtown").collection(currentDay)
                 .onSnapshot((querySnapshot) => {
                     var data_table = [];
                     querySnapshot.forEach((doc) => {
