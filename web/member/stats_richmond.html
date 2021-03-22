@@ -215,13 +215,13 @@
                         tableData[0].parentNode.removeChild(tableData[0]);
                     }
                     // Average headcounts for each hour
-                    for (var i = 0; i < master_table.length; i++) {
+                    for (var i = 0; i < master_table.length; i++) {                     // Loop over each row of the array (hours of the day)
                         var sum = 0;                                                    // Reset sum for each row
                         var average = 0;                                                // Reset average for each row
                         jQuery('<tr/>', {
                             id: i.toString(),
                             "class": 'table_data'
-                        }).appendTo('#stats_table');
+                        }).appendTo('#stats_table');                                    // Loop over every entry in row i (headcounts within that hour)
                         for (var j = 0; j < master_table[i].length; j++) {
                             console.log("i = " + i.toString() + ", j = " + j.toString());
                             var currentSubArray = master_table[i][j];
