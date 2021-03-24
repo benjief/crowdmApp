@@ -3,101 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Main Store Page</title>
-    <meta name="crowdMapp store page code" content="real-time headcount display">
-    <meta name="author" content="Group 11">
+    <title>CrowdaMapp - Stores</title>
+    <meta name="employee store page" content="real-time headcount display">
+    <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <style>
-        :root {
-            --star-size: 25px;
-            --star-color: #fff;
-            --star-background: #edb767;
-        }
-
-        .stars {
-            display: flex;
-            --percent: calc(var(--rating) / 5 * 103%);
-            font-size: var(--star-size);
-            font-family: Times;
-            line-height: 1;
-            margin-left: 7px;
-            height: 100%;
-            align-items: center;
-        }
-
-        .stars::before {
-            content: '🟊🟊🟊🟊🟊';
-            letter-spacing: -3px;
-            background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-            background-clip: unset;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .star_container {
-            display: flex;
-            flex-direction: row;
-            height: 30px;
-            justify-content: flex-start;
-        }
-
-        .star_container p {
-            display: flex;
-            height: 100%;
-            align-items: center;
-        }
-
-        .headcount_container {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            height: 30px;
-        }
-
-        .headcount_container h3 {
-            display: flex;
-            height: 100%;
-            align-items: center;
-            margin-right: 7px;
-        }
-
-        .change_container p {
-            display: flex;
-            height: 100%;
-            align-items: center;
-            margin-left: 7px;
-        }
-
-        .ticker {
-            height: 20px;
-            width: auto;
-            position: relative;
-            top: 1px;
-        }
-
-        small {
-            font-size: 8pt;
-        }
-
-        #heading {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-    </style>
 </head>
 
-
-
-<body>
-    <!-- Header Navigation Bar -->
+<body class="center-text">
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
             <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
@@ -109,9 +28,6 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="employee_main.html">Homepage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="employee_stats.html">Stats</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="stores_main.html">Stores</a>
@@ -203,7 +119,7 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
@@ -223,7 +139,8 @@
                     document.getElementById("headcount_burnaby").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_burnaby").innerHTML = doc.data().Date_Time.toDate();
                     if (doc.get("Previous_Headcount") != null) {
-                        document.getElementById("burnaby_change").innerHTML = Math.abs(doc.data().Current_Headcount - doc.data().Previous_Headcount);
+                        document.getElementById("burnaby_change").innerHTML = Math.abs(doc.data()
+                            .Current_Headcount - doc.data().Previous_Headcount);
                         if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
                             document.getElementById("burnaby_ticker").setAttribute("src", "/images/down_arrow.png");
                         } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
@@ -242,9 +159,11 @@
                     document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
                     if (doc.get("Previous_Headcount") != null) {
-                        document.getElementById("downtown_change").innerHTML = Math.abs(doc.data().Current_Headcount - doc.data().Previous_Headcount);
+                        document.getElementById("downtown_change").innerHTML = Math.abs(doc.data()
+                            .Current_Headcount - doc.data().Previous_Headcount);
                         if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
-                            document.getElementById("downtown_ticker").setAttribute("src", "/images/down_arrow.png");
+                            document.getElementById("downtown_ticker").setAttribute("src",
+                                "/images/down_arrow.png");
                         } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
                             document.getElementById("downtown_ticker").setAttribute("src", "/images/up_arrow.png");
                         } else {
@@ -261,9 +180,11 @@
                     document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
                     document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
                     if (doc.get("Previous_Headcount") != null) {
-                        document.getElementById("richmond_change").innerHTML = Math.abs(doc.data().Current_Headcount - doc.data().Previous_Headcount);
+                        document.getElementById("richmond_change").innerHTML = Math.abs(doc.data()
+                            .Current_Headcount - doc.data().Previous_Headcount);
                         if (doc.data().Previous_Headcount > doc.data().Current_Headcount) {
-                            document.getElementById("richmond_ticker").setAttribute("src", "/images/down_arrow.png");
+                            document.getElementById("richmond_ticker").setAttribute("src",
+                                "/images/down_arrow.png");
                         } else if (doc.data().Previous_Headcount < doc.data().Current_Headcount) {
                             document.getElementById("richmond_ticker").setAttribute("src", "/images/up_arrow.png");
                         } else {
@@ -286,8 +207,10 @@
                         sum += ratings[j];
                     }
                     var avgRating = sum / ratings.length;
-                    document.getElementById("burnaby_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
-                    document.getElementById("current_rating_burnaby").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                    document.getElementById("burnaby_stars").setAttribute("style", "--rating: " + avgRating.toFixed(
+                        1).toString() + ";");
+                    document.getElementById("current_rating_burnaby").innerHTML = "Current rating: " + avgRating
+                        .toFixed(1);
                 });
         }
 
@@ -304,8 +227,10 @@
                         sum += ratings[j];
                     }
                     var avgRating = sum / ratings.length;
-                    document.getElementById("downtown_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
-                    document.getElementById("current_rating_downtown").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                    document.getElementById("downtown_stars").setAttribute("style", "--rating: " + avgRating
+                        .toFixed(1).toString() + ";");
+                    document.getElementById("current_rating_downtown").innerHTML = "Current rating: " + avgRating
+                        .toFixed(1);
                 });
         }
 
@@ -322,8 +247,10 @@
                         sum += ratings[j];
                     }
                     var avgRating = sum / ratings.length;
-                    document.getElementById("richmond_stars").setAttribute("style", "--rating: " + avgRating.toFixed(1).toString() + ";");
-                    document.getElementById("current_rating_richmond").innerHTML = "Current rating: " + avgRating.toFixed(1);
+                    document.getElementById("richmond_stars").setAttribute("style", "--rating: " + avgRating
+                        .toFixed(1).toString() + ";");
+                    document.getElementById("current_rating_richmond").innerHTML = "Current rating: " + avgRating
+                        .toFixed(1);
                 });
         }
 
@@ -334,8 +261,6 @@
         updateRatingBurnaby();
         updateRatingDowntown();
         updateRatingRichmond();
-
-
     </script>
 
 </body>

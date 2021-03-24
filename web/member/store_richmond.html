@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My BCIT Project</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <title>CrowdaMapp - Richmond Store</title>
+    <meta name="store" content="richmond">
+    <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,35 +14,9 @@
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <style>
-        #storefront {
-            width: 100%;
-            max-width: 700px;
-            margin-top: 10px;
-        }
-        #store_details {
-            list-style-type: none;
-        }
-        .store-description {
-            width: 90%;
-            margin-top: 20px;
-        }
-        #address {
-            font-size: 14px;
-        }
-        .copy {
-            height: 20px;
-            width: 20px;
-        }
-        #small {
-            width: 100px;
-        }
-
-    </style>
 </head>
 
 <body>
-    <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -54,9 +28,6 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="main.html">Homepage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Stats</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="stores_main.html">Stores</a>
@@ -76,27 +47,30 @@
         <img id="storefront" src="/images/store_richmond_storefront.png" alt="storefront">
         <ul id="store_details">
             <li>
-                <h1 class="center-text">Richmond Costco</h1> 
+                <h1 class="center-text">Richmond Costco</h1>
             </li>
             <li>
-                <p id="address">9151 Bridgeport Rd, Richmond, BC V6X 3L9 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p1')"></p>
-                
+                <p id="address">9151 Bridgeport Rd, Richmond, BC V6X 3L9 <img class="copy" src="/images/copy.png"
+                        alt="copy" onclick="copyToClipboard('#p1')"></p>
+
                 <p id="p1" style="display: none;">9151 Bridgeport Rd, Richmond, BC V6X 3L9</p>
             </li>
             <li>
                 <p>Open hours: 9:00 AM - 8:30 PM</p>
             </li>
             <li>
-                <p>(604) 270-3647 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')"></p>
+                <p>(604) 270-3647 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
+                </p>
                 <p id="p2" style="display: none;">+16042703647</p>
             </li>
         </ul>
-        <a class="btn btn-primary store-description" href="richmond_reviews.html" role="button">See Reviews</a>
-        <a class="btn btn-primary store-description" href="stats_monday.html" role="button">View Historial Statistics</a>
+        <a class="btn btn-primary store-description" href="reviews_richmond.html" role="button">See Reviews</a>
+        <a class="btn btn-primary store-description" href="stats_richmond.html" role="button">View Historial
+            Statistics</a>
         <a class="list-group-item list-group-item-action active center-text" aria-current="true"
             style="background-color: white; color: black; border: 1px solid white;">
             <p>Last update: <span id="update_time_richmond"></span></p>
-                
+
             <p>Current Occupancy: <span id="headcount_richmond"></span> / 300</p>
         </a>
 
@@ -108,35 +82,37 @@
     </div>
 
     <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related    -->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
-    <!--------------------------------------------------------------------->
-    <!-- JS files: Your own JavaScript functions included here    -->
-    <!--------------------------------------------------------------------->
+    <!-- Link to the api keys for your firebase project -->
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
     <script>
-    function copyToClipboard(element) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-    }
-    function updateHeadcountRichmond() {
-        db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
-            .onSnapshot((doc) => {
-                document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
-                document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
-            });
-    }
-    // Call functions
-    updateHeadcountRichmond();
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+
+        function updateHeadcountRichmond() {
+            db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+        // Call functions
+        updateHeadcountRichmond();
     </script>
 </body>
 

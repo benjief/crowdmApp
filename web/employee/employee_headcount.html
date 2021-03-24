@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My BCIT Project</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <title>CrowdaMapp - Headcount</title>
+    <meta name="headcounter" content="headcount">
+    <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,58 +14,9 @@
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
-
-    <style>
-        .headcount_button {
-            /* margin-top: 60px; */
-            font-size: 20px;
-            width: 90%;
-            height: 150px;
-        }
-
-        #increase_headcount {
-            grid-area: increase_headcount;
-        }
-
-        #decrease_headcount {
-            grid-area: decrease_headcount;
-        }
-
-        .supersize {
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 60px;
-        }
-
-        #update_headcount {
-            grid-area: update_headcount;
-            margin-top: 15px;
-            width: 50%;
-            font-size: 25px;
-            letter-spacing: 1px;
-        }
-
-        #feedback_placeholder {
-            grid-area: feedback;
-            height: 10px;
-            margin-top: 10px;
-            margin-bottom: 30px;
-        }
-
-        #button_container {
-            display: grid;
-            grid-template-columns: repeat(2, 50%);
-            grid-template-rows: auto;
-            grid-template-areas:
-                "increase_headcount decrease_headcount"
-                "update_headcount update_headcount"
-                "feedback feedback";
-            justify-items: center;
-        }
-    </style>
 </head>
 
 <body class="center-text">
-    <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container-fluid">
             <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
@@ -77,9 +28,6 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active" href="employee_main.html">Homepage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="employee_stats.html">Stats</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="stores_main.html">Stores</a>
@@ -138,7 +86,7 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
@@ -154,11 +102,11 @@
     <!-- Get store selected from dropdown menu -->
     <script type="text/javascript">
         var selectedStore;
+
         function getSelectedStore(floatingSelect) {
             selectedStore = floatingSelect.value;
         }
     </script>
-
 
     <script>
         // Head Counter
@@ -175,7 +123,7 @@
                     interval = setInterval(function () {
                         incrementValue(x);
                     }, 80); //counting speed set in milliseconds.
-                }, 600);//hold down delay set in milliseconds. 
+                }, 600); //hold down delay set in milliseconds. 
             });
 
             button.addEventListener('mouseup', clearTimers);
@@ -188,6 +136,7 @@
                 document.getElementById("increase_headcount").style.backgroundColor = "transparent";
             }
         });
+
         function incrementValue(x) {
             document.getElementById(x).textContent = ++headcount;
         };
@@ -223,14 +172,16 @@
             };
         };
 
-        var currentUser = "thisisnotworking@bogus.net";         // delete this
+        var currentUser = "thisisnotworking@bogus.net"; // delete this
         // Add a new update with an auto-generated id when user clicks "Update Headcount" button.
         function onClickUpdate() {
             var feedback = document.getElementById("feedback");
             if (!selectedStore || selectedStore === "invalid") {
                 // Display invalid selection prompt if a store isn't selected
                 feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
-                $(feedback).css({ color: "red" });
+                $(feedback).css({
+                    color: "red"
+                });
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
                 console.log("No update written");
@@ -238,8 +189,9 @@
                 // Get correct store name (in DB format)
                 var storeToUpdate = "Costco_" + selectedStore;
                 // Fetch current user
-                currentUser = firebase.auth().currentUser.email;        // delete and change code below (or use variables on other pages)
-                console.log(currentUser);                               // delete
+                currentUser = firebase.auth().currentUser
+                    .email; // delete and change code below (or use variables on other pages)
+                console.log(currentUser); // delete
                 // Get timestamp at time of click
                 var timestamp = firebase.firestore.FieldValue.serverTimestamp(); // delete and change code below?
                 // Get previous headcount
@@ -247,24 +199,28 @@
                 var previousHeadcount;
                 docRef.get().then((doc) => {
                     if (doc.exists) {
-                        previousHeadcount = doc.data().Current_Headcount;      // Get headcount for entry being replaced
+                        previousHeadcount = doc.data()
+                            .Current_Headcount; // Get headcount for entry being replaced
                         // Add update to "Latest_Update" collection
-                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
-                            Current_Headcount: headcount,
-                            Date_Time: timestamp,
-                            Updater: currentUser,
-                            Previous_Headcount: previousHeadcount
-                        })
+                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest")
+                            .set({
+                                Current_Headcount: headcount,
+                                Date_Time: timestamp,
+                                Updater: currentUser,
+                                Previous_Headcount: previousHeadcount
+                            })
                             .then(() => {
                                 console.log("Document successfully written!");
                                 // Get correct day of the week
                                 var weekday;
-                                docRef.get().then((doc) => {                           // Get the latest update
+                                docRef.get().then((doc) => { // Get the latest update
                                     if (doc.exists) {
-                                        weekday = doc.data().Date_Time;                // Read the Date_Time entry
-                                        weekday = weekday.toDate();                    // Convert it to a JS date object
-                                        weekday = weekday.getDay();                    // Get the day from this JS date object (0 = Sunday, ..., 6 = Saturday)
-                                        switch (weekday) {                             // Fetch the correct weekday
+                                        weekday = doc.data().Date_Time; // Read the Date_Time entry
+                                        weekday = weekday
+                                            .toDate(); // Convert it to a JS date object
+                                        weekday = weekday
+                                            .getDay(); // Get the day from this JS date object (0 = Sunday, ..., 6 = Saturday)
+                                        switch (weekday) { // Fetch the correct weekday
                                             case 0:
                                                 weekday = "Sunday";
                                                 break;
@@ -288,18 +244,22 @@
                                                 break;
                                         }
                                         // Add timestamp to correct day collection
-                                        db.collection("Stores").doc(storeToUpdate).collection(weekday).add({
-                                            Current_Headcount: headcount,
-                                            Date_Time: timestamp,
-                                            Updater: currentUser,
-                                            Previous_Headcount: previousHeadcount
-                                        })
+                                        db.collection("Stores").doc(storeToUpdate).collection(
+                                                weekday).add({
+                                                Current_Headcount: headcount,
+                                                Date_Time: timestamp,
+                                                Updater: currentUser,
+                                                Previous_Headcount: previousHeadcount
+                                            })
                                             .then((docRef) => {
-                                                console.log("Document written with ID: ", docRef.id);
+                                                console.log("Document written with ID: ", docRef
+                                                    .id);
                                                 // Display successful update message
                                                 function displaySuccessfulFeedback() {
                                                     feedback.innerHTML = "Update Successful.";
-                                                    $(feedback).css({ color: "green" });
+                                                    $(feedback).css({
+                                                        color: "green"
+                                                    });
                                                     $(feedback).show(0);
                                                     $(feedback).fadeOut(2500);
                                                 }
@@ -321,11 +281,12 @@
                             });
                     } else {
                         // Add update to "Latest_Update" collection - this code will run if there isn't already an initial update
-                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest").set({
-                            Current_Headcount: headcount,
-                            Date_Time: timestamp,
-                            Updater: currentUser
-                        })
+                        db.collection("Stores").doc(storeToUpdate).collection("Latest_Update").doc("latest")
+                            .set({
+                                Current_Headcount: headcount,
+                                Date_Time: timestamp,
+                                Updater: currentUser
+                            })
                         console.log("An initial 'latest update' has been added!");
                     }
                 }).catch((error) => {
@@ -334,7 +295,5 @@
             }
         }
     </script>
-
 </body>
-
 </html>

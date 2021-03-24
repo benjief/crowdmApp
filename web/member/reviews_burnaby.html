@@ -3,86 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My BCIT Project</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <title>CrowdaMapp - Burnaby Review</title>
+    <meta name="review" content="burnaby">
+    <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/stylesheet.css">
 
     <!-- Optional styles and scripts of your own -->
-    <style>
-        #storefront {
-            width: 100%;
-            max-width: 700px;
-            margin-top: 10px;
-        }
-
-        #store_details {
-            list-style-type: none;
-        }
-
-        .store-description {
-            width: 90%;
-            margin-top: 20px;
-        }
-
-        #review {
-            margin-top: 5%;
-        }
-
-        #review table {
-            width: 100%;
-            font-size: 25px;
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        #review th {
-            color: green;
-            font-size: 25px;
-            border-bottom: 1px solid black;
-            border-collapse: collapse;
-            padding: 10px;
-            border-color: black;
-        }
-
-        #review td {
-            font-size: 25px;
-            border-bottom: 1px solid black;
-            border-collapse: collapse;
-            color: black;
-            padding: 10px;
-            border-color: black;
-        }
-
-        #review div {
-            margin-bottom: 20px;
-        }
-
-        .head {
-            color: green;
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .review-box {
-            background-color: lightgrey;
-        }
-
-        .value {
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="/styles/stylesheet.css">
 </head>
 
-
-
 <body>
-    <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -96,10 +30,7 @@
                         <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Stats</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                        <a class="nav-link active" href="main_stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="feedback.html">Feedback</a>
@@ -126,19 +57,18 @@
     </div>
 
     <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related    -->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
 
-
-    <!--------------------------------------------------------------------->
-    <!-- JS files: Your own JavaScript functions included here    -->
-    <!--------------------------------------------------------------------->
-
+    <!-- Link to the api keys for your firebase project -->
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
     <script>
         function viewReviewsBurnaby() {
@@ -157,8 +87,10 @@
 
                     let t2 = "<div>"
                     for (let i = 0; i < ratings.length; i++) {
-                        t2 += "<div class='review-box'><h5 class='head'>" + "Name: " + "</h5><h5 class='value'>" + ratings[i++] + "</h5><br><h5 class='head'>" + "Ratings: " + "</h5><h5 class='value'>" +
-                            ratings[i++] + "</h5><br><h5 class='head'>" + "Comments: " + "</h5><h5 class='value'>" + ratings[i] + "</h5></div>";
+                        t2 += "<div class='review-box'><h5 class='head'>" + "Name: " + "</h5><h5 class='value'>" +
+                            ratings[i++] + "</h5><br><h5 class='head'>" + "Ratings: " + "</h5><h5 class='value'>" +
+                            ratings[i++] + "</h5><br><h5 class='head'>" + "Comments: " + "</h5><h5 class='value'>" +
+                            ratings[i] + "</h5></div>";
                     }
                     t2 += "</div>";
                     document.getElementById("review").innerHTML = t2;
