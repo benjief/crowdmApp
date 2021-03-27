@@ -3,6 +3,9 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+h1{
+    color: #041E2A;
+}
 .navbar {
      background-color: #0D6391;
 }
