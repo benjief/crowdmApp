@@ -46,32 +46,11 @@ footer {
     width: 90%;
     margin-top: 20px;
 }
-#review {
+#review , #review1, #richmond-more, #downtown-more, #burnaby-more, #review2{
     margin-top: 5%;
 }
-#review table {
-    width: 100%;
-    font-size: 25px;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-#review th {
-    color: green;
-    font-size: 25px;
-    border-bottom: 1px solid black;
-    border-collapse: collapse;
-    padding: 10px;
-    border-color: black;
-}
-#review td {
-    font-size: 25px;
-    border-bottom: 1px solid black;
-    border-collapse: collapse;
-    color: black;
-    padding: 10px;
-    border-color: black;
-}
-#review div {
+
+#review div, #review1 div, #richmond-more div, #downtown-more div, #burnaby-more div, #review2 div{
     margin-bottom: 20px;
 }
 .head {
