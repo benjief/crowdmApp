@@ -3,12 +3,38 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.navbar {
+     background-color: #0D6391;
+}
+
+.nav-item:hover{
+    background-color:  #b3b3b3;
+    border-radius: 20px;
+    
+}
+.nav-item a:hover {
+    color: black;
+}
+.display-4 {
+    color: #E38106;
+}
+
+.button-main {
+    background-color: #0D6391;
+    border: none;
+    color: white;
+}
+
+.button-main:hover {
+    background-color: #2f88b8;
+}
 .center-text {
     text-align: center;
 }
 
 #trademark {
-    color: rgb(255, 0, 0);
+    color: #E38106;
+
 }
 
 #back_button {
@@ -29,6 +55,26 @@ footer {
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-title {
+    color: #E38106;;
+}
+
+.card-text {
+    color: #0D6391;
+}
+
+/*********** more-info ****************/
+
+.accordion-button {
+    color: #0D6391 ;
+}
+
+.accordion-body {
+    color: #D28529
 }
 
 /********* main_stores.html *********/
