@@ -52,6 +52,7 @@ footer {
     width: 90%;
     margin-top: 20px;
 }
+<<<<<<< HEAD
 
 #review {
     margin-top: 5%;
@@ -83,6 +84,13 @@ footer {
 }
 
 #review div {
+=======
+#review , #review1, #richmond-more, #downtown-more, #burnaby-more, #review2{
+    margin-top: 5%;
+}
+
+#review div, #review1 div, #richmond-more div, #downtown-more div, #burnaby-more div, #review2 div{
+>>>>>>> 6d0fd30b0a744c66eb70d303967038c8f347c8ac
     margin-bottom: 20px;
 }
 
