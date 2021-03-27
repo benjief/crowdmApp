@@ -31,10 +31,15 @@ function viewReviewsRichmond() {
     db.collection("Stores").doc("Costco_Richmond").collection("Reviews")
         .onSnapshot((querySnapshot) => {
             var ratings = [];
+            var count = 0;
             querySnapshot.forEach((doc) => {
-                ratings.push(doc.data().Reviewer_Name);
-                ratings.push(doc.data().Reviewer_Rating);
-                ratings.push(doc.data().Reviewer_Comment);
+                count++; 
+                do{
+                    ratings.push(doc.data().Reviewer_Name);
+                    ratings.push(doc.data().Reviewer_Rating);
+                    ratings.push(doc.data().Reviewer_Comment);
+                } while (count <= 3);
+                
             });
 
             // let t2 =
