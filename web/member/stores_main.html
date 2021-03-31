@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CrowdaMapp - Stores</title>
+    <meta name="employee store page" content="real-time headcount display">
+    <meta name="author" content="team 11">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Optional styles and scripts of your own -->
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+</head>
+
+<body class="center-text">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 id="heading">Real-Time Headcount Data</h1>
+        <div class="list-group">
+            <a href="../member/store_burnaby.html" class="list-group-item list-group-item-action active" id="box_burnaby" aria-current="true"
+                style="background-color: white; color: black; border: 1px solid black;">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Costco Burnaby</h5>
+                    <small id="update_time_burnaby"></small>
+                </div>
+                <div class="star_container">
+                    <p id="current_rating_burnaby"></p>
+                    <div id="burnaby_stars" class="stars" style="--rating: 0;"></div>
+                </div>
+                <div class="headcount_container">
+                    <h3 id="headcount_burnaby"></h3>
+                    <div class="ticker_container">
+                        <img id="burnaby_ticker" class="ticker">
+                    </div>
+                    <div class="change_container">
+                        <p id="burnaby_change"></p>
+                    </div>
+                </div>
+            </a>
+            <a href="../member/store_downtown.html" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
+                style="background-color: white; color: black; border: 1px solid black;">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="update_downtown">Costco Downtown</h5>
+                    <small id="update_time_downtown"></small>
+                </div>
+                <div class="star_container">
+                    <p id="current_rating_downtown"></p>
+                    <div id="downtown_stars" class="stars" style="--rating: 0;"></div>
+                </div>
+                <div class="headcount_container">
+                    <h3 id="headcount_downtown"></h3>
+                    <div class="ticker_container">
+                        <img id="downtown_ticker" class="ticker">
+                    </div>
+                    <div class="change_container">
+                        <p id="downtown_change"></p>
+                    </div>
+                </div>
+            </a>
+            <a href="../member/store_richmond.html" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
+                style="background-color: white; color: black; border: 1px solid black;">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Costco Richmond</h5>
+                    <small id="update_time_richmond"></small>
+                </div>
+                <div class="star_container">
+                    <p id="current_rating_richmond"></p>
+                    <div id="richmond_stars" class="stars" style="--rating: 0;"></div>
+                </div>
+                <div class="headcount_container">
+                    <h3 id="headcount_richmond"></h3>
+                    <div class="ticker_container">
+                        <img id="richmond_ticker" class="ticker">
+                    </div>
+                    <div class="change_container">
+                        <p id="richmond_change"></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <footer>
+            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
+        </footer>
+    </div>
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+
+    <!-- Link to the api keys for your firebase project -->
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script src="/scripts/store_main.js"></script>
+
+</body>
+
+</html>
