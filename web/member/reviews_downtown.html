@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CrowdaMapp - Burnaby Store</title>
-    <meta name="store" content="burnaby">
+    <title>CrowdMapp - Downtown Review</title>
+    <meta name="review" content="downtown">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -30,7 +30,7 @@
                         <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                        <a class="nav-link active" href="main_stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="feedback.html">Feedback</a>
@@ -43,36 +43,13 @@
         </div>
     </nav>
 
-    <div class="container center-text">
-        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
-        <ul id="store_details">
-            <li>
-                <h1 class="center-text">Burnaby Costco</h1>
-            </li>
-            <li>
-                <p id="address">4500 Still Creek Dr, Burnaby, BC V5C 0B5 <img class="copy" src="/images/copy.png"
-                        alt="copy" onclick="copyToClipboard('#p1')"></p>
-
-                <p id="p1" style="display: none;">4500 Still Creek Dr, Burnaby, BC V5C 0B5</p>
-            </li>
-            <li>
-                <p>Open hours: 9:00 AM - 8:30 PM</p>
-            </li>
-            <li>
-                <p>(604) 435-6695 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
-                </p>
-                <p id="p2" style="display: none;">+16044356695</p>
-            </li>
-        </ul>
-        <a class="btn btn-primary store-description" href="reviews_burnaby.html" role="button">See Reviews</a>
-        <a class="btn btn-primary store-description" href="stats_burnaby.html" role="button">View Historial
-            Statistics</a>
-        <a class="list-group-item list-group-item-action active center-text" aria-current="true"
-            style="background-color: white; color: black; border: 1px solid white;">
-            <p>Last update: <span id="update_time_burnaby"></span></p>
-
-            <p>Current Occupancy: <span id="headcount_burnaby"></span> / 300</p>
-        </a>
+    <div class="container">
+        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
+        <div>
+            <p id="review1"></p>
+            <button type="button" class="btn btn-info" id="downtown-button" onclick="LoadMore2()">More Reviews</button> 
+            <p id="downtown-more"></p>
+        </div>
 
         <footer>
             <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>

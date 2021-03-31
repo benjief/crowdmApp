@@ -3,20 +3,26 @@
 
 <head>
     <meta charset="utf-8">
+<<<<<<< HEAD
     <title>Feedback Page</title>
     <meta name="crowdMapp feedback form" content="feedback input/submission for all Costco locations">
     <meta name="author" content="Group 11">
+=======
+    <title>CrowdaMapp - Feedback</title>
+    <meta name="feedback form" content="feedback input/submission for all Costco locations">
+    <meta name="author" content="team 11">
+>>>>>>> 6a584a064ac6b673f081fa9b05564467ecd21af2
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="/jquery_plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
+<<<<<<< HEAD
 
     <style>
         body {
@@ -90,10 +96,11 @@
 
     </style>
 
+=======
+>>>>>>> 6a584a064ac6b673f081fa9b05564467ecd21af2
 </head>
 
 <body>
-    <!-- Header Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -107,10 +114,7 @@
                         <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Stats</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                        <a class="nav-link active" href="main_stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="feedback.html">Feedback</a>
@@ -124,8 +128,7 @@
     </nav>
 
     <div class="container">
-        <h1 class="display-4">Welcome, concerned Costco customer!</h1> <br>
-        <h2>Please give your Feedback!</h2> <br>
+        <h2 class="center-text">Please give your Feedback!</h2> <br>
         <div class="form-floating mb-3">
             <select class="form-select" id="floatingSelect" aria-label="Floating label select example"
                 onchange="getSelectedStore(this)">
@@ -169,15 +172,17 @@
 
 
     <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related    -->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
 
     <!-- Link to the api keys for your firebase project -->
     <script src="/scripts/firebase_api_crowdmapp.js"></script>
@@ -185,8 +190,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+    <script src="/scripts/my_functions.js"></script>
 
     <!-- Get store selected from dropdown menu -->
     <script type="text/javascript">
@@ -272,9 +276,7 @@
             }
         }
     </script>
-
-
-
+    
 </body>
 
 </html>
