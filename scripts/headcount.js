@@ -52,19 +52,22 @@ function decrementValue(y) {
         document.getElementById(y).textContent = --headcount;
     };
 };
-var currentUser = "thisisnotworking@bogus.net"; // delete this
-// Add a new update with an auto-generated id when user clicks "Update Headcount" button.
+
+function displayInvalidFeedback(feedback, selectedStore) {
+            // Display invalid selection prompt if a store isn't selected
+            feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
+            $(feedback).css({
+                color: "red"
+            });
+            $(feedback).show(0);
+            $(feedback).fadeOut(2500);
+            console.log("No update written");
+}
+
 function onClickUpdate() {
     var feedback = document.getElementById("feedback");
     if (!selectedStore || selectedStore === "invalid") {
-        // Display invalid selection prompt if a store isn't selected
-        feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
-        $(feedback).css({
-            color: "red"
-        });
-        $(feedback).show(0);
-        $(feedback).fadeOut(2500);
-        console.log("No update written");
+        displayInvalidFeedback(feedback, selectedStore);
     } else {
         // Get correct store name (in DB format)
         var storeToUpdate = "Costco_" + selectedStore;
