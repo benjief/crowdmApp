@@ -309,7 +309,8 @@ input {
     grid-template-areas:
         "increase_headcount decrease_headcount"
         "update_headcount update_headcount"
-        "feedback feedback";
+        "feedback feedback"
+        "footer footer";
     justify-items: center;
 }
 
