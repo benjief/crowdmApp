@@ -1,0 +1,46 @@
+/******** employee_headcount.html ********/
+.headcount_button {
+    font-size: 20px;
+    width: 90%;
+    height: 150px;
+}
+
+#increase_headcount {
+    grid-area: increase_headcount;
+}
+
+#decrease_headcount {
+    grid-area: decrease_headcount;
+}
+
+.supersize {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 60px;
+}
+
+#update_headcount {
+    grid-area: update_headcount;
+    margin-top: 15px;
+    width: 50%;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+#feedback_placeholder {
+    grid-area: feedback;
+    height: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+#button_container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "increase_headcount decrease_headcount"
+        "update_headcount update_headcount"
+        "feedback feedback"
+        "footer footer";
+    justify-items: center;
+}

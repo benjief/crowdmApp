@@ -1,3 +1,37 @@
+        /**************** Stores ****************/
+        // Read real-time Burnaby headcount data and write it to the screen
+        function updateHeadcountBurnaby() {
+            db.collection("Stores").doc("Costco_Burnaby").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_burnaby").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_burnaby").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Read real-time Downtown headcount data and write it to the screen
+        function updateHeadcountDowntown() {
+            db.collection("Stores").doc("Costco_Downtown").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_downtown").innerHTML = doc.data().Current_Headcount;
+                    document.getElementById("update_time_downtown").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Read real-time Richmond headcount data and write it to the screen
+        function updateHeadcountRichmond() {
+            db.collection("Stores").doc("Costco_Richmond").collection("Latest_Update").doc("latest")
+                .onSnapshot((doc) => {
+                    document.getElementById("headcount_richmond").innerHTML = doc.data().Current_Headcount;
+                    console.log(doc.data().Current_Headcount);
+                    document.getElementById("update_time_richmond").innerHTML = doc.data().Date_Time.toDate();
+                });
+        }
+
+        // Call functions
+        updateHeadcountBurnaby();
+        updateHeadcountDowntown();
+        updateHeadcountRichmond();
+
         // Read real-time Burnaby headcount data and write it to the screen
         function updateHeadcountBurnaby() {
             db.collection("Stores").doc("Costco_Burnaby").collection("Latest_Update").doc("latest")
