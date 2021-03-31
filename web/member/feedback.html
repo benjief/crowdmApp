@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My BCIT Project</title>
+    <title>Feedback Page</title>
     <meta name="crowdMapp feedback form" content="feedback input/submission for all Costco locations">
     <meta name="author" content="Group 11">
 
@@ -66,8 +66,12 @@
         .control {
             grid-area: feedback;
             margin-top: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             height: 20px;
+        }
+
+        #footer {
+            grid-area: footer;
         }
 
         #content_container {
@@ -81,7 +85,9 @@
                 "characters_remaining"
                 "submit_button"
                 "feedback"
+                "footer";
         }
+
     </style>
 
 </head>
@@ -153,13 +159,14 @@
             <div class="control">
                 <p id="feedback"></p>
             </div>
+            <footer>
+                <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+                <p>Back</p>
+                <p id="trademark">&#169; 2021 crowdmApp</p>
+            </footer>
         </div>
     </div>
-    <footer>
-        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-        <p>Back</p>
-        <p id="trademark">&#169; 2021 crowdmApp</p>
-    </footer>
+
 
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related    -->
@@ -244,6 +251,9 @@
                 $(feedback).fadeOut(2500);
             } else {
                 document.getElementById("feedback").innerHTML = "Thanks for your feedback!";
+                $(feedback).css({
+                    color: "black"
+                });
                 $(feedback).show(0);
                 $(feedback).fadeOut(2500);
                 db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({

@@ -215,14 +215,14 @@
                         tableData[0].parentNode.removeChild(tableData[0]);
                     }
                     // Average headcounts for each hour (code might be confusing because I used a double-nested array)
-                    for (var i = 0; i < master_table.length; i++) {
+                    for (var i = 0; i < master_table.length; i++) {                     // Loop over each row of the array (hours of the day)
                         var sum = 0;                                                    // Reset sum for each row
                         var average = 0;                                                // Reset average for each row
                         jQuery('<tr/>', {
                             id: i.toString(),
                             "class": 'table_data'
                         }).appendTo('#stats_table');
-                        for (var j = 0; j < master_table[i].length; j++) {
+                        for (var j = 0; j < master_table[i].length; j++) {              // Loop over every entry in row i (headcounts within that hour)
                             console.log("i = " + i.toString() + ", j = " + j.toString());
                             var currentSubArray = master_table[i][j];
                             console.log(currentSubArray);
@@ -246,7 +246,7 @@
                         jQuery('<td/>', {
                             id: timeData
                         }).appendTo('#' + i.toString());
-                        // Add average headcount to row
+                        // Add average headcount to row, if it exists
                         jQuery('<td/>', {
                             id: timeData + '_hc'
                         }).appendTo('#' + i.toString());

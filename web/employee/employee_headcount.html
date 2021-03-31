@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>My BCIT Project</title>
-    <meta name="comp1800 boilerplate code" content="my bcit project">
-    <meta name="author" content="BCIT">
+    <title>Employee Headcount</title>
+    <meta name="crowdMapp employee headcount updater" content="headcount updater for all Costco locations">
+    <meta name="author" content="Group 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,6 +51,10 @@
             margin-bottom: 30px;
         }
 
+        footer {
+            grid-area: footer;
+        }
+
         #button_container {
             display: grid;
             grid-template-columns: repeat(2, 50%);
@@ -58,7 +62,8 @@
             grid-template-areas:
                 "increase_headcount decrease_headcount"
                 "update_headcount update_headcount"
-                "feedback feedback";
+                "feedback feedback"
+                "footer footer";
             justify-items: center;
         }
     </style>
@@ -124,13 +129,13 @@
             <div id="feedback_placeholder">
                 <p id="feedback"></p>
             </div>
+            <footer>
+                <a><img id="back_button" src="/images/back_arrow.png" alt="back_arrow" onclick="history.back()"></a>
+                <p>Back</p>
+                <p id="trademark">&#169; 2021 crowdmApp</p>
+            </footer>
         </div>
 
-        <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" alt="back_arrow" onclick="history.back()"></a>
-            <p>Back</p>
-            <p id="trademark">&#169; 2021 crowdmApp</p>
-        </footer>
     </div>
 
     <!----------------------------------------------->
