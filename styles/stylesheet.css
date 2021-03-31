@@ -119,16 +119,17 @@ footer {
 }
 
 .head {
-    color: green;
+    color: #0D6391 ;
     display: inline-block;
     margin-right: 10px;
 }
 
 .review-box {
-    background-color: lightgrey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .value {
+    color: #D28529;
     display: inline-block;
 }
 
