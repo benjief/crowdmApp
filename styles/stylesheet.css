@@ -86,8 +86,13 @@ footer {
 
 /********* main_stores.html *********/
 #heading {
+    color: #D28529;
     text-align: center;
     margin-bottom: 50px;
+}
+
+.mb-1 {
+    color: #0D6391 ;
 }
 
 /********* Review pages *********/
@@ -205,6 +210,10 @@ td {
 .copy {
     height: 20px;
     width: 20px;
+}
+
+.store-name {
+    color: #ff9100;
 }
 
 
