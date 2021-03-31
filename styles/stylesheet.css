@@ -15,9 +15,11 @@ h1{
     border-radius: 20px;
     
 }
+
 .nav-item a:hover {
     color: black;
 }
+
 .display-4 {
     color: #E38106;
 }
@@ -31,6 +33,7 @@ h1{
 .button-main:hover {
     background-color: #2f88b8;
 }
+
 .center-text {
     text-align: center;
 }
@@ -46,6 +49,7 @@ h1{
 }
 
 footer {
+    grid-area: footer;
     text-align: center;
     position: relative;
     bottom: 0;
@@ -180,10 +184,6 @@ td {
     text-align: center;
 }
 
-footer {
-    grid-area: footer;
-}
-
 #content_container1 {
     display: grid;
     grid-template-columns: 100%;
@@ -207,65 +207,6 @@ footer {
     width: 20px;
 }
 
-/******** feedback.html ********/
-#question {
-    grid-area: question;
-}
-
-#star_rating {
-    grid-area: star_rating;
-}
-
-#comment_box {
-    grid-area: comment_box;
-}
-
-.characters_remaining {
-    display: flex;
-    grid-area: characters_remaining;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 30px;
-    font-size: 10pt;
-}
-
-.characters_remaining p {
-    display: flex;
-    align-items: center;
-    height: 100%;
-    padding-right: 5px;
-}
-
-input {
-    border: none;
-    background-color: white;
-    color: black;
-}
-
-#submit-button {
-    grid-area: submit_button;
-    margin-top: 20px;
-}
-
-.control {
-    grid-area: feedback;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    height: 20px;
-}
-
-#content_container {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: auto;
-    grid-template-areas:
-        "question"
-        "star_rating"
-        "comment_box"
-        "characters_remaining"
-        "submit_button"
-        "feedback"
-}
 
 /******** employee_headcount.html ********/
 .headcount_button {
