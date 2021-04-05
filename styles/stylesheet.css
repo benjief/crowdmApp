@@ -67,11 +67,15 @@ footer {
 }
 
 .card-title {
-    color: #E38106;;
+    font-size: 25px;
+    color: #E38106;
+    margin-bottom: 30px;
 }
 
 .card-text {
+    font-size: 20px;
     color: #0D6391;
+    margin-bottom: 30px;
 }
 
 /*********** more-info ****************/
