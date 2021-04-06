@@ -1,82 +1,130 @@
-/***************** stats *****************/
+/***************** STATS *****************/
+
+// var stores = ["Burnaby", "Downtown", "Richmond"];
 var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var currentDay = weekdays[1];
 
-function getNumbers() {
+// Reads all updates from Firestore and puts them into a array
+function getUpdateArray(querySnapshot) {
+    // Put each update document into an array so that 
+    var update_array = [];
+    querySnapshot.forEach((doc) => {
+        if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
+            var time_hc = [];
+            // Get the hour the update was posted at (column 1), along with the headcount posted for that update (column 2)
+            time_hc.push(doc.data().Date_Time.toDate().getHours());
+            time_hc.push(doc.data().Current_Headcount);
+            update_array.push(time_hc);
+            return update_array;
+        }
+    });
+}
+
+/* Separate headcounts in time by storing them in a master array whose rows contain arrays for 
+different hours of the day */
+function getMasterArray(update_array) {
+    var master_array = [];
+    var hoursInADay = 24;
+    // Add 24 rows to the master array (for each of the hours in a day)
+    for (var i = 0; i < hoursInADay; i++) {
+        master_array[i] = [];
+    }
+    // Each row of hours contains separate arrays for headcount updates made during that hour
+    for (var i = 0; i < update_array.length; i++) {
+        /* update_array[i][0] contains the value for the hour that update was made during.
+        If an update was made during the hour x [0-23], we add [update_time headcount_posted]
+        to row x of the master array */
+        master_array[update_array[i][0]].push(update_array[i]);
+    }
+    return master_array;
+}
+
+// Clear any stats that may already exist on the page (so updated info can be re-added)
+function clearCurrentStats() {
+    // Get data currently posted as an array
+    var currentStats = document.getElementsByClassName('stats_data');
+    // Erase the data from the page, if it exists
+    while (currentStats[0]) {
+        tableData[0].parentNode.removeChild(tableData[0]);
+    }
+}
+
+// Calculate the average head count for each hour
+function calculateAverageHeadCount(master_array, i) {
+    for (var j = 0; j < master_array[i].length; j++) {
+        console.log("i = " + i.toString() + ", j = " + j.toString());
+        // Create an individual array for each sub-array (in order to access its elements with indices)
+        var currentSubArray = master_array[i][j];
+        console.log(currentSubArray);
+        // If data exists within the current sub-array, add the head count to the running sum
+        if (currentSubArray) {
+            console.log(currentSubArray[1]);
+            sum += currentSubArray[1];
+            console.log(sum);
+        }
+    }
+    /* If the current row is populated, calculate the average from the running sum
+    and the length of the row */
+    if (master_array[i].length > 0) {
+        var average = sum / master_array[i].length;
+        average = average.toFixed(0);
+    }
+    return average;
+}
+
+// Get proper format for current hour as a string
+function formatHour(i) {
+    var time;
+    if (i < 10) {
+        time = "0" + i.toString() + ":00";
+    } else {
+        time = i.toString() + ":00";
+    }
+    return time;
+}
+
+// Append the average head count for each hour to the DOM
+function appendCurrentStats(master_array) {
+    for (var i = 0; i < master_array.length; i++) {
+        // Reset sum for each row
+        var sum = 0;
+        // Reset average for each row
+        var average = 0;
+        jQuery('<tr/>', {
+            /* Create a table row with id = the current row being processed 
+            (i.e. the hour being averaged), and append it to the DOM/ This is
+            where the average for the hour will go */
+            id: i.toString(),
+            "class": 'stats_data'
+        }).appendTo('#stats_table');
+        // Calculate the average head count for the current row (hour)
+        var average = calculateAverageHeadCount(master_array, i);
+        var time = formatHour(i)
+        // Add hour to DOM table row with id
+        jQuery('<td/>', {
+            id: time
+        }).appendTo('#' + i.toString());
+        // Add average headcount to DOM table row
+        jQuery('<td/>', {
+            id: time + '_hc'
+        }).appendTo('#' + i.toString());
+        // If an average for a certain hour exists, post it. Otherwise, post "No data"
+        document.getElementById(time).innerHTML = time;
+        if (average) {
+            document.getElementById(time + '_hc').innerHTML = average;
+        } else {
+            document.getElementById(time + '_hc').innerHTML = "No data";
+        }
+    }
+}
+
+function calculateStats() {
     db.collection("Stores").doc("Costco_Downtown").collection(currentDay)
         .onSnapshot((querySnapshot) => {
-            var data_table = [];
-            querySnapshot.forEach((doc) => {
-                if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
-                    var time_hc = [];
-                    time_hc.push(doc.data().Date_Time.toDate().getHours());
-                    time_hc.push(doc.data().Current_Headcount);
-                    data_table.push(time_hc);
-                }
-            });
-            // Separate headcounts in time by storing them in a master table whose rows contain arrays for different hours of the day
-            // Each row of hours contains multiple arrays for headcount updates made at that hour
-            var master_table = [];
-            var hoursInADay = 24;
-            for (var i = 0; i < hoursInADay; i++) {
-                master_table[i] = [];
-            }
-            //
-            for (var i = 0; i < data_table.length; i++) {
-                master_table[data_table[i][0]].push(data_table[i]);
-            }
-            console.log(master_table[0]);
-            console.log(master_table[1]);
-            console.log(master_table[1][1]);
-            // Get rid of any table data that already exists (so it can be re-written)
-            var tableData = document.getElementsByClassName('table_data');
-            while (tableData[0]) {
-                tableData[0].parentNode.removeChild(tableData[0]);
-            }
-            // Average headcounts for each hour
-            for (var i = 0; i < master_table.length; i++) {
-                var sum = 0; // Reset sum for each row
-                var average = 0; // Reset average for each row
-                jQuery('<tr/>', {
-                    id: i.toString(),
-                    "class": 'table_data'
-                }).appendTo('#stats_table');
-                for (var j = 0; j < master_table[i].length; j++) {
-                    console.log("i = " + i.toString() + ", j = " + j.toString());
-                    var currentSubArray = master_table[i][j];
-                    console.log(currentSubArray);
-                    if (master_table[i][j]) {
-                        console.log(currentSubArray[1]);
-                        sum += currentSubArray[1];
-                        console.log(sum);
-                    }
-                }
-                if (master_table[i].length > 0) {
-                    var average = sum / master_table[i].length;
-                    average = average.toFixed(0);
-                }
-                var timeData;
-                if (i < 10) {
-                    timeData = "0" + i.toString() + ":00";
-                } else {
-                    timeData = i.toString() + ":00";
-                }
-                // Add hour to row
-                jQuery('<td/>', {
-                    id: timeData
-                }).appendTo('#' + i.toString());
-                // Add average headcount to row
-                jQuery('<td/>', {
-                    id: timeData + '_hc'
-                }).appendTo('#' + i.toString());
-                document.getElementById(timeData).innerHTML = timeData;
-                if (average) {
-                    document.getElementById(timeData + '_hc').innerHTML = average;
-                } else {
-                    document.getElementById(timeData + '_hc').innerHTML = "No data";
-                }
-
-            }
+            var update_array = getUpdateTable(querySnapshot);
+            var master_array = getMasterArray(update_array);
+            clearCurrentStats();
+            appendCurrentStats(master_array);
         });
 }
 
@@ -87,7 +135,7 @@ function moveDayBack() {
         currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
     }
     document.getElementById("current_day").innerHTML = currentDay;
-    getNumbers();
+    calculateStats();
 }
 
 function moveDayForward() {
@@ -97,9 +145,9 @@ function moveDayForward() {
         currentDay = weekdays[weekdays.indexOf(currentDay) + 1];
     }
     document.getElementById("current_day").innerHTML = currentDay;
-    getNumbers();
+    calculateStats();
 }
 
 // Call functions
-getNumbers();
+calculateStats();
 
