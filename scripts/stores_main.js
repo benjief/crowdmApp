@@ -83,34 +83,13 @@ function updateHeadcount(store) {
         });
 }
 
-// Get, update and post average ratings for all stores
-function updateRating(store) {
-    db.collection("Stores").doc("Costco_" + store).collection("Reviews")
-        .onSnapshot((querySnapshot) => {
-            store = store.toLowerCase();
-            var ratings = [];
-            querySnapshot.forEach((doc) => {
-                ratings.push(doc.data().Reviewer_Rating);
-            });
-            var sum = 0;
-            for (var j = 0; j < ratings.length; j++) {
-                sum += ratings[j];
-            }
-            var avgRating = sum / ratings.length;
-            document.getElementById(store + "_stars").setAttribute("style", "--rating: " + avgRating.toFixed(
-                1).toString() + ";");
-            document.getElementById("current_rating_" + store).innerHTML = "Current rating: " + avgRating
-                .toFixed(1);
-        });
-}
-
 // Call functions
 $(document).ready(function () {
     for (var i = 0; i < stores.length; i++) {
         updateStoreHeaders(stores[i]);
         updateHeadcount(stores[i]);
         updateLastTimeOfLastUpdate(stores[i]);
-        updateRating(stores[i]);
+
     }
 });
 
