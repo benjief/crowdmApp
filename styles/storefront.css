@@ -1,7 +1,14 @@
+:root {
+    --star-size: 25px;
+    --star-color: #fff;
+    --star-background: #edb767;
+}
+
 .content-container {
     display: grid;
     grid-template-columns: 100%;
     grid-template-areas: 
+        "stars"
         "store-name"
         "map"
         "store-info"
@@ -32,6 +39,40 @@ iframe {
     height: 100%;
     align-items: center;
     justify-content: center;
+}
+
+.stars {
+    display: flex;
+    --percent: calc(var(--rating) / 5 * 103%);
+    font-size: var(--star-size);
+    font-family: Times;
+    line-height: 1;
+    margin-left: 7px;
+    height: 100%;
+    align-items: center;
+}
+
+.stars::before {
+    content: '🟊🟊🟊🟊🟊';
+    letter-spacing: -3px;
+    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    background-clip: unset;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.star-container {
+    display: flex;
+    flex-direction: row;
+    grid-area: stars;
+    height: 30px;
+    justify-content: flex-start;
+}
+
+.star-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 .button-container {

@@ -43,7 +43,28 @@ function displayButtons(store) {
     }).appendTo('.button-container');
 }
 
-// Call function
+// Get, update and post average ratings for all stores
+function updateRating(store) {
+    db.collection("Stores").doc("Costco_" + store).collection("Reviews")
+        .onSnapshot((querySnapshot) => {
+            store = store.toLowerCase();
+            var ratings = [];
+            querySnapshot.forEach((doc) => {
+                ratings.push(doc.data().Reviewer_Rating);
+            });
+            var sum = 0;
+            for (var j = 0; j < ratings.length; j++) {
+                sum += ratings[j];
+            }
+            var avgRating = sum / ratings.length;
+            document.getElementById("stars").setAttribute("style", "--rating: " + avgRating
+                .toFixed(1).toString() + ";");
+            document.getElementById("current-rating").innerHTML = "Current rating: " + avgRating
+                .toFixed(1);
+        });
+}
+
+// Call functions
 $(document).ready(function () {
     const parsedUrl = new URL(window.location.href);
     var store = parsedUrl.searchParams.get("store");
@@ -52,4 +73,5 @@ $(document).ready(function () {
         + parsedUrl.searchParams.get("updateunit") + " ago";
     getStoreDetails(store, headcount, lastUpdate);
     displayButtons(store);
+    updateRating(store);
 });
