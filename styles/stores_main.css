@@ -76,6 +76,31 @@
     align-items: center;
 }
 
+.container {
+    display: grid;
+    grid-template-areas: 
+        "page-header"
+        "info-table"
+        "footer";
+    width: 100%;    
+}
+
+.heading-container {
+    display: flex;
+    grid-area: page-header;
+    justify-content: center;
+}
+
+#heading {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.list-group {
+    grid-area: info-table;
+}
+
 .headcount_container {
     display: flex;
     flex-direction: row;

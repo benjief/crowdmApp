@@ -29,7 +29,7 @@ function displayButtons(store) {
     jQuery('<a/>', {
         class: "btn btn-primary button-main",
         id: "view-reviews-button",
-        href: "reviews_" + store.toLowerCase() + ".html",
+        href: "reviews.html?store=" + store,
         role: "button",
         html: "View Reviews"
     }).appendTo('.button-container');

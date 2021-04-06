@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CrowdmApp - Burnaby Review</title>
-    <meta name="review" content="burnaby">
+    <title>CrowdmApp - Reviews</title>
+    <meta name="reviews" content="reviews for all stores">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -14,7 +14,7 @@
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <link rel="stylesheet" href="/styles/review.css">
+    <link rel="stylesheet" href="/styles/reviews.css">
 </head>
 
 <body>
@@ -45,11 +45,10 @@
     </nav>
 
     <div class="container">
-        <img id="storefront" src="/images/store_burnaby_storefront.png" alt="storefront">
-        <div>
-            <p id="review2"></p>
-            <p id="burnaby-more"></p>
-            <button type="button" class="btn btn-info button-main" id="burnaby-button" onclick="LoadMore3()">More Reviews</button> 
+        <div class="heading-container"></div>
+        <div class="review-container"></div>
+        <div class="button-container">
+            <button id="load-more-button" class="btn btn-primary button-main" onclick="loadAllReviews()">Load More</button>      
         </div>
 
         <footer>
@@ -58,7 +57,6 @@
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
-
     <!----------------------------------------------->
     <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
@@ -78,7 +76,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="/scripts/review.js"></script>
+    <script src="/scripts/reviews.js"></script>
 
 </body>
 
