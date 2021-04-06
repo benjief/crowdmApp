@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CrowdmApp - Richmond Store</title>
-    <meta name="store" content="richmond">
+    <title>CrowdmApp - Downtown Store</title>
+    <meta name="store" content="downtown">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -18,7 +18,7 @@
 </head>
 
 <body class="center-text">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -45,34 +45,33 @@
     </nav>
 
     <div class="container">
-        <img id="storefront" src="/images/store_richmond_storefront.png" alt="storefront">
+        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
         <ul id="store_details">
             <li>
-                <h1 class="center-text store-name">Costco Richmond</h1>
+                <h1 class="center-text store-name">Costco Vancouver</h1>
             </li>
             <li>
-                <p id="address">9151 Bridgeport Rd, Richmond, BC V6X 3L9 <img class="copy" src="/images/copy.png"
-                        alt="copy" onclick="copyToClipboard('#p1')"></p>
-
-                <p id="p1" style="display: none;">9151 Bridgeport Rd, Richmond, BC V6X 3L9</p>
+                <a id="address" href="../member/map_downtown.html">605 Expo Blvd, Vancouver, BC V6B 1V4 <img class="copy" src="/images/copy.png" alt="copy"
+                        onclick="copyToClipboard('#p1')"></a>
+                <p id="p1" style="display: none;">605 Expo Blvd, Vancouver, BC V6B 1V4</p>
             </li>
             <li>
                 <p>Hours: 9:00 AM - 8:30 PM</p>
             </li>
             <li>
-                <p>(604) 270-3647 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
+                <p>(604) 622-5050 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
                 </p>
-                <p id="p2" style="display: none;">+16042703647</p>
+                <p id="p2" style="display: none;">+16046225050</p>
             </li>
         </ul>
-        <a class="btn btn-primary button-main" href="reviews_richmond.html" role="button">See Reviews</a></br></br>
-        <a class="btn btn-primary button-main" href="stats_richmond.html" role="button">View Historial
+        <a class="btn btn-primary button-main" href="reviews_downtown.html" role="button">See Reviews</a></br></br>
+        <a class="btn btn-primary button-main" href="stats_downtown.html" role="button">View Historial
             Statistics</a>
         <a class="list-group-item list-group-item-action active center-text" aria-current="true"
             style="background-color: white; color: black; border: 1px solid white;">
-            <p>Last update: <span id="update_time_richmond"></span></p>
+            <p>Last update: <span id="update_time_downtown"></span></p>
 
-            <p>Current Occupancy: <span id="headcount_richmond"></span> / 300</p>
+            <p>Current Occupancy: <span id="headcount_downtown"></span> / 300</p>
         </a>
 
         <footer>

@@ -1,23 +1,16 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>CrowdmApp - Downtown Store</title>
-    <meta name="store" content="downtown">
-    <meta name="author" content="team 11">
-
-    <!-- Bootstrap for Mobile-first, and JQuery -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-    <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
     <link rel="stylesheet" href="/styles/store.css">
+    <title>Document</title>
 </head>
-
-<body class="center-text">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -44,46 +37,14 @@
         </div>
     </nav>
 
-    <div class="container">
-        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
-        <ul id="store_details">
-            <li>
-                <h1 class="center-text store-name">Costco Vancouver</h1>
-            </li>
-            <li>
-                <p id="address">605 Expo Blvd, Vancouver, BC V6B 1V4 <img class="copy" src="/images/copy.png" alt="copy"
-                        onclick="copyToClipboard('#p1')"></p>
-                <p id="p1" style="display: none;">605 Expo Blvd, Vancouver, BC V6B 1V4</p>
-            </li>
-            <li>
-                <p>Hours: 9:00 AM - 8:30 PM</p>
-            </li>
-            <li>
-                <p>(604) 622-5050 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
-                </p>
-                <p id="p2" style="display: none;">+16046225050</p>
-            </li>
-        </ul>
-        <a class="btn btn-primary button-main" href="reviews_downtown.html" role="button">See Reviews</a></br></br>
-        <a class="btn btn-primary button-main" href="stats_downtown.html" role="button">View Historial
-            Statistics</a>
-        <a class="list-group-item list-group-item-action active center-text" aria-current="true"
-            style="background-color: white; color: black; border: 1px solid white;">
-            <p>Last update: <span id="update_time_downtown"></span></p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1301.9162391423297!2d-123.0004504916531!3d49.260621044832206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5486772490e5a199%3A0x8e94e0844aeeddf2!2s4500%20Still%20Creek%20Dr%2C%20Burnaby%2C%20BC%20V5C%200B5%2C%20Canada!5e0!3m2!1sen!2sin!4v1617306863434!5m2!1sen!2sin" 
+    width="800" height="450" style="border:0; margin-left: 25%; margin-top: 5%;" allowfullscreen="" loading="lazy"></iframe>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
 
-            <p>Current Occupancy: <span id="headcount_downtown"></span> / 300</p>
-        </a>
-
-        <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
-            <p id="trademark">&#169; 2021 crowdmApp</p>
-        </footer>
-    </div>
-
-    <!----------------------------------------------->
-    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
-    <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
     </script>
@@ -101,7 +62,5 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="/scripts/store_main.js"></script>
-
 </body>
-
 </html>

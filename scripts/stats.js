@@ -1,82 +1,125 @@
-/***************** stats *****************/
+/***************** STATS *****************/
+const parsedUrl = new URL(window.location.href);
+var store = parsedUrl.searchParams.get("store");
 var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var currentDay = weekdays[1];
+var currentDate = new Date();
+var currentDay = weekdays[currentDate.getDay()];
+$("#current-day").html(currentDay);
 
-function getNumbers() {
-    db.collection("Stores").doc("Costco_Downtown").collection(currentDay)
+var hoursInADay = 24;
+// Create empty array to store all update documents pulled from Firestore
+var masterArray = [];
+// Create empty array to store hourly headcount averages
+var hourlyAverages = [];
+// Create an array of hours in the day
+var hoursIn24HrFormat = []
+// Initialize values to "No data"
+for (var i = 0; i < hoursInADay; i++) {
+    hourlyAverages[i] = "No data";
+}
+// Initialize values to 0
+for (var i = 0; i < hoursInADay; i++) {
+    hoursIn24HrFormat[i] = 0;
+}
+
+// Reset all of the arrays needed to properly post update information to their initial states
+function resetArrays() {
+    masterArray = [];
+    // Initialize values to "No data"
+    for (var i = 0; i < hoursInADay; i++) {
+        hourlyAverages[i] = "No data";
+    }
+    // Initialize values to 0
+    for (var i = 0; i < hoursInADay; i++) {
+        hoursIn24HrFormat[i] = 0;
+    }
+}
+
+
+// Write the store name at the top of the screen
+function writeStoreName(store) {
+    $("#store-name").html = "Costco " + store;
+}
+
+// Add JSON object to master array containing all updates
+function addToMasterArray(updateInfo) {
+    masterArray.push(updateInfo);
+}
+
+// Calculate hourly averages from headcount update documents
+function calculateHourlyAverages() {
+    for (var i = 0; i < hourlyAverages.length; i++) {
+        for (var j = 0; j < masterArray.length; j++) {
+            var sum = 0;
+            var counter = 0;
+            if (masterArray[j]["hour"] == i) {
+                sum += masterArray[j]["headcount"];
+                counter++;
+            }
+            // Populate hourly averages array if an average exists
+            if (counter != 0) {
+                var average = sum / counter;
+                // Replace "No data" at row i with the calculated average
+                hourlyAverages.splice(i, 1, average);
+                // Reset the average to 0 once the row has been dealt with
+                average = 0;
+            }
+        }
+    }
+}
+
+// Create an array of hours to populate the DOM
+function formatTimes() {
+    for (var i = 0; i < hoursIn24HrFormat.length; i++) {
+        // Format the hour nicely
+        var formattedHour;
+        if (i < 10) {
+            formattedHour = "0" + i + ":00";
+        } else {
+            formattedHour = i + ":00";
+        }
+        hoursIn24HrFormat.splice(i, 1, formattedHour);
+    }
+}
+
+// Erase times and their corresponding headcounts from the DOM if they exist
+function eraseInfoFromDom() {
+    var tableData = document.getElementsByClassName('hour-row');
+    while (tableData[0]) {
+        tableData[0].parentNode.removeChild(tableData[0]);
+    }
+}
+
+// Append times and their corresponding headcounts to the DOM
+function appendInfoToDom() {
+    formatTimes();
+    for (var i = 0; i < hoursInADay; i++) {
+        var hour = "<tr class='hour-row' id='" + i.toString() + "-row'></tr>";
+        var formattedHour = "<td class='hour-data' id='" + i.toString() + "-hour'></td>";
+        var headCount = "<td class='headcount-data' id='" + i.toString() + "-headcount'></td>";
+        $("#stats-table").append(hour);
+        $("#" + i.toString() + "-row").append(formattedHour);
+        $("#" + i.toString() + "-row").append(headCount);
+        $("#" + i.toString() + "-hour").html(hoursIn24HrFormat[i].toString());
+        $("#" + i.toString() + "-headcount").html(hourlyAverages[i]);
+    }
+}
+
+// Get headcount updates for the current day
+function getUpdateInfo(store, currentDay) {
+    db.collection("Stores").doc("Costco_" + store).collection(currentDay)
+        .where("Current_Headcount", "!=", null)
         .onSnapshot((querySnapshot) => {
-            var data_table = [];
             querySnapshot.forEach((doc) => {
-                if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
-                    var time_hc = [];
-                    time_hc.push(doc.data().Date_Time.toDate().getHours());
-                    time_hc.push(doc.data().Current_Headcount);
-                    data_table.push(time_hc);
+                if (doc.data().Date_Time) {
+                    var time = doc.data().Date_Time.toDate().getHours();
                 }
+                var headcount = doc.data().Current_Headcount;
+                var updateInfo = { "hour": time, "headcount": headcount };
+                addToMasterArray(updateInfo);
             });
-            // Separate headcounts in time by storing them in a master table whose rows contain arrays for different hours of the day
-            // Each row of hours contains multiple arrays for headcount updates made at that hour
-            var master_table = [];
-            var hoursInADay = 24;
-            for (var i = 0; i < hoursInADay; i++) {
-                master_table[i] = [];
-            }
-            //
-            for (var i = 0; i < data_table.length; i++) {
-                master_table[data_table[i][0]].push(data_table[i]);
-            }
-            console.log(master_table[0]);
-            console.log(master_table[1]);
-            console.log(master_table[1][1]);
-            // Get rid of any table data that already exists (so it can be re-written)
-            var tableData = document.getElementsByClassName('table_data');
-            while (tableData[0]) {
-                tableData[0].parentNode.removeChild(tableData[0]);
-            }
-            // Average headcounts for each hour
-            for (var i = 0; i < master_table.length; i++) {
-                var sum = 0; // Reset sum for each row
-                var average = 0; // Reset average for each row
-                jQuery('<tr/>', {
-                    id: i.toString(),
-                    "class": 'table_data'
-                }).appendTo('#stats_table');
-                for (var j = 0; j < master_table[i].length; j++) {
-                    console.log("i = " + i.toString() + ", j = " + j.toString());
-                    var currentSubArray = master_table[i][j];
-                    console.log(currentSubArray);
-                    if (master_table[i][j]) {
-                        console.log(currentSubArray[1]);
-                        sum += currentSubArray[1];
-                        console.log(sum);
-                    }
-                }
-                if (master_table[i].length > 0) {
-                    var average = sum / master_table[i].length;
-                    average = average.toFixed(0);
-                }
-                var timeData;
-                if (i < 10) {
-                    timeData = "0" + i.toString() + ":00";
-                } else {
-                    timeData = i.toString() + ":00";
-                }
-                // Add hour to row
-                jQuery('<td/>', {
-                    id: timeData
-                }).appendTo('#' + i.toString());
-                // Add average headcount to row
-                jQuery('<td/>', {
-                    id: timeData + '_hc'
-                }).appendTo('#' + i.toString());
-                document.getElementById(timeData).innerHTML = timeData;
-                if (average) {
-                    document.getElementById(timeData + '_hc').innerHTML = average;
-                } else {
-                    document.getElementById(timeData + '_hc').innerHTML = "No data";
-                }
-
-            }
+            calculateHourlyAverages();
+            appendInfoToDom();
         });
 }
 
@@ -86,8 +129,12 @@ function moveDayBack() {
     } else {
         currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
     }
-    document.getElementById("current_day").innerHTML = currentDay;
-    getNumbers();
+    document.getElementById("current-day").innerHTML = currentDay;
+    console.log(currentDay);
+    resetArrays();
+    eraseInfoFromDom();
+    getUpdateInfo(store, currentDay);
+    console.log(masterArray);
 }
 
 function moveDayForward() {
@@ -96,10 +143,16 @@ function moveDayForward() {
     } else {
         currentDay = weekdays[weekdays.indexOf(currentDay) + 1];
     }
-    document.getElementById("current_day").innerHTML = currentDay;
-    getNumbers();
+    document.getElementById("current-day").innerHTML = currentDay;
+    console.log(currentDay);
+    resetArrays();
+    eraseInfoFromDom();
+    getUpdateInfo(store, currentDay);
+    console.log(masterArray);
 }
 
-// Call functions
-getNumbers();
-
+$(document).ready(function () {
+    writeStoreName(store);
+    getUpdateInfo(store, currentDay);
+    console.log(masterArray);
+});

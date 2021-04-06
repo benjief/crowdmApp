@@ -1,5 +1,6 @@
 // Head Counter
 var timeout, interval, headcount = 0;
+
 // Addition
 [].forEach.call(document.querySelectorAll('.add'), function (button) {
     button.addEventListener('mousedown', function () {
@@ -9,8 +10,8 @@ var timeout, interval, headcount = 0;
         timeout = setTimeout(function () {
             interval = setInterval(function () {
                 incrementValue(x);
-            }, 80); //counting speed set in milliseconds.
-        }, 600); //hold down delay set in milliseconds. 
+            }, 80);                     // Counting speed set in milliseconds
+        }, 600);                        // Hold down delay set in milliseconds
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
@@ -25,6 +26,7 @@ var timeout, interval, headcount = 0;
 function incrementValue(x) {
     document.getElementById(x).textContent = ++headcount;
 };
+
 // Substraction
 [].forEach.call(document.querySelectorAll('.subtract'), function (button) {
     button.addEventListener('mousedown', function () {
@@ -52,19 +54,22 @@ function decrementValue(y) {
         document.getElementById(y).textContent = --headcount;
     };
 };
-var currentUser = "thisisnotworking@bogus.net"; // delete this
-// Add a new update with an auto-generated id when user clicks "Update Headcount" button.
+
+function displayInvalidFeedback(feedback, selectedStore) {
+            // Display invalid selection prompt if a store isn't selected
+            feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
+            $(feedback).css({
+                color: "red"
+            });
+            $(feedback).show(0);
+            $(feedback).fadeOut(2500);
+            console.log("No update written");
+}
+
 function onClickUpdate() {
     var feedback = document.getElementById("feedback");
     if (!selectedStore || selectedStore === "invalid") {
-        // Display invalid selection prompt if a store isn't selected
-        feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
-        $(feedback).css({
-            color: "red"
-        });
-        $(feedback).show(0);
-        $(feedback).fadeOut(2500);
-        console.log("No update written");
+        displayInvalidFeedback(feedback, selectedStore);
     } else {
         // Get correct store name (in DB format)
         var storeToUpdate = "Costco_" + selectedStore;

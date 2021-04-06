@@ -14,7 +14,7 @@
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stylesheet.css">
-    <link rel="stylesheet" href="/styles/store.css">
+    <link rel="stylesheet" href="/styles/stores_main.css">
 </head>
 
 <body class="center-text">
@@ -47,10 +47,10 @@
     <div class="container">
         <h1 id="heading">Real-Time Headcount Data</h1>
         <div class="list-group">
-            <a href="../member/store_burnaby.html" class="list-group-item list-group-item-action active" id="box_burnaby" aria-current="true"
+            <a href="../member/storefront.html?store=Burnaby" class="list-group-item list-group-item-action active" id="box_burnaby" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Costco Burnaby</h5>
+                    <h5 class="header" id="header_burnaby"></h5>
                     <small id="update_time_burnaby"></small>
                 </div>
                 <div class="star_container">
@@ -67,10 +67,10 @@
                     </div>
                 </div>
             </a>
-            <a href="../member/store_downtown.html" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
+            <a href="../member/storefront.html?store=Downtown" class="list-group-item list-group-item-action active" id="box_downtown" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="update_downtown mb-1">Costco Downtown</h5>
+                    <h5 class="header" id="header_downtown"></h5>
                     <small id="update_time_downtown"></small>
                 </div>
                 <div class="star_container">
@@ -87,10 +87,10 @@
                     </div>
                 </div>
             </a>
-            <a href="../member/store_richmond.html" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
+            <a href="../member/storefront.html?store=Richmond" class="list-group-item list-group-item-action active" id="box_richmond" aria-current="true"
                 style="background-color: white; color: black; border: 1px solid black;">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Costco Richmond</h5>
+                    <h5 class="header" id="header_richmond"></h5>
                     <small id="update_time_richmond"></small>
                 </div>
                 <div class="star_container">
@@ -109,7 +109,7 @@
             </a>
         </div>
         <footer>
-            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+            <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
@@ -134,7 +134,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="/scripts/store_main.js"></script>
+    <script src="/scripts/stores_main.js"></script>
 
 </body>
 

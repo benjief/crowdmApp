@@ -1,0 +1,43 @@
+.content-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas: 
+        "store-name"
+        "map"
+        "store-info"
+        "buttons"
+        "footer";
+}
+
+iframe {
+    grid-area: map;
+    justify-self: center;
+    border: 1px solid black;
+}
+
+.store-name-container {
+    display: grid;
+    grid-area: store-name;
+    text-align: center;
+    height: 100%;
+}
+
+.store-info-container {
+    grid-area: store-info;
+    text-align: center;
+}
+
+.store-name-container p, .store-info-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    grid-area: buttons;
+    display: grid;
+    row-gap: 20px;
+    width: 50%;
+    justify-self: center;
+}
