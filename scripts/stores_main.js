@@ -1,6 +1,15 @@
 /**************** Stores ****************/
-
 var stores = ["Burnaby", "Downtown", "Richmond"];
+
+// Read store name from Firestore and populate box headers in DOM
+function updateStoreHeaders(store) {
+    db.collection("Stores").doc("Costco_" + store)
+        .onSnapshot((doc) => {
+            store = store.toLowerCase();
+            var storeName = doc.data().Name;
+            $("#header_" + store).html(storeName);
+        });
+}
 
 // Read latest update time for each store, and calculate/write it to the screen
 function updateLastTimeOfLastUpdate(store) {
@@ -88,7 +97,9 @@ function updateRating(store) {
 
 // Call functions
 for (var i = 0; i < stores.length; i++) {
+    updateStoreHeaders(stores[i]);
     updateHeadcount(stores[i]);
     updateLastTimeOfLastUpdate(stores[i]);
     updateRating(stores[i]);
 }
+
