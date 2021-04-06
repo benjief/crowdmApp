@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CrowdaMapp - Stats Burnaby</title>
+    <meta name="stats" content="burnaby">
+    <meta name="author" content="team 11">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Optional styles and scripts of your own -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/stats.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark center-text">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="content-container">
+        <div id="store-name-container">
+            <p id="store-name"></p>
+        </div>
+
+        <div class="day-selector-container">
+            <p class="day-selector" onclick="moveDayBack()">&lt;&nbsp;&nbsp;</p>
+            <p id="current-day">Monday</p>
+            <p class="day-selector" onclick="moveDayForward()">&nbsp;&nbsp;&gt;</p>
+        </div>
+        <div class="stats-container">
+            <table id="stats-table">
+                <tr id="table-header">
+                    <th>Time</th>
+                    <th>Headcount</th>
+                </tr>
+            </table>
+        </div>
+        <footer>
+            <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
+        </footer>
+    </div>
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+
+    <!-- Link to the api keys for your firebase project -->
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script>
+        var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var currentDay = weekdays[2];
+        $("#current-day").html(currentDay);
+        var test = "<p id='test'></p>";
+        jQuery('<tr/>', {
+            id: "test"
+        }).appendTo('#current-day');
+
+function getNumbers() {
+    db.collection("Stores").doc("Costco_Downtown").collection(currentDay)
+        .onSnapshot((querySnapshot) => {
+            var data_table = [];
+            querySnapshot.forEach((doc) => {
+                if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
+                    var time_hc = [];
+                    time_hc.push(doc.data().Date_Time.toDate().getHours());
+                    time_hc.push(doc.data().Current_Headcount);
+                    data_table.push(time_hc);
+                }
+            });
+            console.log(data_table);
+            // Separate headcounts in time by storing them in a master table whose rows contain arrays for different hours of the day
+            // Each row of hours contains multiple arrays for headcount updates made at that hour
+            var master_table = [];
+            var hoursInADay = 24;
+            for (var i = 0; i < hoursInADay; i++) {
+                master_table[i] = [];
+            }
+            console.log(master_table);
+            //
+            for (var i = 0; i < data_table.length; i++) {
+                master_table[data_table[i][0]].push(data_table[i]);
+            }
+            console.log(master_table[2]);
+            console.log(master_table[5]);
+            // Get rid of any table data that already exists (so it can be re-written)
+            var tableData = document.getElementsByClassName('table_data');
+            while (tableData[0]) {
+                tableData[0].parentNode.removeChild(tableData[0]);
+            }
+            // Average headcounts for each hour
+            for (var i = 0; i < master_table.length; i++) {
+                var sum = 0; // Reset sum for each row
+                var average = 0; // Reset average for each row
+                jQuery('<tr/>', {
+                    id: i.toString(),
+                    "class": 'table_data'
+                }).appendTo('#stats_table tbody');
+                for (var j = 0; j < master_table[i].length; j++) {
+                    console.log("i = " + i.toString() + ", j = " + j.toString());
+                    var currentSubArray = master_table[i][j];
+                    console.log(currentSubArray);
+                    if (master_table[i][j]) {
+                        console.log(currentSubArray[1]);
+                        sum += currentSubArray[1];
+                        console.log(sum);
+                    }
+                }
+                if (master_table[i].length > 0) {
+                    var average = sum / master_table[i].length;
+                    average = average.toFixed(0);
+                }
+                var timeData;
+                if (i < 10) {
+                    timeData = "0" + i.toString() + ":00";
+                } else {
+                    timeData = i.toString() + ":00";
+                }
+                // Add hour to row
+                jQuery('<td/>', {
+                    id: timeData
+                }).appendTo('#' + i.toString());
+                // Add average headcount to row
+                jQuery('<td/>', {
+                    id: timeData + '_hc'
+                }).appendTo('#' + i.toString());
+                document.getElementById(timeData).innerHTML = timeData;
+                if (average) {
+                    document.getElementById(timeData + '_hc').innerHTML = average;
+                } else {
+                    document.getElementById(timeData + '_hc').innerHTML = "No data";
+                }
+            }
+        });
+}
+
+function moveDayBack() {
+    if (currentDay === weekdays[0]) {
+        currentDay = weekdays[weekdays.length - 1];
+    } else {
+        currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
+    }
+    document.getElementById("current_day").innerHTML = currentDay;
+    getNumbers();
+}
+
+function moveDayForward() {
+    if (currentDay === weekdays[weekdays.length - 1]) {
+        currentDay = weekdays[0];
+    } else {
+        currentDay = weekdays[weekdays.indexOf(currentDay) + 1];
+    }
+    document.getElementById("current_day").innerHTML = currentDay;
+    getNumbers();
+}
+
+// Call functions
+getNumbers();
+    </script>>
+
+</body>
+
+</html>
