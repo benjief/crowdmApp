@@ -1,0 +1,47 @@
+.container {
+    display: grid;
+    grid-template-areas:
+        "page-heading"
+        "storefront"
+        "reviews"
+        "load-more-button"
+        "footer";
+}
+
+.heading-container {
+    display: flex;
+    grid-area: page-heading;
+    justify-content: center;
+}
+
+.heading-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+img {
+    grid-area: storefront;
+    width: 100%;
+}
+
+.review-container {
+    display: grid;
+    grid-area: reviews;
+    align-items: center;
+    width: 100%;
+    justify-self: left;
+}
+
+.review-container p {
+    height: 68%;
+    align-items: center; 
+}
+
+span {
+    color: blue;
+}
+
+.button-container {
+    grid-area: load-more-button;
+}
