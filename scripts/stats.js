@@ -4,6 +4,10 @@ var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 var currentDate = new Date();
 var currentDay = weekdays[currentDate.getDay()];
 $("#current-day").html(currentDay);
+jQuery('<p/>', {
+    id: "test"
+}).appendTo('#stats_table');
+
 
 
 // Write the store name at the top of the screen
