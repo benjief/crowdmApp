@@ -1,4 +1,4 @@
-/**************** Stores ****************/
+/**************** Stores_Main****************/
 var stores = ["Burnaby", "Downtown", "Richmond"];
 
 // Read store name from Firestore and populate box headers in DOM
@@ -49,7 +49,12 @@ function updateLastTimeOfLastUpdate(store) {
                 timeDifference /= oneYear;
             }
             document.getElementById("update_time_" + store).innerHTML = "Last updated "
-                + Math.floor(timeDifference) + " " + unitOfTime + " ago"
+                + Math.floor(timeDifference) + " " + unitOfTime + " ago";
+            // Add last update as a url query string for use in store front page
+            var currentBox = document.getElementById("box_" + store);
+            var currentHref = currentBox.getAttribute("href");
+            currentBox.setAttribute("href", currentHref + "&updated=" + Math.floor(timeDifference)
+                + "&updateunit=" + unitOfTime);
         })
 }
 
@@ -59,6 +64,10 @@ function updateHeadcount(store) {
         .onSnapshot((doc) => {
             store = store.toLowerCase();
             document.getElementById("headcount_" + store).innerHTML = doc.data().Current_Headcount;
+            // Add current headcount as a url query string for use in store front page
+            var currentBox = document.getElementById("box_" + store);
+            var currentHref = currentBox.getAttribute("href");
+            currentBox.setAttribute("href", currentHref + "&headcount=" + doc.data().Current_Headcount);
             if (doc.get("Previous_Headcount") != null) {
                 var headcountChange = doc.data().Current_Headcount - doc.data().Previous_Headcount;
                 if (headcountChange > 0) {
@@ -96,10 +105,13 @@ function updateRating(store) {
 }
 
 // Call functions
-for (var i = 0; i < stores.length; i++) {
-    updateStoreHeaders(stores[i]);
-    updateHeadcount(stores[i]);
-    updateLastTimeOfLastUpdate(stores[i]);
-    updateRating(stores[i]);
-}
+$(document).ready(function () {
+    for (var i = 0; i < stores.length; i++) {
+        updateStoreHeaders(stores[i]);
+        updateHeadcount(stores[i]);
+        updateLastTimeOfLastUpdate(stores[i]);
+        updateRating(stores[i]);
+    }
+});
+
 

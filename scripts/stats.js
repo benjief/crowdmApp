@@ -1,23 +1,27 @@
 /***************** STATS *****************/
 
-// var stores = ["Burnaby", "Downtown", "Richmond"];
 var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-var currentDay = weekdays[1];
+var currentDate = new Date();
+var currentDay = weekdays[currentDate.getDay()];
+$("#current-day").html(currentDay);
 
-// Reads all updates from Firestore and puts them into a array
-function getUpdateArray(querySnapshot) {
-    // Put each update document into an array so that 
-    var update_array = [];
-    querySnapshot.forEach((doc) => {
-        if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
-            var time_hc = [];
-            // Get the hour the update was posted at (column 1), along with the headcount posted for that update (column 2)
-            time_hc.push(doc.data().Date_Time.toDate().getHours());
-            time_hc.push(doc.data().Current_Headcount);
-            update_array.push(time_hc);
-            return update_array;
-        }
-    });
+
+// Write the store name at the top of the screen
+function writeStoreName(store) {
+    $("#store-name").html = "Costco " + store;
+}
+
+
+// Read all updates from Firestore and puts them into an array
+function getUpdateArray(doc, update_array) {
+    // Put each update document into the array 
+    if (doc.get("Date_Time") != null && doc.get("Current_Headcount") != null) {
+        var time_hc = [];
+        // Get the hour the update was posted at (column 1), along with the headcount posted for that update (column 2)
+        time_hc.push(doc.data().Date_Time.toDate().getHours());
+        time_hc.push(doc.data().Current_Headcount);
+        update_array.push(time_hc);
+    }
 }
 
 /* Separate headcounts in time by storing them in a master array whose rows contain arrays for 
@@ -51,6 +55,8 @@ function clearCurrentStats() {
 
 // Calculate the average head count for each hour
 function calculateAverageHeadCount(master_array, i) {
+    // Reset sum for each row
+    var sum = 0;
     for (var j = 0; j < master_array[i].length; j++) {
         console.log("i = " + i.toString() + ", j = " + j.toString());
         // Create an individual array for each sub-array (in order to access its elements with indices)
@@ -85,11 +91,13 @@ function formatHour(i) {
 
 // Append the average head count for each hour to the DOM
 function appendCurrentStats(master_array) {
+    console.log(master_array);
     for (var i = 0; i < master_array.length; i++) {
-        // Reset sum for each row
-        var sum = 0;
         // Reset average for each row
         var average = 0;
+        jQuery('<p/>', {
+            id: "test"
+        }).appendTo(document.getElementById('stats_table'));
         jQuery('<tr/>', {
             /* Create a table row with id = the current row being processed 
             (i.e. the hour being averaged), and append it to the DOM/ This is
@@ -99,7 +107,8 @@ function appendCurrentStats(master_array) {
         }).appendTo('#stats_table');
         // Calculate the average head count for the current row (hour)
         var average = calculateAverageHeadCount(master_array, i);
-        var time = formatHour(i)
+        var time = formatHour(i);
+        console.log(time);
         // Add hour to DOM table row with id
         jQuery('<td/>', {
             id: time
@@ -109,19 +118,22 @@ function appendCurrentStats(master_array) {
             id: time + '_hc'
         }).appendTo('#' + i.toString());
         // If an average for a certain hour exists, post it. Otherwise, post "No data"
-        document.getElementById(time).innerHTML = time;
-        if (average) {
-            document.getElementById(time + '_hc').innerHTML = average;
-        } else {
-            document.getElementById(time + '_hc').innerHTML = "No data";
-        }
+        // document.getElementById(time).innerHTML = time;
+        // if (average) {
+        //     document.getElementById(time + '_hc').innerHTML = average;
+        // } else {
+        //     document.getElementById(time + '_hc').innerHTML = "No data";
+        // }
     }
 }
 
-function calculateStats() {
-    db.collection("Stores").doc("Costco_Downtown").collection(currentDay)
+function calculateStats(store) {
+    db.collection("Stores").doc("Costco_" + store).collection(currentDay)
         .onSnapshot((querySnapshot) => {
-            var update_array = getUpdateTable(querySnapshot);
+            var update_array = [];
+            querySnapshot.forEach((doc) => {
+                getUpdateArray(doc, update_array);
+            });
             var master_array = getMasterArray(update_array);
             clearCurrentStats();
             appendCurrentStats(master_array);
@@ -134,7 +146,7 @@ function moveDayBack() {
     } else {
         currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
     }
-    document.getElementById("current_day").innerHTML = currentDay;
+    document.getElementById("current-day").innerHTML = currentDay;
     calculateStats();
 }
 
@@ -144,10 +156,13 @@ function moveDayForward() {
     } else {
         currentDay = weekdays[weekdays.indexOf(currentDay) + 1];
     }
-    document.getElementById("current_day").innerHTML = currentDay;
+    document.getElementById("current-day").innerHTML = currentDay;
     calculateStats();
 }
 
-// Call functions
-calculateStats();
-
+$(document).ready(function () {
+    const parsedUrl = new URL(window.location.href);
+    var store = parsedUrl.searchParams.get("store");
+    writeStoreName(store);
+    calculateStats(store);
+});

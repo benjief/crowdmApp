@@ -1,5 +1,6 @@
 // Head Counter
 var timeout, interval, headcount = 0;
+
 // Addition
 [].forEach.call(document.querySelectorAll('.add'), function (button) {
     button.addEventListener('mousedown', function () {
@@ -9,8 +10,8 @@ var timeout, interval, headcount = 0;
         timeout = setTimeout(function () {
             interval = setInterval(function () {
                 incrementValue(x);
-            }, 80); //counting speed set in milliseconds.
-        }, 600); //hold down delay set in milliseconds. 
+            }, 80);                     // Counting speed set in milliseconds
+        }, 600);                        // Hold down delay set in milliseconds
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
@@ -25,6 +26,7 @@ var timeout, interval, headcount = 0;
 function incrementValue(x) {
     document.getElementById(x).textContent = ++headcount;
 };
+
 // Substraction
 [].forEach.call(document.querySelectorAll('.subtract'), function (button) {
     button.addEventListener('mousedown', function () {
