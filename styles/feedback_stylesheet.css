@@ -130,3 +130,8 @@ input {
         "feedback"
         "footer";
 }
+
+#back-button {
+    height: 30px;
+    width: auto;
+}
