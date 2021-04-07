@@ -14,3 +14,20 @@ function sayHello() {
     });
 }
 sayHello();
+
+/***************** copy function which doesn't work *****************/
+function copyToClipboard(element) {
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+
+$(document).ready(function(){
+    $("button").click(function(){
+      $("#div1").fadeIn();
+      $("#div2").fadeIn("slow");
+      $("#div3").fadeIn(3000);
+    });
+  });
