@@ -55,7 +55,7 @@ td {
     text-align: center;
 }
 
-#content-container1 {
+#content-container {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: auto;
@@ -65,5 +65,4 @@ td {
         "stats-table"
         "footer";
     position: relative;
-    padding-top: 50px;
 }

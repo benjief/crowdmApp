@@ -38,7 +38,7 @@ function resetArrays() {
 
 // Write the store name at the top of the screen
 function writeStoreName(store) {
-    $("#store-name").html = "Costco " + store;
+    $("#store-name").html("Costco " + store);
 }
 
 // Add JSON object to master array containing all updates
@@ -119,6 +119,7 @@ function getUpdateInfo(store, currentDay) {
                 addToMasterArray(updateInfo);
             });
             calculateHourlyAverages();
+            eraseInfoFromDom();
             appendInfoToDom();
         });
 }

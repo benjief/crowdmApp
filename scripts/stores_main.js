@@ -7,7 +7,7 @@ function updateStoreHeaders(store) {
         .onSnapshot((doc) => {
             store = store.toLowerCase();
             var storeName = doc.data().Name;
-            $("#header_" + store).html(storeName);
+            $("#store-name-" + store).html(storeName);
         });
 }
 
@@ -48,12 +48,12 @@ function updateLastTimeOfLastUpdate(store) {
                 unitOfTime = "years";
                 timeDifference /= oneYear;
             }
-            document.getElementById("update_time_" + store).innerHTML = "Last updated "
+            document.getElementById("update-time-" + store).innerHTML = "Updated "
                 + Math.floor(timeDifference) + " " + unitOfTime + " ago";
             // Add last update as a url query string for use in store front page
-            var currentBox = document.getElementById("box_" + store);
-            var currentHref = currentBox.getAttribute("href");
-            currentBox.setAttribute("href", currentHref + "&updated=" + Math.floor(timeDifference)
+            var currentStore = document.getElementById("store-name-" + store);
+            var currentHref = currentStore.getAttribute("href");
+            currentStore.setAttribute("href", currentHref + "&updated=" + Math.floor(timeDifference)
                 + "&updateunit=" + unitOfTime);
         })
 }
@@ -63,21 +63,21 @@ function updateHeadcount(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Latest_Update").doc("latest")
         .onSnapshot((doc) => {
             store = store.toLowerCase();
-            document.getElementById("headcount_" + store).innerHTML = doc.data().Current_Headcount;
+            document.getElementById("headcount-" + store).innerHTML = "Current: " + doc.data().Current_Headcount;
             // Add current headcount as a url query string for use in store front page
-            var currentBox = document.getElementById("box_" + store);
-            var currentHref = currentBox.getAttribute("href");
-            currentBox.setAttribute("href", currentHref + "&headcount=" + doc.data().Current_Headcount);
+            var currentStore = document.getElementById("store-name-" + store);
+            var currentHref = currentStore.getAttribute("href");
+            currentStore.setAttribute("href", currentHref + "&headcount=" + doc.data().Current_Headcount);
             if (doc.get("Previous_Headcount") != null) {
-                var headcountChange = doc.data().Current_Headcount - doc.data().Previous_Headcount;
+                var previousHeadcount = doc.data().Previous_Headcount;
+                var headcountChange = doc.data().Current_Headcount - previousHeadcount;
+                document.getElementById("previous-headcount-" + store).innerHTML = "Previous: " + previousHeadcount;
                 if (headcountChange > 0) {
-                    document.getElementById(store + "_change").innerHTML = "Increase: " + Math.abs(headcountChange);
-                    document.getElementById(store + "_ticker").setAttribute("src", "/images/up_arrow.png");
+                    document.getElementById(store + "-ticker").setAttribute("src", "/images/up_arrow.png");
                 } else if (headcountChange < 0) {
-                    document.getElementById(store + "_change").innerHTML = "Decrease: " + Math.abs(headcountChange);
-                    document.getElementById(store + "_ticker").setAttribute("src", "/images/down_arrow.png");
+                    document.getElementById(store + "-ticker").setAttribute("src", "/images/down_arrow.png");
                 } else {
-                    document.getElementById(store + "_ticker").removeAttribute("src");
+                    document.getElementById(store + "-ticker").removeAttribute("src");
                 }
             }
         });
