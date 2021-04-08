@@ -21,16 +21,20 @@
     display: flex;
     height: 100%;
     align-items: center;
+    font-size: 25px;
 }
 
 .store-info-container {
     display: grid;
-    grid-template-columns: 40% 23% 13% 24%;
+    grid-template-columns: 40% 23% 10% 27%;
     grid-template-rows: auto;
     grid-template-areas: 
         "update-time update-time update-time update-time"
         "store-name headcount ticker previous-headcount";
     width: 100%;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
     font-size: 10pt;
     margin-bottom: 5px;

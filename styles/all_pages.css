@@ -46,7 +46,7 @@ body {
     height: 100%;
     font-size: 25pt;
     font-weight: 800;
-    color: rgb(70, 180, 240);
+    color: #0a425f;
 }
 
 #main-content-card {
@@ -62,12 +62,13 @@ body {
 }
 
 #trademark {
-    color: rgb(70, 180, 240);
+    color: #061e2b;
 }
 
 #back-button {
     height: 30px;
     width: auto;
+    color: #061e2b;
     filter: invert(23%) sepia(64%) saturate(428%) hue-rotate(185deg) brightness(87%) contrast(103%);
 }
 
@@ -97,4 +98,9 @@ footer {
     margin-top: 30px;
     width: 100%;
     text-align: center;
+}
+
+.nav-item {
+    font-weight: bold;
+    margin-left: 3vw;
 }
