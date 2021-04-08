@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CrowdmApp - Stores</title>
-    <meta name="employee store page" content="real-time headcount display">
+    <title>CrowdmApp - Stats Burnaby</title>
+    <meta name="stats" content="burnaby">
+    <meta name="stats" content="historical stats for all stores">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -13,12 +14,13 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="/styles/stores_main.css">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
     <link rel="stylesheet" href="/styles/all_pages.css">
-
+    <link rel="stylesheet" href="/styles/stats.css">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 </head>
 
-<body class="center-text">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -35,7 +37,7 @@
                         <a class="nav-link active" href="stores_main.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                        <a class="nav-link active" href="headcount.html">Headcount</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="../home/index.html">Log out</a>
@@ -45,77 +47,37 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="heading-container">
-            <p id="heading">Real-Time Headcount Data</p>
-        </div>
-        <div class="store-info-container" id="info-burnaby">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-burnaby" href="../member/storefront.html?store=Burnaby">Costcto
-                    Burnaby</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-burnaby"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="burnaby-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-burnaby"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-burnaby"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-downtown">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-downtown" href="../member/storefront.html?store=Downtown">Costco
-                    Downtown</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-downtown"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="downtown-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-downtown"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-downtown"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-richmond">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-richmond" href="../member/storefront.html?store=Richmond">Costcto
-                    Richmond</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-richmond"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="richmond-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-richmond"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-richmond"></p>
-            </div>
+    <div id="content-container">
+        <div id="store-name-container">
+            <p id="store-name"></p>
         </div>
 
+        <div class="day-selector-container">
+            <p class="day-selector" onclick="moveDayBack()">&lt;&nbsp;&nbsp;</p>
+            <p id="current-day"></p>
+            <p class="day-selector" onclick="moveDayForward()">&nbsp;&nbsp;&gt;</p>
+        </div>
+        <div class="stats-container">
+            <table id="stats-table">
+                <tr id="table-header">
+                    <th>Time</th>
+                    <th>Headcount</th>
+                </tr>
+            </table>
+        </div>
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
+            <p id=back-button-text>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
+
     <!----------------------------------------------->
     <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
@@ -129,7 +91,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="/scripts/stores_main.js"></script>
+    <script src="/scripts/stats.js"></script>
 
 </body>
 

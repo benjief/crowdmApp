@@ -45,6 +45,11 @@ iframe {
     grid-area: buttons;
     display: grid;
     row-gap: 20px;
-    width: 50%;
     justify-self: center;
+}
+
+footer {
+    grid-area: footer;
+    width: 100%;
+    text-align: center;
 }

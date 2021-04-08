@@ -82,11 +82,12 @@ img {
     align-items: center;
     width: 100%;
     justify-self: left;
+    
 }
 
 .review-container p {
-    height: 68%;
     align-items: center; 
+    border: 1px solid black;
 }
 
 span {
