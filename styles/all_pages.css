@@ -3,10 +3,12 @@ body {
     font-family: "Mali", Arial, Helvetica, sans-serif;
     font-weight: 700;
     font-size: 11pt;
+    color: rgb(40, 55, 99);
 }
 
-h1{
-    color: #041E2A;
+.container {
+    display: grid;
+    width: 100%;
 }
 
 .navbar {
@@ -29,36 +31,38 @@ h1{
     color: black;
 }
 
-.display-4 {
-    color: #E38106;
-}
-
 .button-main {
     background-color: rgb(40, 55, 99);
     border: none;
     color: white;
 }
 
-#member-login-button, #employee-login-button {
-    width: 230px;
-}
-
-#main-content-card {
-    max-width: 100%; 
-    margin-top: 40px;
-}
-
-#card-left-column img {
-    width: 100%; 
-    height: 20rem;
-}
-
-#more-info-button {
-    width: 200px;
+.heading-container {
+    display: grid;
+    grid-area: heading;
+    justify-content: center;
+    width: 100%;
 }
 
 .button-main:hover {
     background-color: #2f88b8;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 25pt;
+    font-weight: 800;
+    color: rgb(70, 180, 240);
+}
+
+#main-content-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-text {
+    color: #0D6391;
 }
 
 .center-text {
@@ -88,38 +92,4 @@ footer {
     width: 100%;
     margin-top: 20px;
     font-weight: 700;
-}
-
-/********* index.html *********/
-.page-heading {
-    font-size: 25pt;
-    font-weight: 800;
-    color: rgb(70, 180, 240);
-}
-
-#main-content-card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.card-title {
-    font-size: 25pt;
-    font-weight: 700;
-    color: rgb(70, 180, 240);
-    margin-bottom: 30px;
-    
-}
-
-.card-text {
-    font-size: 20px;
-    color: #0D6391;
-    margin-bottom: 30px;
-}
-
-/*********** more-info ****************/
-.accordion-button {
-    color: #0D6391 ;
-}
-
-.accordion-body {
-    color: #D28529
 }

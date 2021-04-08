@@ -1,0 +1,61 @@
+.container {
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+.page-subheading {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "auth-container"
+        "employee-message"
+        "employee-login-button";
+    grid-area: content-card;
+    margin: 0;
+    margin-top: 18px;
+    width: 100%;
+}
+
+#firebaseui-auth-container {
+    grid-area: auth-container;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#firebaseui-auth- {
+    width: 100%;
+}
+
+
+#providerID {
+    background-color: seagreen;
+}
+
+.text-container {
+    display: flex;
+    grid-area: employee-message;
+    height: 100%;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.text-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+#employee-login-button {
+    grid-area: employee-login-button;
+    justify-self: center;
+    width: 210px;
+    margin-bottom: 18px;
+}
