@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CrowdmApp - Stores</title>
-    <meta name="employee store page" content="real-time headcount display">
+    <title>CrowdmApp - Burnaby Store</title>
+    <meta name="store" content="burnaby">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
@@ -13,15 +13,15 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="/styles/stores_main.css">
+    <link rel="stylesheet" href="/styles/storefront.css">
     <link rel="stylesheet" href="/styles/stylesheet.css">
 
 </head>
 
-<body class="center-text">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark center-text">
         <div class="container-fluid">
-            <a class="navbar-brand" href="employee_main.html">crowdmApp</a>
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="employee_main.html">Homepage</a>
+                        <a class="nav-link active" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="stores_main.html">Stores</a>
@@ -45,71 +45,17 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="heading-container">
-            <p id="heading">Real-Time Headcount Data</p>
-        </div>
-        <div class="store-info-container" id="info-burnaby">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-burnaby" href="../member/storefront.html?store=Burnaby">Costcto
-                    Burnaby</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-burnaby"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="burnaby-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-burnaby"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-burnaby"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-downtown">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-downtown" href="../employee/storefront.html">Costco
-                    Downtown</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-downtown"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="downtown-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-downtown"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-downtown"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-richmond">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-richmond" href="../member/storefront.html?store=Richmond">Costcto
-                    Richmond</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-richmond"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="richmond-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-richmond"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-richmond"></p>
-            </div>
-        </div>
-
+    <div class="content-container">
+        <div class="store-name-container"></div>
+        <div class="store-info-container"></div>
+        <div class="button-container"></div>
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p>Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
+
     <!----------------------------------------------->
     <!-- JS: Boostrap, JQuery, Firebase, API related    -->
     <!----------------------------------------------->
@@ -129,7 +75,7 @@
     <!--------------------------------------------------------------------->
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
-    <script src="/scripts/stores_main.js"></script>
+    <script src="/scripts/storefront.js"></script>
 
 </body>
 
