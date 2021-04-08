@@ -37,6 +37,9 @@ h1{
     background-color: rgb(40, 55, 99);
     border: none;
     color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 
 #member-login-button, #employee-login-button {
@@ -46,6 +49,7 @@ h1{
 #main-content-card {
     max-width: 100%; 
     margin-top: 40px;
+
 }
 
 #card-left-column img {
@@ -79,6 +83,8 @@ h1{
 #back-button-text {
     color: rgb(40, 55, 99);
 }
+
+
 
 footer {
     grid-area: footer;
