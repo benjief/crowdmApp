@@ -14,11 +14,14 @@
 
     <!-- Optional styles and scripts of your own -->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
-    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/all_pages.css">
+    <link rel="stylesheet" href="/styles/employee_login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body class="center-text">
-    <nav class="navbar navbar-expand-lg navbar-dark  center-text">
+    <nav class="navbar navbar-expand-lg navbar-dark center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">crowdmApp</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -42,14 +45,22 @@
     </nav>
 
     <div class="container">
-        <h1>Employee Login</h1>
-        <h1 class="display-4">Let's get you logged in...</h1>
-        <div id="firebaseui-auth-container"></div>
-        <p style="color: #0D6391;">If you are not a Costco Employee, please log in as a member below.</p>
-        <a class="btn btn-primary button-main" href="member_login.html" role="button">Costco Member Login</a><br><br>
+        <div class="heading-container">
+            <p class="page-heading">Employee Login</p>
+            <p class="page-subheading">Welcome - Let's get you logged in!</p>
+        </div>
+        <div class="card mb-3" id="main-content-card">
+            <div id="firebaseui-auth-container"></div>
+            <div class="text-container">
+                <p class="card-text">If you aren't a Costco employee, click the button below to log in:</p>
+            </div>        
+            <a class="btn btn-primary button-main" id="member-login-button" href="employee_login.html"
+                role="button">Costco Member Login</a>
+        </div>
+
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
+            <p id="back-button-text">Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
