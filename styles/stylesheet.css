@@ -1,13 +1,23 @@
 /********* Styles all pages *********/
 body {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Mali", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 11pt;
 }
 
 h1{
     color: #041E2A;
 }
+
 .navbar {
-     background-color: #0D6391;
+     background-color: rgb(40, 55, 99);
+}
+
+.navbar-brand {
+    font-family: "Yeon Sung", Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: 400;
+    color: rgb(70, 180, 240);
 }
 
 .nav-item:hover{
@@ -25,9 +35,27 @@ h1{
 }
 
 .button-main {
-    background-color: #0D6391;
+    background-color: rgb(40, 55, 99);
     border: none;
     color: white;
+}
+
+#member-login-button, #employee-login-button {
+    width: 230px;
+}
+
+#main-content-card {
+    max-width: 100%; 
+    margin-top: 40px;
+}
+
+#card-left-column img {
+    width: 100%; 
+    height: 20rem;
+}
+
+#more-info-button {
+    width: 200px;
 }
 
 .button-main:hover {
@@ -39,13 +67,18 @@ h1{
 }
 
 #trademark {
-    color: #E38106;
+    color: rgb(70, 180, 240);
 
 }
 
 #back-button {
     height: 30px;
     width: auto;
+    filter: invert(23%) sepia(64%) saturate(428%) hue-rotate(185deg) brightness(87%) contrast(103%);
+}
+
+#back-button-text {
+    color: rgb(40, 55, 99);
 }
 
 footer {
@@ -55,21 +88,26 @@ footer {
     bottom: 0;
     width: 100%;
     margin-top: 20px;
+    font-weight: 700;
 }
 
 /********* index.html *********/
-#card {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    
+.page-heading {
+    font-size: 25pt;
+    font-weight: 800;
+    color: rgb(70, 180, 240);
+}
+
+#main-content-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card-title {
-    font-size: 25px;
-    color: #E38106;
+    font-size: 25pt;
+    font-weight: 700;
+    color: rgb(70, 180, 240);
     margin-bottom: 30px;
+    
 }
 
 .card-text {

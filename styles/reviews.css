@@ -33,6 +33,7 @@
     --percent: calc(var(--rating) / 5 * 103%);
     font-size: var(--star-size);
     font-family: Times;
+    font-weight: normal;
     line-height: 1;
     margin-left: 7px;
     height: 100%;
@@ -89,9 +90,13 @@ img {
 }
 
 span {
-    color: blue;
+    color: rgb(70, 180, 240);
 }
 
 .button-container {
     grid-area: load-more-button;
+}
+
+.footer #back-button {
+
 }
