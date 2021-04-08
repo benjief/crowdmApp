@@ -11,11 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
 
     <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/all_pages.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body class="center-text">
@@ -47,36 +48,32 @@
             <p class="page-heading">Welcome to crowdmApp</p>
         </div>
         <div class="button-container">
-            <a class="btn btn-primary button-main" id="member-login-button" href="member_login.html" role="button">Costco Member Login</a><br><br>
-            <a class="btn btn-primary button-main" id="employee-login-button" href="employee_login.html" role="button">Costco Employee Login</a>
+            <a class="btn btn-primary button-main" id="member-login-button" href="member_login.html"
+                role="button">Costco Member Login</a><br><br>
+            <a class="btn btn-primary button-main" id="employee-login-button" href="employee_login.html"
+                role="button">Costco Employee Login</a>
         </div>
         <div class="card mb-3" id="main-content-card">
-            <div class="row g-0">
-                <div class="col-md-4" id="card-left-column">
-                    <img src="/images/costco.jpg" alt="image">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Safety Precautions</h5>
-                        <p class="card-text">Costco is firmly committed to helping protect the health and safety of our
-                            members
-                            and employees,
-                            and to serving our communities. We are closely monitoring the changing situation, and
-                            complying with
-                            Public Health
-                            guidance.</p>
-                        <a class="btn btn-primary button-main" id="more-info-button" href="moreInfo.html" >More Info</a>
-                    </div>
+            <img src="/images/costco.jpg" alt="image">
+            <div class="card-body">
+                <h5 class="card-title">Safety Precautions</h5>
+                <p class="card-text">Costco is firmly committed to helping protect the health and safety of our
+                    members and employees, and to serving our communities. We are closely monitoring the changing
+                    situation, and complying with Public Health guidance.</p>
+                <div>
+                    <a class="btn btn-primary button-main" id="more-info-button" href="moreInfo.html">More Info</a>
                 </div>
             </div>
         </div>
-
-        <footer>
+        <footer>   
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p id="back-button-text">Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>
+
+
+
 
     <!----------------------------------------------->
     <!-- JS: Boostrap, JQuery, Firebase, API related    -->

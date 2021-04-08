@@ -1,0 +1,94 @@
+/********* Styles all pages *********/
+body {
+    font-family: "Mali", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 11pt;
+    color: rgb(40, 55, 99);
+}
+
+.navbar {
+     background-color: rgb(40, 55, 99);
+}
+
+.navbar-brand {
+    font-family: "Yeon Sung", Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: 400;
+    color: rgb(70, 180, 240);
+}
+
+.nav-item:hover{
+    background-color:  #63b6e2;
+    border-radius: 3px;
+}
+
+.nav-item a:hover {
+    color: black;
+}
+
+.button-main {
+    background-color: rgb(40, 55, 99);
+    border: none;
+    color: white;
+    height: auto;
+    width: auto;
+    margin: auto;
+    
+}
+
+#main-content-card {
+    max-width: 100%; 
+    margin-top: 40px;
+}
+
+.page-heading {
+    align-items: center;
+    height: 100%;
+    font-size: 25pt;
+    font-weight: 800;
+    color: rgb(70, 180, 240);
+}
+
+#main-content-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-text {
+    color: #0D6391;
+}
+
+.center-text {
+    text-align: center;
+}
+
+#trademark {
+    color: rgb(70, 180, 240);
+}
+
+#back-button {
+    height: 30px;
+    width: auto;
+    filter: invert(23%) sepia(64%) saturate(428%) hue-rotate(185deg) brightness(87%) contrast(103%);
+}
+
+#back-button-text {
+    color: rgb(40, 55, 99);
+}
+
+/* grid */
+
+.heading-container {
+    text-align: center;
+    width: 100%;
+}
+
+.container {
+    display: grid;
+    grid-row: auto;
+    margin-top: 20px;
+    height: 100%;
+    max-height: 700px;
+    min-height: 400px;
+    align-items: center;
+}
+

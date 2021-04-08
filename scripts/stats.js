@@ -49,9 +49,9 @@ function addToMasterArray(updateInfo) {
 // Calculate hourly averages from headcount update documents
 function calculateHourlyAverages() {
     for (var i = 0; i < hourlyAverages.length; i++) {
+        var sum = 0;
+        var counter = 0;
         for (var j = 0; j < masterArray.length; j++) {
-            var sum = 0;
-            var counter = 0;
             if (masterArray[j]["hour"] == i) {
                 sum += masterArray[j]["headcount"];
                 counter++;
@@ -59,6 +59,9 @@ function calculateHourlyAverages() {
             // Populate hourly averages array if an average exists
             if (counter != 0) {
                 var average = sum / counter;
+                console.log(sum);
+                console.log(counter);
+                console.log(average);
                 // Replace "No data" at row i with the calculated average
                 hourlyAverages.splice(i, 1, average);
                 // Reset the average to 0 once the row has been dealt with
@@ -101,6 +104,7 @@ function appendInfoToDom() {
         $("#" + i.toString() + "-row").append(formattedHour);
         $("#" + i.toString() + "-row").append(headCount);
         $("#" + i.toString() + "-hour").html(hoursIn24HrFormat[i].toString());
+        console.log(hourlyAverages);
         $("#" + i.toString() + "-headcount").html(hourlyAverages[i]);
     }
 }
@@ -133,7 +137,6 @@ function moveDayBack() {
     document.getElementById("current-day").innerHTML = currentDay;
     console.log(currentDay);
     resetArrays();
-    eraseInfoFromDom();
     getUpdateInfo(store, currentDay);
     console.log(masterArray);
 }
@@ -147,7 +150,6 @@ function moveDayForward() {
     document.getElementById("current-day").innerHTML = currentDay;
     console.log(currentDay);
     resetArrays();
-    eraseInfoFromDom();
     getUpdateInfo(store, currentDay);
     console.log(masterArray);
 }
