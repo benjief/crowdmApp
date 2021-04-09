@@ -5,6 +5,8 @@
         "footer";
 }
 
+.page-
+
 #main-content-card {
     display: grid;
     grid-template-areas: 
@@ -27,6 +29,7 @@
 #image-carousel {
     grid-area: image-carousel;
     width: 100%;
+    margin-top: 5px;
 }
 
 
