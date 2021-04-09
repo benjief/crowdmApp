@@ -5,9 +5,8 @@
         "footer";
 }
 
-.page-subheading {
-    align-items: center;
-    height: 100%;
+.heading-container {
+    display: grid;
 }
 
 #main-content-card {
@@ -17,7 +16,6 @@
         "employee-message"
         "employee-login-button";
     grid-area: content-card;
-    margin: 0;
     margin-top: 18px;
     width: 100%;
     max-width: 500px;

@@ -63,13 +63,6 @@ nav a {
     max-width: 100%;
 }
 
-.page-heading {
-    align-items: center;
-    height: 100%;
-    font-size: 25pt;
-    font-weight: 800;
-    color: #0a425f;
-}
 
 #main-content-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -99,12 +92,6 @@ nav a {
 }
 
 /* grid */
-
-.heading-container {
-    text-align: center;
-    width: 100%;
-}
-
 .container {
     display: grid;
     grid-row: auto;
@@ -112,8 +99,21 @@ nav a {
     height: 100%;
     max-height: 700px;
     min-height: 400px;
+}
+
+.heading-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.page-heading {
+    display: flex;
     align-items: center;
-    text-align: center;
+    height: 100%;
+    font-size: 25pt;
+    font-weight: 800;
+    color: #0a425f;
 }
 
 footer {
