@@ -1,0 +1,55 @@
+.container {
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "card-text"
+        "view-stores"
+        "leave-feedback"
+        "log-out";
+    grid-area: content-card;
+    grid-gap: 15px;
+    margin: 0;
+    margin-top: 18px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-text-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-text {
+    display: flex;
+    grid-area: card-text;
+    height: 100%;
+    align-items: center;
+}
+
+.button-main {
+    width: 160px;
+}
+
+#view-stores-button {
+    grid-area: view-stores;
+}
+
+#leave-feedback-button {
+    grid-area: leave-feedback;
+}
+
+#log-out-button {
+    grid-area: log-out;
+    margin-bottom: 25px;
+}
+
+
