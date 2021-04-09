@@ -5,11 +5,6 @@
         "footer";
 }
 
-.page-subheading {
-    align-items: center;
-    height: 100%;
-}
-
 #main-content-card {
     display: grid;
     grid-template-areas: 
@@ -17,8 +12,6 @@
         "member-message"
         "member-login-button";
     grid-area: content-card;
-    margin: 0;
-    margin-top: 18px;
     width: 100%;
     max-width: 500px;
     margin-left: auto;
@@ -27,7 +20,7 @@
 
 #firebaseui-auth-container {
     grid-area: auth-container;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 5px;
     width: 100%;
 }
