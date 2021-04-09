@@ -16,7 +16,7 @@
         "employee-message"
         "employee-login-button";
     grid-area: content-card;
-    margin-top: 18px;
+    margin-top: 10px;
     width: 100%;
     max-width: 500px;
     margin-left: auto;

@@ -14,6 +14,7 @@
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/all_pages.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
 </head>
@@ -47,14 +48,16 @@
 
     <div class="container center-text">
         <div class="heading-container">
-            <p class="page-heading">>Hello, <span class="name-goes-here"></span></p>
-            
+            <p class="page-heading">Hello,&nbsp;<span class="name-goes-here"></span></p>
         </div>
-
-        <h4>Quick links:</h4>
-        <a class="btn btn-primary button-main" href="../member/stores.html" role="button">View Stores</a>
-        <a class="btn btn-primary button-main" href="feedback.html" role="button">Leave Feedback</a>
-        <a class="btn btn-primary button-main" href="../home/index.html" role="button">Log Out</a>
+        <div class="card mb-3" id="main-content-card">
+            <div class="card-title-container">
+                <p class="card-title">Please select an option:</p>
+            </div>
+            <a class="btn btn-primary button-main" id="view-stores-button" href="../member/stores.html" role="button">View Stores</a>
+            <a class="btn btn-primary button-main" id="leave-feedback-button" href="feedback.html" role="button">Leave Feedback</a>
+            <a class="btn btn-primary button-main" id="log-out-button" href="../home/index.html" role="button">Log Out</a>
+        </div>
 
         <footer>
             <div id="footer">            

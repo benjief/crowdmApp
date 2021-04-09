@@ -18,7 +18,7 @@ function textCounter(field, field2, maxlimit) {
 
 // Star rating bar
 $(function () {
-    $('#star_rating').barrating({
+    $('#star-rating').barrating({
         theme: 'fontawesome-stars'
     });
 });

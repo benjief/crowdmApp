@@ -61,6 +61,8 @@ nav a {
 
 #main-content-card {
     max-width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 
@@ -68,8 +70,15 @@ nav a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.card-title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: rgb(70, 180, 240);
+}
+
 .card-text {
     color: #0D6391;
+    font-size: 13pt;
 }
 
 .center-text {
@@ -77,7 +86,7 @@ nav a {
 }
 
 #trademark {
-    color: #061e2b;
+    color: rgb(40, 55, 99);
 }
 
 #back-button {
@@ -95,7 +104,6 @@ nav a {
 .container {
     display: grid;
     grid-row: auto;
-    margin-top: 20px;
     height: 100%;
     max-height: 700px;
     min-height: 400px;
@@ -113,7 +121,11 @@ nav a {
     height: 100%;
     font-size: 25pt;
     font-weight: 800;
-    color: #0a425f;
+    color: (40, 55, 99);
+}
+
+.page-subheading {
+    color: rgb(70, 180, 240);
 }
 
 footer {
