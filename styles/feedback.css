@@ -1,94 +1,19 @@
-/********* Styles all pages *********/
-body {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-h1{
-    color: #041E2A;
-}
-.navbar {
-     background-color: #0D6391;
-}
-
-.nav-item:hover{
-    background-color:  #b3b3b3;
-    border-radius: 20px;
-}
-
-.nav-item a:hover {
-    color: black;
-}
-
-.display-4 {
-    color: #E38106;
-}
-
 .button-main {
     background-color: #0D6391;
-    border: none;
-    color: white;
 }
 
 .button-main:hover {
     background-color: #2f88b8;
 }
 
-.center-text {
-    color: #E38106;
-    text-align: center;
-}
-
-#trademark {
-    color: #E38106;
-
-}
-
-#back-button {
-    height: 30px;
-    width: auto;
-}
-
-footer {
-    grid-area: footer;
-    text-align: center;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 20px;
-}
-
-/********* Page-specific Styling *********/
-#question_container {
-    grid-area: question;
-}
-
-#question {
-    display: flex;
-    height: 100%;
-    align-items: center;
-}
-
 #star_rating {
-    grid-area: star_rating;
-}
-
-.br-widget {
-    display: flex;
-    align-items: center;
-}
-
-.comment_box {
-    grid-area: comment_box;
-
+    max-width: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .characters_remaining {
     display: flex;
-    grid-area: characters_remaining;
-    flex-direction: row;
-    justify-content: flex-start;
-    height: 30px;
-    font-size: 10pt;
 }
 
 .characters_remaining p {
@@ -100,38 +25,9 @@ footer {
 
 input {
     border: none;
-    background-color: white;
     color: black;
-}
-
-#submit-button {
-    grid-area: submit_button;
-    margin-top: 20px;
-}
-
-.control {
-    grid-area: feedback;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    height: 20px;
-    text-align: center;
 }
 
 #content_container {
     display: grid;
-    /* grid-template-columns: 100%; */
-    grid-template-rows: auto;
-    grid-template-areas:
-        "question"
-        "star_rating"
-        "comment_box"
-        "characters_remaining"
-        "submit_button"
-        "feedback"
-        "footer";
-}
-
-#back-button {
-    height: 30px;
-    width: auto;
 }
