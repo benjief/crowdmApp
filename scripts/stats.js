@@ -59,9 +59,6 @@ function calculateHourlyAverages() {
             // Populate hourly averages array if an average exists
             if (counter != 0) {
                 var average = sum / counter;
-                console.log(sum);
-                console.log(counter);
-                console.log(average);
                 // Replace "No data" at row i with the calculated average
                 hourlyAverages.splice(i, 1, average);
                 // Reset the average to 0 once the row has been dealt with
@@ -104,7 +101,6 @@ function appendInfoToDom() {
         $("#" + i.toString() + "-row").append(formattedHour);
         $("#" + i.toString() + "-row").append(headCount);
         $("#" + i.toString() + "-hour").html(hoursIn24HrFormat[i].toString());
-        console.log(hourlyAverages);
         $("#" + i.toString() + "-headcount").html(hourlyAverages[i]);
     }
 }
@@ -157,5 +153,4 @@ function moveDayForward() {
 $(document).ready(function () {
     writeStoreName(store);
     getUpdateInfo(store, currentDay);
-    console.log(masterArray);
 });
