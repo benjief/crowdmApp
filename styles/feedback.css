@@ -23,6 +23,10 @@
     padding-right: 5px;
 }
 
+#counter {
+    background-color: white;
+}
+
 input {
     border: none;
     color: black;
