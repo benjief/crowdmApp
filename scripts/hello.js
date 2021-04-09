@@ -8,7 +8,12 @@ function sayHello() {
                 .then(function (doc) {
                     // Extract the first name of the user
                     var name = doc.data().Name.split(" ", 1);
-                    $(".name-goes-here").html(" " + name);
+                    if (name) {
+                        $(".name-goes-here").html(" " + name);
+                      // Display a generic message if no name is entered when signing up
+                    } else {
+                        $(".name-goes-here").html(" Costco member!");
+                    }
                 });
         }
     });
