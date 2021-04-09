@@ -5,9 +5,15 @@
     height: 150px;
 }
 
+.headcount_button:active {
+    color: rgb(44, 129, 255);
+    font-weight: bolder;
+}
+
 #increase_headcount {
     grid-area: increase_headcount;
 }
+
 
 #decrease_headcount {
     grid-area: decrease_headcount;
