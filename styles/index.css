@@ -24,7 +24,7 @@
     width: 100%;
     height: 100%;
     justify-self: center;
-    margin-top: 65px;
+    margin-top: 32px;
 }
 
 #main-content-card img {
@@ -45,9 +45,6 @@
 
 .card-title {
     display: flex;
-    font-size: 25pt;
-    font-weight: 700;
-    color: rgb(70, 180, 240);
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -55,8 +52,6 @@
 
 .card-text {
     display: flex;
-    font-size: 20px;
-    color: #0D6391;
     height: 100%;
 }
 

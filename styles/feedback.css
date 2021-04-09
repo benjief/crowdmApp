@@ -1,22 +1,116 @@
-.button-main {
-    background-color: #0D6391;
+.container {
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
 }
 
-.button-main:hover {
-    background-color: #2f88b8;
+.heading-container {
+    text-align: center;
+    grid-area: heading;
 }
 
-#star_rating {
+.page-heading {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "card-text"
+        "location-select"
+        "safety-question"
+        "star-rating"
+        "comments"
+        "chars-remaining"
+        "submit";
+    grid-area: content-card;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-text-container {
+    display: flex;
+    grid-area: card-text;
+    text-align: justify;
+    justify-self: center;
+    width: 80%;
+    margin-top: 15px;
+}
+
+.card-text {
+    display: flex;
+}
+
+.mb-3 {
+    grid-area: location-select;
+    width: 80%;
+    justify-self: center;
+    margin-top: 15px;
+}
+
+#question-container {
+    display: flex;
+    grid-area: safety-question;
+    width: 80%;
+    justify-self: center;
+    justify-content: center;
+}
+
+#question {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: rgb(40, 55, 99);
+}
+
+.star-container {
+    display: flex;
+    grid-area: star-rating;
+    width: 80%;
+    justify-self: center;
+    justify-content: center;
+}
+
+.br-theme-fontawesome-stars {
+    display: flex;
+    height: 100%;
+    position: relative;
+    top: 4px;
+}
+
+#star-rating {
     max-width: 50px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.characters_remaining {
+.comment-box {
     display: flex;
+    flex-direction: column;
+    grid-area: comments;
+    width: 80%;
+    justify-self: center;
+    margin-top: 10px;
 }
 
-.characters_remaining p {
+.form-label {
+    text-align: center;
+    color: rgb(40, 55, 99);
+}
+
+.characters-remaining {
+    display: flex;
+    grid-area: chars-remaining;
+    justify-self: center;
+}
+
+.characters-remaining p {
     display: flex;
     align-items: center;
     height: 100%;
@@ -29,9 +123,9 @@
 
 input {
     border: none;
-    color: black;
+    color: rgb(40, 55, 99);
 }
 
-#content_container {
-    display: grid;
+#submit-button {
+    grid-area: submit;
 }

@@ -5,6 +5,11 @@
         "footer";
 }
 
+.heading-container {
+    display: flex;
+    text-align: center;
+}
+
 #main-content-card {
     display: grid;
     grid-template-areas: 
@@ -22,13 +27,13 @@
     margin-right: auto;
 }
 
-.card-text-container {
+.card-title-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-.card-text {
+.card-title {
     display: flex;
     grid-area: card-text;
     height: 100%;
