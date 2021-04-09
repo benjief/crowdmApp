@@ -6,21 +6,43 @@ body {
     color: rgb(40, 55, 99);
 }
 
+a {
+    color: white;
+}
+
+.link-nav{
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+}
+
+.link-nav:hover {
+    background-color: white;
+    border-radius: 3px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.link-nav:active {
+    background-color: rgb(211, 211, 211);
+}
+
 .navbar {
      background-color: rgb(40, 55, 99);
+}
+
+.hamburger {
+    color: white;
 }
 
 .navbar-brand {
     font-family: "Yeon Sung", Arial, Helvetica, sans-serif;
     font-size: 20pt;
     font-weight: 400;
-    color: rgb(70, 180, 240);
+    color: rgb(118, 195, 247);
 }
 
-.nav-item:hover{
-    background-color:  #63b6e2;
-    border-radius: 3px;
-}
 
 .nav-item a:hover {
     color: black;
