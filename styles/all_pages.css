@@ -10,7 +10,7 @@ nav a {
     color: white;
 }
 
-.link-nav{
+.link-nav {
     text-decoration: none;
     padding: 0.5rem 1rem;
     display: block;
@@ -30,7 +30,7 @@ nav a {
 }
 
 .navbar {
-     background-color: rgb(40, 55, 99);
+    background-color: rgb(40, 55, 99);
 }
 
 .hamburger {
@@ -41,7 +41,7 @@ nav a {
     font-family: "Cabin Sketch", Arial, Helvetica, sans-serif;
     font-size: 20pt;
     font-weight: 400;
-    color: white
+    color: white;
 }
 
 
@@ -56,11 +56,11 @@ nav a {
     height: auto;
     width: auto;
     margin: auto;
-    
+
 }
 
 #main-content-card {
-    max-width: 100%; 
+    max-width: 100%;
 }
 
 .page-heading {
