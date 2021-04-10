@@ -72,12 +72,6 @@ nav a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-@media (min-width: 550px) {
-    #main-content-card {
-        max-width: 500px;
-    }
-}
-
 .card-title {
     font-size: 15pt;
     font-weight: 700;
@@ -150,4 +144,10 @@ footer {
 
 .nav-item {
     font-weight: bold;
+}
+
+@media (min-width: 550px) {
+    #main-content-card {
+        max-width: 500px;
+    }
 }

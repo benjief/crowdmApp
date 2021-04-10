@@ -40,7 +40,7 @@ function onClickSubmit() {
     var feedback = document.getElementById("feedback");
     // Make sure a store has been selected
     if (!selectedStore || selectedStore === "invalid") {
-        feedback.innerHTML = "Please select a valid Costco location."
+        feedback.innerHTML = "Please select a valid Costco location"
         $(feedback).css({
             color: "red"
         });
@@ -48,7 +48,7 @@ function onClickSubmit() {
         $(feedback).fadeOut(2500);
         // Make sure a rating has been given
     } else if (!rating) {
-        feedback.innerHTML = "Please rate your experience."
+        feedback.innerHTML = "Please rate your experience"
         $(feedback).css({
             color: "red"
         });

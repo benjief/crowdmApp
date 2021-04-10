@@ -57,7 +57,7 @@ function decrementValue(y) {
 
 function displayInvalidFeedback(feedback, selectedStore) {
             // Display invalid selection prompt if a store isn't selected
-            feedback.innerHTML = "Please select a valid Costco location from the dropdown list.";
+            feedback.innerHTML = "Please select a valid Costco location from the dropdown list";
             $(feedback).css({
                 color: "red"
             });
@@ -141,7 +141,7 @@ function onClickUpdate() {
                                             .id);
                                         // Display successful update message
                                         function displaySuccessfulFeedback() {
-                                            feedback.innerHTML = "Update Successful.";
+                                            feedback.innerHTML = "Update Successful";
                                             $(feedback).css({
                                                 color: "green"
                                             });
