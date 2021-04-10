@@ -60,7 +60,7 @@ function calculateHourlyAverages() {
             if (counter != 0) {
                 var average = sum / counter;
                 // Replace "No data" at row i with the calculated average
-                hourlyAverages.splice(i, 1, average);
+                hourlyAverages.splice(i, 1, average.toFixed(0));
                 // Reset the average to 0 once the row has been dealt with
                 average = 0;
             }

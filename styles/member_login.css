@@ -9,19 +9,29 @@
     display: grid;
 }
 
+.page-heading {
+    justify-self: center;
+}
+
+.page-subheading {
+    justify-self: center;
+}
+
 #main-content-card {
     display: grid;
     grid-template-areas: 
         "auth-container"
         "employee-message"
         "employee-login-button";
+    grid-area: content-card;
 }
 
 #firebaseui-auth-container {
     grid-area: auth-container;
     margin-top: 20px;
     margin-bottom: 5px;
-    width: 100%;
+    width: 90%;
+    justify-self: center;
 }
 
 #firebaseui-auth- {

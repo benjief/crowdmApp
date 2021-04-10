@@ -1,32 +1,41 @@
-:root {
-    --star-size: 25px;
-    --star-color: #fff;
-    --star-background: #edb767;
-}
-
-.content-container {
+.container {
     display: grid;
-    grid-template-columns: 100%;
     grid-template-areas: 
-        "stars"
-        "store-name"
-        "map"
-        "store-info"
-        "buttons"
+        "heading"
+        "content-card"
         "footer";
 }
 
-iframe {
-    grid-area: map;
-    justify-self: center;
-    border: 1px solid black;
+.heading-container {
+    display: grid !important;
+    grid-area: heading;
+    text-align: center;
 }
 
-.store-name-container {
-    display: grid;
-    grid-area: store-name;
+.page-heading {
     text-align: center;
-    height: 100%;
+}
+
+.main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "map"
+        "store-info"
+        "buttons";
+    grid-area: content-card;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    grid-area: map;
+    margin-bottom: 20px;
+}
+
+iframe {
+    border: 1px solid rgb(231, 231, 231);
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .store-info-container {
@@ -44,8 +53,13 @@ iframe {
 .button-container {
     grid-area: buttons;
     display: grid;
-    row-gap: 20px;
+    row-gap: 10px;
     justify-self: center;
+    margin-bottom: 20px;
+}
+
+.button-container a {
+    width: 220px;
 }
 
 footer {
