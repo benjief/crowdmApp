@@ -4,7 +4,7 @@ var timeout, interval, headcount = 0;
 // Addition
 [].forEach.call(document.querySelectorAll('.add'), function (button) {
     button.addEventListener('mousedown', function () {
-        document.getElementById("increase_headcount").style.backgroundColor = "green";
+        document.getElementById("increase-headcount").style.backgroundColor = "green";
         var x = button.dataset.target;
         incrementValue(x);
         timeout = setTimeout(function () {
@@ -19,18 +19,18 @@ var timeout, interval, headcount = 0;
     function clearTimers() {
         clearTimeout(timeout);
         clearInterval(interval);
-        document.getElementById("increase_headcount").style.backgroundColor = "transparent";
+        document.getElementById("increase-headcount").style.backgroundColor = "rgb(238, 238, 238)";
     }
 });
 
 function incrementValue(x) {
-    document.getElementById(x).textContent = ++headcount;
+    document.getElementById(x).textContent = "Headcount: " + ++headcount;
 };
 
 // Substraction
 [].forEach.call(document.querySelectorAll('.subtract'), function (button) {
     button.addEventListener('mousedown', function () {
-        document.getElementById("decrease_headcount").style.backgroundColor = "red";
+        document.getElementById("decrease-headcount").style.backgroundColor = "red";
         var y = button.dataset.target;
         decrementValue(y);
         timeout = setTimeout(function () {
@@ -45,13 +45,13 @@ function incrementValue(x) {
     function clearTimers() {
         clearTimeout(timeout);
         clearInterval(interval);
-        document.getElementById("decrease_headcount").style.backgroundColor = "transparent";
+        document.getElementById("decrease-headcount").style.backgroundColor = "rgb(238, 238, 238)";
     }
 });
 
 function decrementValue(y) {
     if (headcount > 0) {
-        document.getElementById(y).textContent = --headcount;
+        document.getElementById(y).textContent = "Headcount: " + --headcount;
     };
 };
 

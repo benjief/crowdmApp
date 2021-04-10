@@ -1,56 +1,114 @@
-/******** employee_headcount.html ********/
-.headcount_button {
-    font-size: 20px;
+.container {
+    display: grid;
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+.heading-container {
+    display: grid;
+    grid-area: heading;
+    text-align: center;
+}
+
+.page-heading { 
+    justify-self: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas:
+        "location-selector"
+        "headcount-tally"
+        "headcount-adjustment"
+        "feedback";
+    grid-area: content-card;
+}
+
+.mb-3 {
+    grid-area: location-selector;
+    margin-top: 17px;
+    width: 90%;
+    justify-self: center;
+}
+
+#headcount-tally {
+    grid-area: headcount-tally;
+}
+
+.headcount-button {
+    font-size: 17pt;
     width: 90%;
     height: 150px;
 }
 
-.headcount_button:active {
-    color: rgb(44, 129, 255);
-    font-weight: bolder;
+.headcount-button:active {
+    font-weight: 700;
 }
 
-#increase_headcount {
-    grid-area: increase_headcount;
-}
-
-
-#decrease_headcount {
-    grid-area: decrease_headcount;
-}
-
-.supersize {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 60px;
-}
-
-#update_headcount {
-    grid-area: update_headcount;
-    margin-top: 15px;
-    width: 50%;
-    font-size: 25px;
-    letter-spacing: 1px;
-}
-
-#feedback_placeholder {
-    grid-area: feedback;
-    height: 10px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-#button_container {
+#button-container {
     display: grid;
     grid-template-columns: repeat(2, 50%);
     grid-template-rows: auto;
     grid-template-areas:
-        "increase_headcount decrease_headcount"
-        "update_headcount update_headcount"
-        "feedback feedback"
+        "increase-headcount decrease-headcount"
+        "update-headcount update-headcount"
         "footer footer";
     justify-items: center;
+    grid-area: headcount-adjustment;
 }
 
-footer {
-    grid-area: footer;
+#increase-headcount {
+    grid-area: increase-headcount;
+    color: rgb(40, 55, 99);
+    background-color: rgb(238, 238, 238);
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px rgb(226, 226, 226);
+}
+
+#decrease-headcount {
+    grid-area: decrease-headcount;
+    color: rgb(40, 55, 99);
+    background-color: rgb(238, 238, 238);
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px rgb(226, 226, 226);
+}
+
+.supersize {
+    font-size: 55px;
+    color: rgb(40, 55, 99);;
+}
+
+#update-headcount {
+    grid-area: update-headcount;
+    width: 180px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#feedback-placeholder {
+    display: flex;
+    grid-area: feedback;
+    height: 40px;
+    font-weight: 700;
+    justify-content: center;
+}
+
+@media (max-width: 550px) {
+    #feedback-placeholder {
+        display: flex;
+        grid-area: feedback;
+        height: 60px;
+        font-weight: 700;
+        justify-content: center;
+    }
+}
+
+#feeback {
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
