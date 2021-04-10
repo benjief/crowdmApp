@@ -1,47 +1,70 @@
 
-/******** store_main.html ********/
 .container {
     display: grid;
     grid-template-areas: 
-        "page-header"
-        "info-burnaby"
-        "info-downtown"
-        "info-richmond"
-        "footer";
-    width: 100%;    
+        "page-heading"
+        "content-card"
+        "footer"; 
 }
 
 .heading-container {
-    display: flex;
-    grid-area: page-header;
-    justify-content: center;
+    display: grid !important;
 }
 
-#heading {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    font-size: 25px;
+.page-subheading {
+    justify-self: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "info-burnaby"
+        "info-downtown"
+        "info-richmond";
+    grid-area: content-card;
 }
 
 .store-info-container {
     display: grid;
-    grid-template-columns: 40% 23% 10% 27%;
-    grid-template-rows: auto;
+    grid-template-columns: 40% 40% 20%;
+    grid-template-rows: 30px 45px;
     grid-template-areas: 
-        "update-time update-time update-time update-time"
-        "store-name headcount ticker previous-headcount";
-    width: 100%;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
+        "update-time . ."
+        "store-name current-headcount previous-headcount";
+    width: 95%;
     font-size: 10pt;
-    margin-bottom: 5px;
-    border: solid 1px black;
+    margin-bottom: 13px;
+    background-color: rgb(238, 238, 238);
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 10px;
+}
+
+@media (min-width: 550px) {
+    .store-info-container {
+        font-size: 13pt;
+    }
+
+    .previous-headcount-container p {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        font-size: 11pt;
+    }
+    
+    .update-time-container {
+        display: flex;
+        justify-content: flex-start;
+        grid-area: update-time;
+        height: 100%;
+        font-size: 11pt;
+        margin-left: 10%;
+    }
 }
 
 #info-burnaby {
+    margin-top: 13px;
     grid-area: info-burnaby;
 }
 
@@ -56,38 +79,54 @@
 .store-name-container {
     display: flex;
     grid-area: store-name;
-    margin-left: 3%;
-}
-
-.headcount-container {
-    grid-area: headcount;
-}
-
-.ticker-container {
-    display: flex;
     justify-content: flex-start;
-    grid-area: ticker;
+    margin-left: 10%;
+    font-weight: 700;
+}
+
+.store-name-container a {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.headcount-ticker-container div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.headcount-ticker-container {
+    display: flex;
+    grid-area: current-headcount;
+    justify-content: center;
+    font-weight: 700;
 }
 
 .ticker {
-    height: 25px;
+    display: flex;
+    height: 65%;
     width: auto;
     position: relative;
-    top: -3px;
+    margin-left: 2px;
+    align-items: center;
 }
 
 .previous-headcount-container {
     display: flex;
-    justify-content: flex-end;
     grid-area: previous-headcount;
-    height: 100%;
-    margin-right: 5%;
+    justify-content: flex-start;
+    position: relative;
+    top: 2px;
 }
 
 .previous-headcount-container p {
     display: flex;
     height: 100%;
     align-items: center;
+    font-size: 8pt;
 }
 
 .update-time-container {
@@ -95,8 +134,8 @@
     justify-content: flex-start;
     grid-area: update-time;
     height: 100%;
-    margin-left: 1%;
     font-size: 8pt;
+    margin-left: 10%;
 }
 
 .update-time-container p {

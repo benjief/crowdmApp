@@ -134,6 +134,9 @@ nav a {
 }
 
 .page-subheading {
+    display: flex;
+    align-items: center;
+    height: 100%;
     font-size: 20px;
     color: rgb(70, 180, 240);
 }
@@ -142,6 +145,7 @@ footer {
     margin-top: 30px;
     width: 100%;
     text-align: center;
+    grid-area: footer;
 }
 
 .nav-item {

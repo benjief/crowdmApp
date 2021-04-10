@@ -61,7 +61,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-img {
+#main-content-card img {
     grid-area: storefront;
     width: 100%;
 }
