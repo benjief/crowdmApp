@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
     <title>CrowdmApp - Mainpage</title>
-    <meta name="employee main page" content="main page">
+    <meta name="member main page" content="main page">
     <meta name="author" content="team 11">
 
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/all_pages.css">
+    <link rel="stylesheet" href="/styles/employee_main.css">
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
-    
 </head>
 
-<body class="center-text">
+<body>
     <nav class="navbar navbar-expand-lg center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -30,32 +30,41 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="link-nav" href="main.html">Homepage</a>
+                        <a class="link-nav" href="../member/main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="stores.html">Stores</a>
+                        <a class="link-nav" href="../member/stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="headcount.html">Headcount</a>
+                        <a class="link-nav" href="../member/feedback.html">Feedback</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../home/index.html">Log Out</a>
+                        <a class="link-nav" href="../home/index.html">Log out</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container">
-        <h1 class="display-4">Welcome, <span class="name-goes-here"></span></h1>
-        <h4>Quick links:</h4>
-        <a class="btn btn-primary button-main" href="stores.html" role="button">View Stores</a>
-        <a class="btn btn-primary button-main" href="headcount.html" role="button">Update Headcount</a>
-        <a class="btn btn-primary button-main" href="../home/index.html" role="button">Log Out</a>
+    <div class="container center-text">
+        <div class="heading-container">
+            <p class="page-heading">Hello,&nbsp;<span class="name-goes-here"></span>!</p>
+        </div>
+        <div class="card mb-3" id="main-content-card">
+            <div class="card-text-container">
+                <p class="card-text">Please select an option:</p>
+            </div>
+            <a class="btn btn-primary button-main" id="view-stores-button" href="stores.html" role="button">View Stores</a>
+            <a class="btn btn-primary button-main" id="update-headcount-button" href="/employee_feedback.html" role="button">Update Headcount</a>
+            <a class="btn btn-primary button-main" id="log-out-button" href="../home/index.html" role="button">Log Out</a>
+        </div>
+
         <footer>
-            <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
-            <p id="trademark">&#169; 2021 crowdmApp</p>
+            <div id="footer">            
+                <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+                <p id="back-button-text">Back</p>
+                <p id="trademark">&#169; 2021 crowdmApp</p>
+            </div>
         </footer>
     </div>
 
@@ -64,7 +73,7 @@
     <!----------------------------------------------->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
