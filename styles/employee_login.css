@@ -15,12 +15,6 @@
         "auth-container"
         "member-message"
         "member-login-button";
-    grid-area: content-card;
-    margin-top: 10px;
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #firebaseui-auth-container {

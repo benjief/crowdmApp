@@ -7,12 +7,12 @@ var defaultReviewsPosted = 3;
 
 function pageSetUp(store) {
     // Add store name to top of page
-    var heading = "<p id='heading'></p>";
+    var heading = "<p class='page-heading'></p>";
     $(".heading-container").append(heading);
-    $("#heading").html("Costco " + store);
+    $(".page-heading").html("Reviews: Costco " + store);
     // Add image to top of page
     var storeImage = "<img src='/images/store_" + store.toLowerCase() + "_storefront.png' alt='storefront'>"
-    $(".container").append(storeImage);
+    $("#main-content-card").append(storeImage);
 }
 
 // Add JSON object to master array containing all reviews
@@ -23,12 +23,16 @@ function addToMasterArray(reviewInfo) {
 // Add reviews to the DOM
 function postReviews(start, end) {
     for (var i = start; i < end; i++) {
-        var review = "<p class='review' id='review-" + i.toString()
-            + "'></p>";
+        var review = "<div class='review' id='review-" + i.toString()
+            + "'></div>";
+        // Add reviewer name, rating, date and comment to each review
         $(".review-container").append(review);
-        $("#review-" + i.toString()).html("<span>Name: </span>" + masterArray[i]["name"] + "<br/>"
-            + "<span>Rating: </span>" + masterArray[i]["rating"] + "<br/>"
-            + "<span>Comments: </span>" + masterArray[i]["comment"]);
+        $("#review-" + i.toString()).append("<div class='review-name-rating-date' id='review-name-rating-date-" + i.toString() + "'></div>");
+        $("#review-name-rating-date-" + i.toString()).append("<div class='review-name-rating' id='review-name-rating-" + i.toString() + "'></div>");
+        $("#review-name-rating-" + i.toString()).append("<p id='reviewer-name'>" + masterArray[i]["name"] + "</p>");
+        $("#review-name-rating-" + i.toString()).append("<div id='reviewer-rating' class='stars' style='--rating:" + masterArray[i]["rating"].toFixed(1).toString() + "'></div></div>");
+        $("#review-name-rating-date-" + i.toString()).append("<p id='review-date'>" + masterArray[i]["date"] + "</p>");
+        $("#review-" + i.toString()).append("<p id='reviewer-comment'>" + masterArray[i]["comment"] + "</p>");
     }
 }
 
@@ -40,9 +44,10 @@ function getReviews(store) {
             querySnapshot.forEach((doc) => {
                 var name = doc.data().Reviewer_Name;
                 var rating = doc.data().Reviewer_Rating;
+                var date = doc.data().Date_Time.toDate().toDateString();
                 var comment = doc.data().Reviewer_Comment;
                 // Create JSON object to house review information
-                var reviewInfo = { "name": name, "rating": rating, "comment": comment };
+                var reviewInfo = { "name": name, "rating": rating, "date": date, "comment": comment };
                 addToMasterArray(reviewInfo);
             });
             console.log(masterArray);
@@ -69,10 +74,9 @@ function updateRating(store) {
                 sum += ratings[j];
             }
             var avgRating = sum / ratings.length;
-            document.getElementById("stars").setAttribute("style", "--rating: " + avgRating
-                .toFixed(1).toString() + ";");
-            document.getElementById("current-rating").innerHTML = "Current rating: " + avgRating
-                .toFixed(1);
+            document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
+                .toFixed(1) + "/5";
+            $("#current-rating").attr("class", "card-text");
         });
 }
 

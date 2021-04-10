@@ -1,7 +1,7 @@
 /********* Styles all pages *********/
 body {
     font-family: "Mali", Arial, Helvetica, sans-serif;
-    font-weight: 700;
+    font-weight: 300;
     font-size: 11pt;
     color: rgb(40, 55, 99);
 }
@@ -60,13 +60,14 @@ nav a {
 }
 
 #main-content-card {
-    max-width: 100%;
+    grid-area: content-card;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
     overflow: hidden;
     border-radius: 4px;
-}
-
-
-#main-content-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
