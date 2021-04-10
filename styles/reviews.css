@@ -17,6 +17,13 @@
     text-align: center;
 }
 
+.heading-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
 #main-content-card {
     display: grid;
     grid-template-areas:
@@ -24,12 +31,7 @@
         "current-rating"
         "reviews"
         "load-more-button";
-}
-
-.heading-container p {
-    display: flex;
-    height: 100%;
-    align-items: center;
+    grid-area: content-card;
 }
 
 .current-rating-container {
