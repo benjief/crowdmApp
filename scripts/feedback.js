@@ -40,7 +40,7 @@ function onClickSubmit() {
     var feedback = document.getElementById("feedback");
     // Make sure a store has been selected
     if (!selectedStore || selectedStore === "invalid") {
-        feedback.innerHTML = "Please select a valid Costco location from the dropdown list."
+        feedback.innerHTML = "Please select a valid Costco location."
         $(feedback).css({
             color: "red"
         });

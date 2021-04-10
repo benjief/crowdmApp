@@ -24,7 +24,7 @@
     text-align: justify;
 }
 
-#image-carousel {
+.slide {
     grid-area: image-carousel;
     width: 100%;
     margin-top: 5px;
