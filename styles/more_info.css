@@ -30,4 +30,8 @@
     margin-top: 5px;
 }
 
+.carousel-indicators {
+    display: hide;
+}
+
 
