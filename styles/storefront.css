@@ -9,11 +9,11 @@
 .heading-container {
     display: grid !important;
     grid-area: heading;
-    text-align: center;
 }
 
 .page-heading {
     text-align: center;
+    justify-self: center;
 }
 
 .main-content-card {
