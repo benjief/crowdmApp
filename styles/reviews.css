@@ -127,6 +127,7 @@
 #reviewer-comment {
     grid-area: reviewer-comment;
     margin-left: 15px;
+    margin-right: 15px;
 }
 
 .button-container {
