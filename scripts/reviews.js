@@ -90,7 +90,7 @@ function getReviews(store) {
 
 function loadAllReviews() {
     postReviews(defaultReviewsPosted, masterArray.length)
-    $(".button-container").css({ display: "none" });
+    $("#load-more-button").css({ display: "none" });
 }
 
 // Get, update and post average ratings for all stores
@@ -114,8 +114,14 @@ function updateRating(store) {
             } else {
                 avgRating = 0;
             }
-            document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
-                .toFixed(1) + "/5";
+            if (avgRating == 0) {
+                document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
+                    .toFixed(0) + "/5";
+            } else {
+                document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
+                    .toFixed(1) + "/5";
+            }
+
             $("#current-rating").attr("class", "card-text");
         });
 }
