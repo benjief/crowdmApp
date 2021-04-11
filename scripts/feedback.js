@@ -1,8 +1,13 @@
-// Get store selected from dropdown menu 
-var selectedStore;
+// Set up a flags to check if the users submission is valid
+var noStoreSelected;
+var noRating;
 
+var store;
+
+// Get store selected from dropdown menu 
 function getSelectedStore(floatingSelect) {
-    selectedStore = floatingSelect.value;
+    var selectedStore = floatingSelect.value;
+    store = "Costco_" + selectedStore;
 }
 
 // Implement a character limit counter
@@ -25,54 +30,78 @@ $(function () {
 
 // Record rating
 var rating;
-
-function getRating(star_rating) {
-    rating = star_rating.value;
+function getRating(starRating) {
+    rating = starRating.value;
 }
 
-// Write review to database
-// Add a new document in collection "cities"
-function onClickSubmit() {
-    // Grab comment
-    console.log(document.getElementById("comment_box").value);
-    // Get correct store name (in DB format)
-    var storeToUpdate = "Costco_" + selectedStore;
-    var feedback = document.getElementById("feedback");
-    // Make sure a store has been selected
-    if (!selectedStore || selectedStore === "invalid") {
+// Make sure a store has been selected
+function checkSelection() {
+    if (!store || store === "invalid") {
         feedback.innerHTML = "Please select a valid Costco location"
         $(feedback).css({
             color: "red"
         });
         $(feedback).show(0);
         $(feedback).fadeOut(2500);
-        // Make sure a rating has been given
-    } else if (!rating) {
+        noStoreSelected = true;
+        console.log("Review not submitted - no store selected.");
+    } else {
+        noStoreSelected = false;
+    }
+}
+
+// Make sure a rating has been given
+function checkRating() {
+    if (!rating) {
         feedback.innerHTML = "Please rate your experience"
         $(feedback).css({
             color: "red"
         });
         $(feedback).show(0);
         $(feedback).fadeOut(2500);
+        noRating = true;
+        console.log("Review not submitted - no rating.");
     } else {
+        noRating = false;
+    }
+}
+
+// Add a review to Firestore; only the most up-to-date review is stored
+function addReview(store) {
+    db.collection("Stores").doc(store).collection("Reviews").doc(firebase.auth().currentUser.displayName).set({
+        id: firebase.auth().currentUser.displayName,
+        Reviewer_Name: firebase.auth().currentUser.displayName,
+        Reviewer_Email: firebase.auth().currentUser.email,
+        Reviewer_Rating: parseInt(rating),
+        Reviewer_Comment: document.getElementById("comment_box").value,
+        Date_Time: firebase.firestore.FieldValue.serverTimestamp()
+    })
+        .then(() => {
+            console.log("Document successfully written!");
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+}
+
+// Deal with submission click in the appropriate manner
+function onClickSubmit() {
+    // Grab comment
+    console.log(document.getElementById("comment_box").value);
+    var feedback = document.getElementById("feedback");
+    checkSelection();
+    if (!noStoreSelected) {
+        checkRating();
+    }
+    // Add or modify a review if selections are valid
+    if (!noStoreSelected && !noRating) {
+        addReview(store);
+        // Display success message
         document.getElementById("feedback").innerHTML = "Thanks for your feedback!";
         $(feedback).css({
-            color: "black"
+            color: "green"
         });
         $(feedback).show(0);
         $(feedback).fadeOut(2500);
-        db.collection("Stores").doc(storeToUpdate).collection("Reviews").add({
-            Reviewer_Name: firebase.auth().currentUser.displayName,
-            Reviewer_Email: firebase.auth().currentUser.email,
-            Reviewer_Rating: parseInt(rating),
-            Reviewer_Comment: document.getElementById("comment_box").value,
-            Date_Time: firebase.firestore.FieldValue.serverTimestamp()
-        })
-            .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-            });
     }
 }

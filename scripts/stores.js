@@ -22,6 +22,10 @@ function updateLastTimeOfLastUpdate(store) {
             var currentTime = new Date();
             // Calculate time difference between latest update and current time in milliseconds
             var timeDifference = currentTime.getTime() - updateTime.getTime();
+            // Sets the time difference to 0 if it's negative (which happens upon updating a store's headcount for some reason)
+            if (timeDifference < 0) {
+                timeDifference = 0;
+            }
             // Define variables to convert from milliseconds to other units of time
             var oneSecond = 1000;
             var oneMinute = 60 * oneSecond;
@@ -89,7 +93,6 @@ $(document).ready(function () {
         updateStoreHeaders(stores[i]);
         updateHeadcount(stores[i]);
         updateLastTimeOfLastUpdate(stores[i]);
-
     }
 });
 
