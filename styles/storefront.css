@@ -1,54 +1,3 @@
-<<<<<<< HEAD
-:root {
-    --star-size: 25px;
-    --star-color: #fff;
-    --star-background: #edb767;
-}
-
-.content-container {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-areas: 
-        "stars"
-        "store-name"
-        "map"
-        "store-info"
-        "buttons"
-        "footer";
-}
-
-iframe {
-    grid-area: map;
-    justify-self: center;
-    border: 1px solid black;
-}
-
-.store-name-container {
-    display: grid;
-    grid-area: store-name;
-    text-align: center;
-    height: 100%;
-}
-
-.store-info-container {
-    grid-area: store-info;
-    text-align: center;
-}
-
-.store-name-container p, .store-info-container p {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-.button-container {
-    grid-area: buttons;
-    display: grid;
-    row-gap: 20px;
-    width: 50%;
-    justify-self: center;
-=======
 .container {
     display: grid;
     grid-template-areas: 
@@ -130,5 +79,4 @@ footer {
     .store-name-container p, .store-info-container p {
         font-size: 15pt;
     }
->>>>>>> 9eb073c37641dc5c81e645c79d8875f61c9e64c6
 }
