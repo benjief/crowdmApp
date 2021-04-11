@@ -76,6 +76,15 @@ function getReviews(store) {
             eraseInfoFromDom();
             defaultReviewsPosted = Math.min(masterArray.length, 3);
             postReviews(0, defaultReviewsPosted);
+            // Append a "Load More" button to the DOM if at least four reviews have been posted
+            if (masterArray.length > defaultReviewsPosted) {
+                console.log(masterArray.length);
+                var buttonContainer = "<div class='button-container'></div>"
+                $(".review-container").append(buttonContainer);
+                var loadMoreButton = "<button id='load-more-button' class='btn btn-primary button-main'" +
+                    "onclick='loadAllReviews()'>Load More</button>";
+                $(".button-container").append(loadMoreButton);
+            }
         });
 }
 
@@ -87,8 +96,8 @@ function loadAllReviews() {
 // Get, update and post average ratings for all stores
 function updateRating(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Reviews")
-    .where("Reviewer_Rating", "!=", "null")    
-    .onSnapshot((querySnapshot) => {
+        .where("Reviewer_Rating", "!=", "null")
+        .onSnapshot((querySnapshot) => {
             store = store.toLowerCase();
             var ratings = [];
             querySnapshot.forEach((doc) => {
