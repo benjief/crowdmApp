@@ -96,12 +96,14 @@ function onClickSubmit() {
     // Add or modify a review if selections are valid
     if (!noStoreSelected && !noRating) {
         addReview(store);
-        // Display success message
+        // Display success message and direct users back to the main page
         document.getElementById("feedback").innerHTML = "Thanks for your feedback!";
         $(feedback).css({
             color: "green"
         });
         $(feedback).show(0);
         $(feedback).fadeOut(2500);
+        setTimeout(function () { 
+            location.href = "/web/member/main.html"}, 2300);
     }
 }
