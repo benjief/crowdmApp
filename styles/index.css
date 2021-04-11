@@ -24,7 +24,7 @@
     width: 100%;
     height: 100%;
     justify-self: center;
-    margin-top: 32px;
+    margin-top: 22px;
 }
 
 #main-content-card img {
@@ -32,15 +32,11 @@
     width: 100%;
 }
 
+
 .card-body {
     display: grid;
     grid-area: card-text;
-    position: relative;
-    top:-20px;
-}
-
-#more-info-button {
-    width: 100px;
+    margin-bottom: 13px;
 }
 
 .card-title {
@@ -53,6 +49,11 @@
 .card-text {
     display: flex;
     height: 100%;
+    text-align: justify;
+}
+
+#more-info-button {
+    width: 100px;
 }
 
 footer {

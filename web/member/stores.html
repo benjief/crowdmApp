@@ -10,8 +10,8 @@
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-        
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/stores.css">
@@ -24,23 +24,24 @@
     <nav class="navbar navbar-expand-lg center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
-            <button class="navbar-toggler navbar-dark hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-dark hamburger" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/main.html">Homepage</a>
+                        <a class="link-nav" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/stores.html">Stores</a>
+                        <a class="link-nav" href="stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/feedback.html">Feedback</a>
+                        <a class="link-nav" href="feedback.html">Feedback</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../home/index.html">Log Out</a>
+                        <a class="link-nav" href="../home/index.html" onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -49,66 +50,66 @@
 
     <div class="container">
         <div class="heading-container">
-            <p id="heading">Real-Time Headcount Data</p>
+            <p class="page-heading">Costco Real-Time Headcount Data</p>
+            <p class="page-subheading">Click on a location for more information!</p>
         </div>
-        <div class="store-info-container" id="info-burnaby">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-burnaby" href="../member/storefront.html?store=Burnaby">Costcto
-                    Burnaby</a>
+        <div id="main-content-card">
+            <div class="store-info-container" id="info-burnaby">
+                <div class="store-name-container">
+                    <a class="store-name" id="store-name-burnaby"
+                        href="../member/storefront.html?store=Burnaby">
+                    </a>
+                </div>
+                <div class="headcount-ticker-container">
+                    <div class="real-time-headcount" id="headcount-burnaby"></div>
+                    <img class="ticker" id="burnaby-ticker">
+                </div>
+                <div class="previous-headcount-container">
+                    <p class="previous-headcount" id="previous-headcount-burnaby"></p>
+                </div>
+                <div class="update-time-container">
+                    <p class="update-time" id="update-time-burnaby"></p>
+                </div>
             </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-burnaby"></div>
+            <div class="store-info-container" id="info-downtown">
+                <div class="store-name-container">
+                    <a class="store-name" id="store-name-downtown"
+                        href="../member/storefront.html?store=Downtown">
+                    </a>
+                </div>
+                <div class="headcount-ticker-container">
+                    <div class="real-time-headcount" id="headcount-downtown"></div>
+                    <img class="ticker" id="downtown-ticker">
+                </div>
+                <div class="previous-headcount-container">
+                    <p class="previous-headcount" id="previous-headcount-downtown"></p>
+                </div>
+                <div class="update-time-container">
+                    <p class="update-time" id="update-time-downtown"></p>
+                </div>
             </div>
-            <div class="ticker-container">
-                <img class="ticker" id="burnaby-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-burnaby"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-burnaby"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-downtown">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-downtown" href="../member/storefront.html?store=Downtown">Costco
-                    Downtown</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-downtown"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="downtown-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-downtown"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-downtown"></p>
-            </div>
-        </div>
-        <div class="store-info-container" id="info-richmond">
-            <div class="store-name-container">
-                <a class="store-name" id="store-name-richmond" href="../member/storefront.html?store=Richmond">Costco
-                    Richmond</a>
-            </div>
-            <div class="headcount-container">
-                <div class="real-time-headcount" id="headcount-richmond"></div>
-            </div>
-            <div class="ticker-container">
-                <img class="ticker" id="richmond-ticker">
-            </div>
-            <div class="previous-headcount-container">
-                <p class="previous-headcount" id="previous-headcount-richmond"></p>
-            </div>
-            <div class="update-time-container">
-                <p class="update-time" id="update-time-richmond"></p>
+            <div class="store-info-container" id="info-richmond">
+                <div class="store-name-container">
+                    <a class="store-name" id="store-name-richmond"
+                        href="../member/storefront.html?store=Richmond">
+                    </a>
+                </div>
+                <div class="headcount-ticker-container">
+                    <div class="real-time-headcount" id="headcount-richmond"></div>
+                    <img class="ticker" id="richmond-ticker">
+                </div>
+                <div class="previous-headcount-container">
+                    <p class="previous-headcount" id="previous-headcount-richmond"></p>
+                </div>
+                <div class="update-time-container">
+                    <p class="update-time" id="update-time-richmond"></p>
+                </div>
             </div>
         </div>
 
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
-            <p>Back</p>
+            <p id="back-button-text">Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
     </div>

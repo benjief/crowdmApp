@@ -40,7 +40,7 @@
                         <a class="link-nav" href="headcount.html">Headcount</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../home/index.html">Log Out</a>
+                        <a class="link-nav" href="../home/index.html" onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -49,14 +49,11 @@
 
     <div class="container">
         <div class="heading-container"></div>
-        <div class="star-container">
-            <p id="current-rating"></p>
-            <div id="stars" class="stars" style="--rating: 0;"></div>
-        </div>
-        <div class="review-container"></div>
-        <div class="button-container">
-            <button id="load-more-button" class="btn btn-primary button-main" onclick="loadAllReviews()">Load
-                More</button>
+        <div id="main-content-card">
+            <div class="current-rating-container">
+                <p id="current-rating"></p>
+            </div>
+            <div class="review-container"></div>
         </div>
 
         <footer>
@@ -84,6 +81,7 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="/scripts/reviews.js"></script>
+    <script src="/scripts/logout.js"></script>
 
 </body>
 

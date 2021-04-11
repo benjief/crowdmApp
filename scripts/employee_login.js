@@ -24,7 +24,7 @@ var uiConfig = {
                     .then(function () {
                         console.log("New user added to firestore");
                         window.location.assign(
-                            "/web/employee/employee_main.html"
+                            "/web/employee/main.html"
                         ); //re-direct to employee_main.html after signup
                     })
                     .catch(function (error) {

@@ -13,7 +13,7 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="/jquery_plugins/jquery-bar-rating/dist/themes/fontawesome-stars.css">
     <link rel="stylesheet" href="/styles/all_pages.css">
     <link rel="stylesheet" href="/styles/feedback.css">
@@ -39,10 +39,7 @@
                         <a class="link-nav" href="../member/stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/feedback.html">Feedback</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="link-nav" href="../home/index.html">Log Out</a>
+                        <a class="link-nav" href="../home/index.html" onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -93,7 +90,7 @@
             </div>
             <button id="submit-button" role="button" class="btn btn-primary button-main"
                 onclick="onClickSubmit()">Submit</button>
-            <div class="control">
+            <div class="feedback-placeholder">
                 <p id="feedback"></p>
             </div>
         </div>
@@ -127,7 +124,7 @@
     <!--------------------------------------------------------------------->
     <script src="/scripts/feedback.js"></script>
     <script src="/scripts/hello.js"></script>
-
+    <script src="/scripts/logout.js"></script>
 
 </body>
 

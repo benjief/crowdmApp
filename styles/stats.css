@@ -54,9 +54,9 @@
 }
 
 #stats-table {
-    width: 50%;
+    width: 80%;
     table-layout: fixed;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 #stats-table th,

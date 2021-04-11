@@ -25,7 +25,8 @@
         "star-rating"
         "comments"
         "chars-remaining"
-        "submit";
+        "submit"
+        "feedback";
     grid-area: content-card;
     margin-top: 10px;
     width: 100%;
@@ -119,6 +120,7 @@
 
 #counter {
     background-color: white;
+    width: 30px;
 }
 
 input {
@@ -128,4 +130,19 @@ input {
 
 #submit-button {
     grid-area: submit;
+    margin-top: 10px;
+}
+
+.feedback-placeholder {
+    display: flex;
+    grid-area: feedback;
+    height: 50px;
+    justify-content: center;
+}
+
+#feedback {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-weight: 700;
 }

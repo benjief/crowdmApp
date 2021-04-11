@@ -11,23 +11,39 @@
         "dropdown-menu"
         "image-carousel";
     grid-area: content-card;
-    margin: 0;
-    margin-top: 18px;
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-#dropdown-menu {
+#accordionFlushExample {
     grid-area: dropdown-menu;
     text-align: justify;
 }
 
-#image-carousel {
+.collapsed {
+    font-weight: 700;
+    font-size: 11pt;
+}
+
+.accordion-body {
+    font-size: 10t;
+}
+
+.slide {
     grid-area: image-carousel;
     width: 100%;
     margin-top: 5px;
+}
+
+.carousel-indicators {
+    display: hide;
+}
+
+@media (min-width: 550px) {
+    .collapsed {
+        font-size: 13pt;
+    }
+    .accordion-body {
+        font-size: 12pt;
+    }
 }
 
 

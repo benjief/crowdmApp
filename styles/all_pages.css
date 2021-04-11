@@ -72,12 +72,6 @@ nav a {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-@media (min-width: 550px) {
-    #main-content-card {
-        max-width: 500px;
-    }
-}
-
 .card-title {
     font-size: 15pt;
     font-weight: 700;
@@ -130,10 +124,13 @@ nav a {
     height: 100%;
     font-size: 25pt;
     font-weight: 800;
-    color: (40, 55, 99);
+    color: rgb(40, 55, 99);
 }
 
 .page-subheading {
+    display: flex;
+    align-items: center;
+    height: 100%;
     font-size: 20px;
     color: rgb(70, 180, 240);
 }
@@ -142,8 +139,15 @@ footer {
     margin-top: 30px;
     width: 100%;
     text-align: center;
+    grid-area: footer;
 }
 
 .nav-item {
     font-weight: bold;
+}
+
+@media (min-width: 550px) {
+    #main-content-card {
+        max-width: 500px;
+    }
 }

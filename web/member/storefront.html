@@ -10,18 +10,19 @@
     <!-- Bootstrap for Mobile-first, and JQuery -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
-        
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Optional styles and scripts of your own -->
     <link rel="stylesheet" href="/styles/storefront.css">
     <link rel="stylesheet" href="/styles/all_pages.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    
 </head>
 
-<body>
+<body class="body">
     <nav class="navbar navbar-expand-lg center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
@@ -32,26 +33,31 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/main.html">Homepage</a>
+                        <a class="link-nav" href="main.html">Homepage</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/stores.html">Stores</a>
+                        <a class="link-nav" href="stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../member/feedback.html">Feedback</a>
+                        <a class="link-nav" href="feedback.html">Feedback</a>
                     </li>
                     <li class="nav-item">
-                        <a class="link-nav" href="../home/index.html">Log Out</a>
+                        <a class="link-nav" href="../home/index.html" onclick="logOut()">Log Out</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="content-container">
-        <div class="store-name-container"></div>
-        <div class="store-info-container"></div>
-        <div class="button-container"></div>
+    <div class="container">
+        <div class="heading-container">
+        </div>
+        <div id="main-content-card">
+            <div class="map"></div>
+            <div class="store-info-container"></div>
+            <div class="button-container"></div>
+        </div>
+        
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p>Back</p>
@@ -78,6 +84,7 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script src="/scripts/storefront.js"></script>
+    <script src="/scripts/logout.js"></script>
 
 </body>
 

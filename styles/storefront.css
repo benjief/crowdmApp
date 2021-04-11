@@ -9,11 +9,11 @@
 .heading-container {
     display: grid !important;
     grid-area: heading;
-    text-align: center;
 }
 
 .page-heading {
     text-align: center;
+    justify-self: center;
 }
 
 .main-content-card {
@@ -36,6 +36,9 @@ iframe {
     border: 1px solid rgb(231, 231, 231);
     overflow: hidden;
     border-radius: 5px;
+    width: 80%;
+    height: 250px;
+    margin-top: 20px;
 }
 
 .store-info-container {
@@ -66,4 +69,14 @@ footer {
     grid-area: footer;
     width: 100%;
     text-align: center;
+}
+
+@media (min-width: 550px) {
+    iframe {
+        height: 400px;
+    }
+
+    .store-name-container p, .store-info-container p {
+        font-size: 15pt;
+    }
 }
