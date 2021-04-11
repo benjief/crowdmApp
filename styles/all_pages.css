@@ -1,0 +1,153 @@
+/********* Styles all pages *********/
+body {
+    font-family: "Mali", Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 11pt;
+    color: rgb(40, 55, 99);
+    letter-spacing: -1px;
+}
+
+nav a {
+    color: white;
+}
+
+.link-nav {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+}
+
+.link-nav:hover {
+    background-color: white;
+    border-radius: 3px;
+
+}
+
+.link-nav:active {
+    background-color: rgb(211, 211, 211);
+}
+
+.navbar {
+    background-color: rgb(40, 55, 99);
+}
+
+.hamburger {
+    color: white;
+}
+
+.navbar-brand {
+    font-family: "Cabin Sketch", Arial, Helvetica, sans-serif;
+    font-size: 20pt;
+    font-weight: 400;
+    color: white;
+}
+
+
+.nav-item a:hover {
+    color: black;
+}
+
+.button-main {
+    background-color: rgb(40, 55, 99);
+    border: none;
+    color: white;
+    height: auto;
+    width: auto;
+    margin: auto;
+
+}
+
+#main-content-card {
+    grid-area: content-card;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card-title {
+    font-size: 15pt;
+    font-weight: 700;
+    color: rgb(70, 180, 240);
+}
+
+.card-text {
+    color: #0D6391;
+    font-size: 13pt;
+}
+
+.center-text {
+    text-align: center;
+}
+
+#trademark {
+    color: rgb(40, 55, 99);
+}
+
+#back-button {
+    height: 30px;
+    width: auto;
+    color: #061e2b;
+    filter: invert(23%) sepia(64%) saturate(428%) hue-rotate(185deg) brightness(87%) contrast(103%);
+}
+
+#back-button-text {
+    color: rgb(40, 55, 99);
+}
+
+/* grid */
+.container {
+    display: grid;
+    grid-row: auto;
+    height: 100%;
+    max-height: 700px;
+    min-height: 400px;
+}
+
+.heading-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 25pt;
+    font-weight: 800;
+    color: rgb(40, 55, 99);
+}
+
+.page-subheading {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 20px;
+    color: rgb(70, 180, 240);
+}
+
+footer {
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    grid-area: footer;
+}
+
+.nav-item {
+    font-weight: bold;
+}
+
+@media (min-width: 550px) {
+    #main-content-card {
+        max-width: 500px;
+    }
+}

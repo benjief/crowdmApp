@@ -1,0 +1,145 @@
+
+.container {
+    display: grid;
+    grid-template-areas: 
+        "page-heading"
+        "content-card"
+        "footer"; 
+}
+
+.heading-container {
+    display: grid !important;
+}
+
+.page-subheading {
+    justify-self: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "info-burnaby"
+        "info-downtown"
+        "info-richmond";
+    grid-area: content-card;
+}
+
+.store-info-container {
+    display: grid;
+    grid-template-columns: 40% 35% 25%;
+    grid-template-rows: 30px 45px;
+    grid-template-areas: 
+        "update-time update-time ."
+        "store-name current-headcount previous-headcount";
+    width: 95%;
+    font-size: 10pt;
+    margin-bottom: 13px;
+    background-color: rgb(238, 238, 238);
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 10px;
+}
+
+#info-burnaby {
+    margin-top: 13px;
+    grid-area: info-burnaby;
+}
+
+#info-downtown {
+    grid-area: info-downtown;
+}
+
+#info-richmond {
+    grid-area: info-richmond;
+}
+
+.store-name-container {
+    display: flex;
+    grid-area: store-name;
+    justify-content: flex-start;
+    margin-left: 10%;
+    font-weight: 700;
+}
+
+.store-name-container a {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.headcount-ticker-container div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.headcount-ticker-container {
+    display: flex;
+    grid-area: current-headcount;
+    justify-content: flex-start;
+    font-weight: 700;
+    margin-left: 7px;
+}
+
+.ticker {
+    display: flex;
+    height: 25px;
+    width: auto;
+    position: relative;
+    margin-left: 2px;
+    align-items: center;
+    top: 6px;
+}
+
+.previous-headcount-container {
+    display: flex;
+    grid-area: previous-headcount;
+    top: 2px;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+
+.previous-headcount-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-size: 9pt;
+}
+
+.update-time-container {
+    display: flex;
+    justify-content: flex-start;
+    grid-area: update-time;
+    height: 100%;
+    font-size: 9pt;
+    margin-left: 5%;
+}
+
+.update-time-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+@media (min-width: 550px) {
+    .store-info-container {
+        font-size: 13pt;
+    }
+
+    .previous-headcount-container p {
+        font-size: 10pt;
+    }
+    
+    .update-time-container {
+        font-size: 10pt;
+    }
+
+    .ticker {
+        height: 30px;
+        top: 2px;
+    }
+}

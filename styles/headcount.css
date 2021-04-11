@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /******** employee_headcount.html ********/
 .headcount_button {
     font-size: 20px;
@@ -43,4 +44,119 @@
         "feedback feedback"
         "footer footer";
     justify-items: center;
+=======
+.container {
+    display: grid;
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+.heading-container {
+    display: grid;
+    grid-area: heading;
+    text-align: center;
+}
+
+.page-heading { 
+    justify-self: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas:
+        "location-selector"
+        "headcount-tally"
+        "headcount-adjustment"
+        "feedback";
+    grid-area: content-card;
+}
+
+.mb-3 {
+    grid-area: location-selector;
+    margin-top: 17px;
+    width: 90%;
+    justify-self: center;
+}
+
+#headcount-tally {
+    grid-area: headcount-tally;
+}
+
+.headcount-button {
+    font-size: 17pt;
+    width: 90%;
+    height: 150px;
+}
+
+.headcount-button:active {
+    font-weight: 700;
+}
+
+#button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "increase-headcount decrease-headcount"
+        "update-headcount update-headcount"
+        "footer footer";
+    justify-items: center;
+    grid-area: headcount-adjustment;
+}
+
+#increase-headcount {
+    grid-area: increase-headcount;
+    color: rgb(40, 55, 99);
+    background-color: rgb(238, 238, 238);
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px rgb(226, 226, 226);
+}
+
+#decrease-headcount {
+    grid-area: decrease-headcount;
+    color: rgb(40, 55, 99);
+    background-color: rgb(238, 238, 238);
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px rgb(226, 226, 226);
+}
+
+.supersize {
+    font-size: 55px;
+    color: rgb(40, 55, 99);;
+}
+
+#update-headcount {
+    grid-area: update-headcount;
+    width: 180px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#feedback-placeholder {
+    display: flex;
+    grid-area: feedback;
+    height: 40px;
+    font-weight: 700;
+    justify-content: center;
+}
+
+@media (max-width: 550px) {
+    #feedback-placeholder {
+        display: flex;
+        grid-area: feedback;
+        height: 60px;
+        font-weight: 700;
+        justify-content: center;
+    }
+}
+
+#feeback {
+    display: flex;
+    height: 100%;
+    align-items: center;
+>>>>>>> 9eb073c37641dc5c81e645c79d8875f61c9e64c6
 }

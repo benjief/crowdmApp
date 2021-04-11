@@ -4,21 +4,23 @@ function getStoreDetails(store, headcount, lastUpdate) {
         .onSnapshot((doc) => {
             // Store name, headcount and last update information
             jQuery('<p/>', {
-                id: "store-name",
-                html: "Costco " + store + "<br/>" + headcount + "<br/>" + lastUpdate
-            }).prependTo('.store-name-container');
+                class: "page-heading",
+                html: "Costco " + store
+            }).prependTo('.heading-container');
+            jQuery('<p/>', {
+                class: "page-subheading",
+                html: headcount + "<br/>" + lastUpdate
+            }).appendTo('.heading-container');
             // Embedded map
             jQuery('<iframe/>', {
                 src: "https://www.google.com/maps?q=" + doc.data().Address + "&output=embed",
-                width: "300",
-                height: "300",
                 allowfullscreen: "",
                 loading: "lazy"
-            }).prependTo('.content-container');
+            }).prependTo('.map');
             // Store address, hours and phone number
             jQuery('<p/>', {
                 id: "store-address",
-                html: doc.data().Address + "<br/>" + doc.data().Hours + "<br/>" + doc.data().Phone_Number
+                html: doc.data().Address + "<br/>Store Hours: " + doc.data().Hours + "<br/>Store Phone: " + doc.data().Phone_Number
             }).appendTo('.store-info-container');
         });
 }

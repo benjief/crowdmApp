@@ -1,0 +1,148 @@
+.container {
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+.heading-container {
+    text-align: center;
+    grid-area: heading;
+}
+
+.page-heading {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "card-text"
+        "location-select"
+        "safety-question"
+        "star-rating"
+        "comments"
+        "chars-remaining"
+        "submit"
+        "feedback";
+    grid-area: content-card;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-text-container {
+    display: flex;
+    grid-area: card-text;
+    text-align: justify;
+    justify-self: center;
+    width: 80%;
+    margin-top: 15px;
+}
+
+.card-text {
+    display: flex;
+}
+
+.mb-3 {
+    grid-area: location-select;
+    width: 80%;
+    justify-self: center;
+    margin-top: 15px;
+}
+
+#question-container {
+    display: flex;
+    grid-area: safety-question;
+    width: 80%;
+    justify-self: center;
+    justify-content: center;
+}
+
+#question {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: rgb(40, 55, 99);
+}
+
+.star-container {
+    display: flex;
+    grid-area: star-rating;
+    width: 80%;
+    justify-self: center;
+    justify-content: center;
+}
+
+.br-theme-fontawesome-stars {
+    display: flex;
+    height: 100%;
+    position: relative;
+    top: 4px;
+}
+
+#star-rating {
+    max-width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    grid-area: comments;
+    width: 80%;
+    justify-self: center;
+    margin-top: 10px;
+}
+
+.form-label {
+    text-align: center;
+    color: rgb(40, 55, 99);
+}
+
+.characters-remaining {
+    display: flex;
+    grid-area: chars-remaining;
+    justify-self: center;
+}
+
+.characters-remaining p {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-right: 5px;
+}
+
+#counter {
+    background-color: white;
+    width: 30px;
+}
+
+input {
+    border: none;
+    color: rgb(40, 55, 99);
+}
+
+#submit-button {
+    grid-area: submit;
+    margin-top: 10px;
+}
+
+.feedback-placeholder {
+    display: flex;
+    grid-area: feedback;
+    height: 50px;
+    justify-content: center;
+}
+
+#feedback {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    font-weight: 700;
+}

@@ -24,7 +24,7 @@ var uiConfig = {
                     .then(function () {
                         console.log("New user added to firestore");
                         window.location.assign(
-                            "../member/main.html"); //re-direct to main.html after signup
+                            "/web//member/main.html"); //re-direct to main.html after signup
                     })
                     .catch(function (error) {
                         console.log("Error adding new user: " + error);
@@ -34,11 +34,6 @@ var uiConfig = {
             }
             return false;
         },
-        uiShown: function () {
-            // The widget is rendered.
-            // Hide the loader.
-            document.getElementById('loader').style.display = 'none';
-        }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',

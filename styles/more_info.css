@@ -1,0 +1,49 @@
+.container {
+    grid-template-areas:
+        "heading"
+        "content-card"
+        "footer";
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "dropdown-menu"
+        "image-carousel";
+    grid-area: content-card;
+}
+
+#accordionFlushExample {
+    grid-area: dropdown-menu;
+    text-align: justify;
+}
+
+.collapsed {
+    font-weight: 700;
+    font-size: 11pt;
+}
+
+.accordion-body {
+    font-size: 10t;
+}
+
+.slide {
+    grid-area: image-carousel;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.carousel-indicators {
+    display: hide;
+}
+
+@media (min-width: 550px) {
+    .collapsed {
+        font-size: 13pt;
+    }
+    .accordion-body {
+        font-size: 12pt;
+    }
+}
+
+

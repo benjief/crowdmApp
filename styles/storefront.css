@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
     --star-size: 25px;
     --star-color: #fff;
@@ -47,4 +48,87 @@ iframe {
     row-gap: 20px;
     width: 50%;
     justify-self: center;
+=======
+.container {
+    display: grid;
+    grid-template-areas: 
+        "heading"
+        "content-card"
+        "footer";
+}
+
+.heading-container {
+    display: grid !important;
+    grid-area: heading;
+}
+
+.page-heading {
+    text-align: center;
+    justify-self: center;
+}
+
+.main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "map"
+        "store-info"
+        "buttons";
+    grid-area: content-card;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    grid-area: map;
+    margin-bottom: 20px;
+}
+
+iframe {
+    border: 1px solid rgb(231, 231, 231);
+    overflow: hidden;
+    border-radius: 5px;
+    width: 80%;
+    height: 250px;
+    margin-top: 20px;
+}
+
+.store-info-container {
+    grid-area: store-info;
+    text-align: center;
+}
+
+.store-name-container p, .store-info-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    grid-area: buttons;
+    display: grid;
+    row-gap: 10px;
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+.button-container a {
+    width: 220px;
+}
+
+footer {
+    grid-area: footer;
+    width: 100%;
+    text-align: center;
+}
+
+@media (min-width: 550px) {
+    iframe {
+        height: 400px;
+    }
+
+    .store-name-container p, .store-info-container p {
+        font-size: 15pt;
+    }
+>>>>>>> 9eb073c37641dc5c81e645c79d8875f61c9e64c6
 }

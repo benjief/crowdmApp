@@ -1,0 +1,61 @@
+/********* index.html *********/
+.container {
+    grid-template-areas: 
+        "heading"
+        "buttons"
+        "content-card"
+        "footer";
+}
+
+.button-container {
+    grid-area: buttons;
+}
+
+#member-login-button, #employee-login-button {
+    width: 210px;
+}
+
+#main-content-card {
+    display: grid;
+    grid-template-areas: 
+        "costco-image"
+        "card-text";
+    grid-area: content-card;
+    width: 100%;
+    height: 100%;
+    justify-self: center;
+    margin-top: 22px;
+}
+
+#main-content-card img {
+    grid-area: costco-image;
+    width: 100%;
+}
+
+
+.card-body {
+    display: grid;
+    grid-area: card-text;
+    margin-bottom: 13px;
+}
+
+.card-title {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-text {
+    display: flex;
+    height: 100%;
+    text-align: justify;
+}
+
+#more-info-button {
+    width: 100px;
+}
+
+footer {
+    margin-top: 70px;
+}
