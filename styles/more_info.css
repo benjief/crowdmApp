@@ -13,7 +13,7 @@
     grid-area: content-card;
 }
 
-#dropdown-menu {
+#accordionFlushExample {
     grid-area: dropdown-menu;
     text-align: justify;
 }
