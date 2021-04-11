@@ -80,7 +80,7 @@ function getReviews(store) {
             if (masterArray.length > defaultReviewsPosted) {
                 console.log(masterArray.length);
                 var buttonContainer = "<div class='button-container'></div>"
-                $(".review-container").append(buttonContainer);
+                $("#main-content-card").append(buttonContainer);
                 var loadMoreButton = "<button id='load-more-button' class='btn btn-primary button-main'" +
                     "onclick='loadAllReviews()'>Load More</button>";
                 $(".button-container").append(loadMoreButton);
@@ -90,7 +90,7 @@ function getReviews(store) {
 
 function loadAllReviews() {
     postReviews(defaultReviewsPosted, masterArray.length)
-    $("#load-more-button").css({ display: "none" });
+    $(".button-container").css({ display: "none" });
 }
 
 // Get, update and post average ratings for all stores
