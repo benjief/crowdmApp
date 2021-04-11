@@ -36,7 +36,7 @@ function getRating(starRating) {
 
 // Make sure a store has been selected
 function checkSelection() {
-    if (!store || store === "invalid") {
+    if (!store || store === "Costco_invalid") {
         feedback.innerHTML = "Please select a valid Costco location"
         $(feedback).css({
             color: "red"

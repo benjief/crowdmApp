@@ -36,8 +36,9 @@ iframe {
     border: 1px solid rgb(231, 231, 231);
     overflow: hidden;
     border-radius: 5px;
-    width: 100%;
-    height: 200px;
+    width: 80%;
+    height: 250px;
+    margin-top: 20px;
 }
 
 .store-info-container {
@@ -72,7 +73,7 @@ footer {
 
 @media (min-width: 550px) {
     iframe {
-        height: 250px;
+        height: 400px;
     }
 
     .store-name-container p, .store-info-container p {

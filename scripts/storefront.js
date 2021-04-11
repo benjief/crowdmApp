@@ -15,8 +15,7 @@ function getStoreDetails(store, headcount, lastUpdate) {
             jQuery('<iframe/>', {
                 src: "https://www.google.com/maps?q=" + doc.data().Address + "&output=embed",
                 allowfullscreen: "",
-                loading: "lazy",
-                gestureHandling: "greedy"
+                loading: "lazy"
             }).prependTo('.map');
             // Store address, hours and phone number
             jQuery('<p/>', {

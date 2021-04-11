@@ -168,8 +168,9 @@ function updateHeadcount(store) {
 
 // Write an update to the correct store and day in Firestore; note that the latest update is stored in a separate collection ("Latest_Update")
 function onClickUpdate() {
+    console.log(store);
     // If a store hasn't been selected, display an error message
-    if (!store || store === "invalid") {
+    if (!store || store === "Costco_invalid") {
         displayInvalidFeedback();
     } else {
         // Get day at time of click
