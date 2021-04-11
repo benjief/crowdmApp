@@ -132,7 +132,7 @@ function replaceLatestUpdate(store, timestamp) {
 function storeUpdate(store, timestamp) {
     db.collection("Stores").doc(store).collection(currentWeekday)
         .add({
-            Current_Headount: headcount,
+            Current_Headcount: headcount,
             Date_Time: timestamp,
             Updater_Name: currentUser,
             Updater_Email: currentUserEmail,
