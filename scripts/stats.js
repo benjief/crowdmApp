@@ -113,17 +113,12 @@ function getUpdateInfo(store, currentDay) {
     db.collection("Stores").doc("Costco_" + store).collection(currentDay)
         // .where("Current_Headcount", "!=", null)
         .onSnapshot((querySnapshot) => {
-            if (querySnapshot.empty) {
-                console.log("empty");
-            }
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
                 if (doc.data().Date_Time) {
                     var time = doc.data().Date_Time.toDate().getHours();
                 }
                 var headcount = doc.data().Current_Headcount;
                 var updateInfo = { "hour": time, "headcount": headcount };
-                console.log(updateInfo);
                 addToMasterArray(updateInfo);
             });
             calculateHourlyAverages();
@@ -139,10 +134,8 @@ function moveDayBack() {
         currentDay = weekdays[weekdays.indexOf(currentDay) - 1];
     }
     document.getElementById("current-day").innerHTML = currentDay;
-    console.log(currentDay);
     resetArrays();
     getUpdateInfo(store, currentDay);
-    console.log(masterArray);
 }
 
 function moveDayForward() {
@@ -161,6 +154,4 @@ function moveDayForward() {
 $(document).ready(function () {
     writeStoreName(store);
     getUpdateInfo(store, currentDay);
-    console.log(masterArray);
-    console.log(hourlyAverages);
 });

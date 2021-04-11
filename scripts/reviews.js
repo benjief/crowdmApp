@@ -84,6 +84,7 @@ function getReviews(store) {
                 var loadMoreButton = "<button id='load-more-button' class='btn btn-primary button-main'" +
                     "onclick='loadAllReviews()'>Load More</button>";
                 $(".button-container").append(loadMoreButton);
+                $(".review-container").css( {marginBottom: "10px"});
             }
         });
 }
