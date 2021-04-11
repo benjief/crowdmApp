@@ -53,7 +53,9 @@
 }
 
 .stars::before {
+    /* These don't show up on iPhone */
     content: '🟊🟊🟊🟊🟊';
+    /* content: '★★★★★'; */
     letter-spacing: -2px;
     background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
     background-clip: unset;
@@ -115,7 +117,7 @@
     display: flex;
     height: 100%;
     align-items: center;
-    font-size: 15pt;
+    font-size: 14pt;
     --percent: calc(var(--rating) / 5 * 100%);
     margin-left: 5px;
 }
