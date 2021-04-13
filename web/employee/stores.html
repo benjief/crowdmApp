@@ -24,15 +24,17 @@
     <nav class="navbar navbar-expand-lg center-text">
         <div class="container-fluid">
             <a class="navbar-brand" href="main.html">crowdmApp</a>
-            <button class="navbar-toggler navbar-dark hamburger" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler navbar-dark hamburger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="link-nav" href="main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="link-nav" href="stores.html">Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="link-nav" href="headcount.html">Headcount</a>
@@ -105,7 +107,7 @@
         </div>
 
         <footer>
-            <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+            <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" href="#" onclick="GoBackWithRefresh();return false;"></a>
             <p id="back-button-text">Back</p>
             <p id="trademark">&#169; 2021 crowdmApp</p>
         </footer>
@@ -130,6 +132,7 @@
     <!--------------------------------------------------------------------->
     <script src="/scripts/stores.js"></script>
     <script src="/scripts/logout.js"></script>
+    <script src="/scripts/back.js"></script>
 
 </body>
 

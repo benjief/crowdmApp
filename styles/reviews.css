@@ -53,7 +53,7 @@
 }
 
 .stars::before {
-    /* These don't show up on iPhone */
+    /* These don't show up on Apple */
     content: '🟊🟊🟊🟊🟊';
     /* content: '★★★★★'; */
     letter-spacing: -2px;
@@ -74,7 +74,7 @@
     grid-area: reviews;
     width: 95%;
     justify-self: center;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
     row-gap: 20px;
 }
 
