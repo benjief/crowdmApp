@@ -24,7 +24,16 @@ function addToMasterArray(reviewInfo) {
 function eraseInfoFromDom() {
     var reviewData = document.getElementsByClassName('review');
     while (reviewData[0]) {
+        masterArray = [];
         reviewData[0].parentNode.removeChild(reviewData[0]);
+    }
+}
+
+// Erase the "Load More" button from the DOM if it exists
+function eraseButtonFromDom() {
+    var button = document.getElementsByClassName('button-main');
+    while (button[0]) {
+        button[0].parentNode.removeChild(button[0]);
     }
 }
 
@@ -63,6 +72,8 @@ function getReviews(store) {
         .onSnapshot((querySnapshot) => {
             // Get information for each review and push to the ratings array
             querySnapshot.forEach((doc) => {
+                // Clear existing reviews before posting
+                eraseInfoFromDom();
                 var name = doc.data().Reviewer_Name;
                 var rating = doc.data().Reviewer_Rating;
                 var date = doc.data().Date_Time.toDate().toDateString();
@@ -72,19 +83,19 @@ function getReviews(store) {
                 addToMasterArray(reviewInfo);
             });
             console.log(masterArray);
-            // Clear existing reviews before posting
-            eraseInfoFromDom();
+            // Specify a default number of reviews to display
             defaultReviewsPosted = Math.min(masterArray.length, 3);
             postReviews(0, defaultReviewsPosted);
             // Append a "Load More" button to the DOM if at least four reviews have been posted
             if (masterArray.length > defaultReviewsPosted) {
-                console.log(masterArray.length);
+                // Erase button if it already exists
+                eraseButtonFromDom();
                 var buttonContainer = "<div class='button-container'></div>"
                 $("#main-content-card").append(buttonContainer);
                 var loadMoreButton = "<button id='load-more-button' class='btn btn-primary button-main'" +
                     "onclick='loadAllReviews()'>Load More</button>";
                 $(".button-container").append(loadMoreButton);
-                $(".review-container").css( {marginBottom: "10px"});
+                $(".review-container").css({ marginBottom: "10px" });
             }
         });
 }

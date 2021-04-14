@@ -35,6 +35,10 @@
 
 #headcount-tally {
     grid-area: headcount-tally;
+    font-size: 20pt;
+    color: rgb(70, 180, 240);
+    font-weight: 700;
+
 }
 
 .headcount-button {
