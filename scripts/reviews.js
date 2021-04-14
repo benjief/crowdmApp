@@ -31,7 +31,7 @@ function eraseInfoFromDom() {
 
 // Erase the "Load More" button from the DOM if it exists
 function eraseButtonFromDom() {
-    var button = document.getElementsByClassName('button-main');
+    var button = document.getElementsByClassName('button-container');
     while (button[0]) {
         button[0].parentNode.removeChild(button[0]);
     }
