@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CrowdmApp - Downtown Store</title>
+    <meta name="store" content="downtown">
+    <meta name="author" content="team 11">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Optional styles and scripts of your own -->
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+    <link rel="stylesheet" href="/styles/store.css">
+</head>
+
+<body class="center-text">
+    <nav class="navbar navbar-expand-lg navbar-dark center-text">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="main.html">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stores_main.html">Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="feedback.html">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <img id="storefront" src="/images/store_downtown_storefront.png" alt="storefront">
+        <ul id="store_details">
+            <li>
+                <h1 class="center-text store-name">Costco Vancouver</h1>
+            </li>
+            <li>
+                <a id="address" href="../member/map_downtown.html">605 Expo Blvd, Vancouver, BC V6B 1V4 <img class="copy" src="/images/copy.png" alt="copy"
+                        onclick="copyToClipboard('#p1')"></a>
+                <p id="p1" style="display: none;">605 Expo Blvd, Vancouver, BC V6B 1V4</p>
+            </li>
+            <li>
+                <p>Hours: 9:00 AM - 8:30 PM</p>
+            </li>
+            <li>
+                <p>(604) 622-5050 <img class="copy" src="/images/copy.png" alt="copy" onclick="copyToClipboard('#p2')">
+                </p>
+                <p id="p2" style="display: none;">+16046225050</p>
+            </li>
+        </ul>
+        <a class="btn btn-primary button-main" href="reviews_downtown.html" role="button">See Reviews</a></br></br>
+        <a class="btn btn-primary button-main" href="stats_downtown.html" role="button">View Historial
+            Statistics</a>
+        <a class="list-group-item list-group-item-action active center-text" aria-current="true"
+            style="background-color: white; color: black; border: 1px solid white;">
+            <p>Last update: <span id="update_time_downtown"></span></p>
+
+            <p>Current Occupancy: <span id="headcount_downtown"></span> / 300</p>
+        </a>
+
+        <footer>
+            <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+            <p>Back</p>
+            <p id="trademark">&#169; 2021 crowdmApp</p>
+        </footer>
+    </div>
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, JQuery, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="/jquery_plugins/jquery-bar-rating/dist/jquery.barrating.min.js"></script>
+
+    <!-- Link to the api keys for your firebase project -->
+    <script src="/scripts/firebase_api_crowdmapp.js"></script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script src="/scripts/store_main.js"></script>
+
+</body>
+
+</html>
