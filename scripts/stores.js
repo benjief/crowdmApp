@@ -1,8 +1,12 @@
 // JS for stores.html
 
+/* This code loops over each store, since we need to display info for all three locations
+   This array is used to facilitate that looping */
 var stores = ["Burnaby", "Downtown", "Richmond"];
 
-// Read store name from Firestore and populate box headers in DOM
+/* Get store name from Firestore and populate box headers in the DOM
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function updateStoreHeaders(store) {
     db.collection("Stores").doc("Costco_" + store)
         .onSnapshot((doc) => {
@@ -12,7 +16,11 @@ function updateStoreHeaders(store) {
         });
 }
 
-// Read latest update time for each store, and calculate/write it to the screen
+/* Read latest update time for each store, and calculate/write it to the screen. Note that this function
+   seems long because of all the else if statements, but there's just a fair amount of repitition and variable definition
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
+                  */
 function updateLastTimeOfLastUpdate(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Latest_Update").doc("latest")
         .onSnapshot((doc) => {
@@ -63,7 +71,9 @@ function updateLastTimeOfLastUpdate(store) {
         })
 }
 
-// Read real-time headcount data for all stores and write it to the screen
+/* Get real-time headcount data for the current store being looped over from Firestore, and write it to the screen
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function updateHeadcount(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Latest_Update").doc("latest")
         .onSnapshot((doc) => {
@@ -88,7 +98,10 @@ function updateHeadcount(store) {
         });
 }
 
-// Call functions
+/* Call functions when page is ready
+   @param stores[i] - String containing the store's location (e.g. "Burnaby") - taken from an array in order to 
+                      loop over each location. Note that this isn't properly formatted for accessing a Firestore 
+                      collection ("Costco_" needs to be added first) */
 $(document).ready(function () {
     for (var i = 0; i < stores.length; i++) {
         updateStoreHeaders(stores[i]);
@@ -96,5 +109,3 @@ $(document).ready(function () {
         updateLastTimeOfLastUpdate(stores[i]);
     }
 });
-
-

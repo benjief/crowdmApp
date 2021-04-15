@@ -12,12 +12,14 @@ var previousHeadcount;
 // Set up a variable to store feedback to be posted
 var feedback = document.getElementById("feedback");
 
-// Get the selected store name
+/* Get the selected store's Firebase collection name by combining "Costco_"
+   with the store name from the dropdown list (in headcount.html) */
 function getSelectedStore() {
     store = "Costco_" + floatingSelect.value;
 }
 
-// Increase the headcount and tally displayed
+/* Increase the headcount and tally displayed
+   @param x - button used to increment the headcount tally (target is increase-headcount button in headcount.html) */
 function incrementValue(x) {
     ++headcount;
     document.getElementById(x).textContent = "Headcount: " + headcount;
@@ -37,6 +39,7 @@ function incrementValue(x) {
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
+
     // Stops counter when not pressing the button
     function clearTimers() {
         clearTimeout(timeout);
@@ -45,7 +48,8 @@ function incrementValue(x) {
     }
 });
 
-// Decrease the headcount and tally displayed
+/* Decrease the headcount and tally displayed
+   @param y - button used to decrement the headcount tally (target is decrease-headcount button in headcount.html) */
 function decrementValue(y) {
     if (headcount > 0) {
         --headcount;
@@ -67,6 +71,7 @@ function decrementValue(y) {
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
+
     // Stops counter when not pressing the button
     function clearTimers() {
         clearTimeout(timeout);
@@ -97,7 +102,9 @@ function displaySuccessfulFeedback() {
     $(feedback).fadeOut(2500);
 }
 
-// Get the headcount of the next-most-recent update posted
+/* Get (read) the headcount of the next-most-recent update posted from Firestore
+   @param store - String containing the correctly formatted name for the selected store's collection
+                  in Firestore */
 function getPreviousHeadcount(store) {
     var timestamp = firebase.firestore.FieldValue.serverTimestamp(); 
     db.collection("Stores").doc(store).collection("Latest_Update").doc("latest")
@@ -110,7 +117,10 @@ function getPreviousHeadcount(store) {
         });
 }
 
-// Overwrite the next-most-recent update posted
+/* Overwrite the next-most-recent update posted in Firestore (so that this update becomes the latest one)
+   @param store - String containing the correctly formatted name for the selected store's collection
+                  in Firestore
+   @param timestamp - timestamp containing the date and time of the most recent update (to be written) */
 function replaceLatestUpdate(store, timestamp) {
     db.collection("Stores").doc(store).collection("Latest_Update").doc("latest")
         .set({
@@ -130,7 +140,10 @@ function replaceLatestUpdate(store, timestamp) {
         });
 }
 
-// Store the update in the correct weekday collection of the selected store
+/* Store the update in the correct weekday collection of the selected store, in addition to the "Latest_Update" collection
+   @param store - String containing the correctly formatted name for the selected store's collection
+                  in Firestore
+   @param timestamp - timestamp containing the date and time of the most recent update (to be written) */
 function storeUpdate(store, timestamp) {
     db.collection("Stores").doc(store).collection(currentWeekday)
         .add({
@@ -147,28 +160,30 @@ function storeUpdate(store, timestamp) {
         });
 }
 
-// Get the current weekday
+// Get the current weekday using a JS date object created when the headcount is submitted
 function getWeekday() {
     var currentDate = new Date();
     currentWeekday = weekdays[currentDate.getDay()];
 }
 
 
-// Update the headcount
+/* Update the headcount in Firestore
+   @param store - String containing the correctly formatted name for the selected store's collection
+                  in Firestore */
+
 function updateHeadcount(store) {
     // Get current user's name
     currentUser = firebase.auth().currentUser.displayName;
     // Get current user's email
     currentUserEmail = firebase.auth().currentUser.email;
-    // Get timestamp at time of click
-    var timestamp = firebase.firestore.FieldValue.serverTimestamp();
     /* Get headcount of previous update - note that the document "latest" in each store's "Latest_Update"
        collection must be present and have an attribute called "Current_Headcount" with a value of 0 before
        updates can start being posted. */
     getPreviousHeadcount(store);
 }
 
-// Write an update to the correct store and day in Firestore; note that the latest update is stored in a separate collection ("Latest_Update")
+/* Write an update to the correct store and day in Firestore; note that the latest update is stored in a separate 
+   collection ("Latest_Update") */
 function onClickUpdate() {
     console.log(store);
     // If a store hasn't been selected, display an error message

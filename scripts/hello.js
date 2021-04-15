@@ -1,5 +1,7 @@
 // JS for personalized greetings (main.html, feedback.html)
 
+/* Get the current user's name from Firestore and use it to create personalized greetings
+   on main.html (for all users) and feedback.html (for members) */
 function sayHello() {
     firebase.auth().onAuthStateChanged(function (somebody) {
         if (somebody) {

@@ -5,6 +5,9 @@ var masterArray = [];
 // Default number of reviews posted upon page loading (<= 3)
 var defaultReviewsPosted;
 
+/* Set up the store page display with the store name and image
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function pageSetUp(store) {
     // Add store name to top of page
     var heading = "<p class='page-heading'></p>";
@@ -15,12 +18,13 @@ function pageSetUp(store) {
     $("#main-content-card").append(storeImage);
 }
 
-// Add JSON object to master array containing all reviews
+/* Add JSON object to master array containing all reviews
+   @param reviewInfo - JSON object containing key : value pairs pertaining to review attributes */
 function addToMasterArray(reviewInfo) {
     masterArray.push(reviewInfo);
 }
 
-// Erase reviews from the DOM if they exist
+// Erase reviews from the DOM if they exist (prevents multiple copies of reviews from accumulating upon update/refresh)
 function eraseInfoFromDom() {
     var reviewData = document.getElementsByClassName('review');
     while (reviewData[0]) {
@@ -29,7 +33,7 @@ function eraseInfoFromDom() {
     }
 }
 
-// Erase the "Load More" button from the DOM if it exists
+// Erase the "Load More" button from the DOM if it exists (prevents multiple buttons from accumulating upon update/refresh)
 function eraseButtonFromDom() {
     var button = document.getElementsByClassName('button-container');
     while (button[0]) {
@@ -37,9 +41,12 @@ function eraseButtonFromDom() {
     }
 }
 
-// Add reviews to the DOM
+/* Add reviews to the DOM once they've been pulled from the Firestore Reviews collection of the correct store
+   (note that store information comes from a URL query string, based on what the user has clicked on to get to this page)
+   @param start - int containing the index (of the array containing reviews) to start appending reviews from 
+   @param end - int containing the index to stop appending reviews at */
 function postReviews(start, end) {
-    // Append a message if no reviews have been posted
+    // Append a message to the DOM if no reviews have been posted
     if (!masterArray[0]) {
         var i = 0;
         var review = "<div class='review' id='review-" + i.toString()
@@ -49,6 +56,7 @@ function postReviews(start, end) {
         $("#review-" + i.toString()).append("<div class='review-name-rating-date' id='review-name-rating-date-" + i.toString() + "'></div>");
         $("#review-name-rating-date-" + i.toString()).append("<div class='review-name-rating' id='review-name-rating-" + i.toString() + "'></div>");
         $("#review-name-rating-" + i.toString()).append("<p id='reviewer-name'>No reviews have been posted!</p>");
+      // Append reviews to the DOM if at least one exists
     } else {
         for (var i = start; i < end; i++) {
             var review = "<div class='review' id='review-" + i.toString()
@@ -65,7 +73,9 @@ function postReviews(start, end) {
     }
 }
 
-// Read review data from Firestore and write it to the screen (most recent reviews first)
+/* Get review data from Firestore and write it to the screen (ordered by review timestamp - more recent reviews appear first)
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function getReviews(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Reviews")
         .orderBy("Date_Time", "desc")
@@ -100,12 +110,16 @@ function getReviews(store) {
         });
 }
 
+/* Loads all reviews by calling postReviews starting at index 3 (the default amount posted) and
+   ending at the last index of the reviews array */
 function loadAllReviews() {
     postReviews(defaultReviewsPosted, masterArray.length)
     $("#load-more-button").css({ display: "none" });
 }
 
-// Get, update and post average ratings for all stores
+/* Get (from Firestore), update and post average ratings for the correct location (again, pulled from a url query string)
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function updateRating(store) {
     db.collection("Stores").doc("Costco_" + store).collection("Reviews")
         .where("Reviewer_Rating", "!=", "null")
@@ -119,25 +133,29 @@ function updateRating(store) {
             for (var j = 0; j < ratings.length; j++) {
                 sum += ratings[j];
             }
-            console.log(ratings);
             var avgRating;
             if (ratings[0]) {
+                // If ratings exist, average them
                 avgRating = sum / ratings.length;
+              // If no ratings exist, the average rating is set to 0
             } else {
                 avgRating = 0;
             }
+            // If no ratings have yet been submitted, post "-/5" (0/5 seems misleading)
             if (avgRating == 0) {
                 document.getElementById("current-rating").innerHTML = "Average Rating: -/5";
+              // If an average rating exists, post it
             } else {
                 document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
                     .toFixed(1) + "/5";
             }
-
             $("#current-rating").attr("class", "card-text");
         });
 }
 
-// Call functions
+/* Call functions when the page is ready 
+      @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                     properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */ 
 $(document).ready(function () {
     const parsedUrl = new URL(window.location.href);
     var store = parsedUrl.searchParams.get("store");
