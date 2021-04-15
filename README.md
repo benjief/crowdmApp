@@ -5,39 +5,39 @@
 * [Contents](#content)
 
 ## General Info
-This browser based web application to ...
+This browser based web application shows you real-time occupancy data for Costco stores
 	
 ## Technologies
 Technologies used for this project:
 * HTML, CSS
 * JavaScript
 * Bootstrap 
-* ...
+* Jquery
 	
 ## Content
-Content of the project folder:
-
-```
  Top level of project folder: 
 ├── .gitignore                     # Git ignore file
-└── README.md
+├── .vs                            # Folder for 
+├── .vscode                        # Folder for the live server settings port
+├── jquery_plugins                 # Folder for plugins like the jquery star-rating feature
+└── README.md                      # README file
 
 It has the following subfolders and files:
 ├── .git                           # Folder for git repo
 ├── web                            # Folder for folders with coded files
-    └── employee                   # Employee authorized pages
+    ├── employee                   # Folder for employee authorized pages
         /headcount.html            # Headcount updater
         /main.html                 # Main page for employees
         /reviews.html              # Reviews
         /stats.html                # Stats
         /storefront.html           # Storefront page for all stores
         /stores.html               # Store list
-    └── home                       # All of the unauthorized pages
+    ├── home                       # Folder for all of the unauthorized pages
         /index.html                # Landing HTML file, this is what users see when you come to url
         /employee-login.html       # Employee login page
         /member-login.html         # Member login page
         /more-info.html            # Costco covid-related information
-    └── member                     # Costco member authorized pages
+    ├── member                     # Folder for costco member authorized pages
         /feedback.html             # Feedback form
         /main.html                 # Main page for members
         /reviews.html              # Reviews
@@ -59,7 +59,6 @@ It has the following subfolders and files:
     /store_richmond_storefront.png # Picture used for the storefront page
     /up_arrow.png                  # Icon used for headcount changes
 ├── scripts                        # Folder for scripts
-    └── outdated-scripts           # Folder for unused or obsolete files
     /back.js                       # Back feature to return to the page you've last visited
     /employee-login.js             # Employee login
     /feedback.js                   # Feedback form that sends data to Cloud Firestore
@@ -72,8 +71,8 @@ It has the following subfolders and files:
     /stats.js                      # Statistics
     /storefront.js                 # Storefronts for all locations
     /stores.js                     # Takes headcount data from Cloud Firestore
-├── styles                         # 
     └── outdated-scripts           # Folder for unused or obsolete files
+├── styles                         # Folder for stylesheets
     /all-pages.css                 # Styles every page
     /employee-login.css            # Styles specifically for 
     /employee-main.css             # Styles specifically for 
@@ -87,13 +86,11 @@ It has the following subfolders and files:
     /stats.css                     # Styles specifically for 
     /storefront.css                # Styles specifically for 
     /stores.css                    # Styles specifically for 
-Firebase hosting files: 
-├── .firebaserc...
-
-
-```
-
-Tips for file naming files and folders:
-* use lowercase with no spaces
-* use dashes (not underscore) for word separation
-
+    └── outdated-scripts           # Folder for unused or obsolete files
+Firebase hosting files:               
+├── .firebase                      #
+├── .firebase.json                 #
+├── .firebaserc                    #
+├── firestore.rules                #
+├── storage.rules                  #
+└── firestore.indexes.json         #
