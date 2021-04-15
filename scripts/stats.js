@@ -165,7 +165,6 @@ function moveDayForward() {
       @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
                      properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
       @param currentDay - String containing the name of the current weekday (e.g. "Friday") */
-      
 $(document).ready(function () {
     writeStoreName(store);
     getUpdateInfo(store, currentDay);
