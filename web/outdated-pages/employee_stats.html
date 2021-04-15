@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My BCIT Project</title>
+    <meta name="comp1800 boilerplate code" content="my bcit project">
+    <meta name="author" content="BCIT">
+
+    <!-- Bootstrap for Mobile-first, and JQuery -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Optional styles and scripts of your own -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="/styles/stylesheet.css">
+
+    <style>
+        body {
+            width: 100%;
+        }
+
+        p a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 25pt;
+            color: #00bae8;
+        }
+
+        #day_selector {
+            grid-area: day_selector;
+            font-size: 17pt;
+        }
+
+        #content_wrap {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: 80px calc(80vh - 150px);
+            grid-template-areas:
+                "day_selector"
+                "graph";
+            position: relative;
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        #graph_wrap {
+            grid-area: graph;
+            position: relative;
+            left: 0px;
+            padding-bottom: 80%;
+            height: 0;
+            overflow: hidden;
+            margin-left: 2%;
+            margin-right: 2%;
+        }
+
+        #graph {
+            position: absolute;
+            top: 0;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success center-text">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="employee-main.html">crowdmApp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="employee-main.html">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="employee-stats.html">Stats</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="stores-main.html">Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="employee-headcount.html">Headcount</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../home/index.html">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="content_wrap">
+        <p id="day_selector"><a href="#">&lt;&nbsp;&nbsp;</a>Monday<a
+                href="#">&nbsp;&nbsp;&gt;</a></p>
+        <div id="graph_wrap">
+            <div id="graph"></div>
+        </div>
+    </div>
+    <footer>
+        <a><img id="back_button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
+        <p>Back</p>
+        <p id="trademark">&#169; 2021 crowdmApp</p>
+    </footer>
+    
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related    -->
+    <!----------------------------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <script src="scripts/firebase-api-crowdmapp.js"> </script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+    <script>
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth()); 
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- jQuery Mobile -->
+    <!-- <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script> -->
+    <!-- Bar Chart -->
+    <script>
+        google.load("visualization", "1", {
+            packages: ["corechart"]
+        });
+        google.setOnLoadCallback(drawVisualization);
+
+        $(window).on("throttledresize", function (event) {
+            drawVisualization();
+        });
+
+        function drawVisualization() {
+
+            var options = {
+                title: "",
+                width: '100%',
+                height: '100%',
+                axisTitlesPosition: 'in',
+                'isStacked': true,
+                // pieSliceText: 'percentage',
+                colors: ['#f97263'],
+                chartArea: {
+                    left: "10%",
+                    top: "3%",
+                    height: "80%",
+                    width: "100%"
+                },
+                vAxis: {
+                    title: "",
+                    textStyle: {
+                        bold: true
+                    }
+                },
+                hAxis: {
+                    title: "Crowdedness",
+                    viewWindowMode: 'explicit',
+                    viewWindow: {           // eventually, want to set these to store capacities
+                        max: 300,
+                        min: 0
+                    }
+                },
+                annotations: {
+                    stem: {
+                        length:5
+                    }
+                },
+                bar: {
+                    groupWidth: "40%"
+                },
+                legend: {
+                    position: "none"
+                }
+            };
+
+            // Create and populate the data table.
+            var data = google.visualization.arrayToDataTable([
+                ['Time', 'Crowdedness'],
+                ['8AM', 37],
+                ['9AM', 55],
+                ['10AM', 111],
+                ['11AM', 207],
+                ['12PM', 253],
+                ['1PM', 201],
+                ['2PM', 65],
+                ['3PM', 76],
+                ['4PM', 52],
+                ['5PM', 48],
+                ['6PM', 31],
+                ['7PM', 27],
+                ['8PM', 16]
+            ]);
+
+            // Create color ranges for crowdedness
+            var ranges = [
+                [0, 80, '#00ad1d'],         // green
+                [81, 200, '#eded00'],       // yellow     
+                [201, 1000, '#ed2700'],     // red
+            ]
+
+            // Column Calculations
+            var view = new google.visualization.DataView(data);
+
+            // Sp
+            view.setColumns([0, 1, {
+                calc: function (dt, row) {
+                    var rowValue = dt.getValue(row, 1);
+                    var color;
+                    ranges.forEach(function (range, index) {
+                        if ((rowValue >= range[0]) && ((rowValue < range[1]) || (range[1] === null))) {
+                            color = range[2];
+                        }
+                    });
+                    return color;
+                },
+                role: 'style',
+                type: 'string',
+            },
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+
+
+            // Create and draw the visualization.
+            new google.visualization.BarChart(document.getElementById('graph')).
+                draw(view, options);
+        }
+        // Hide loading message
+        $.mobile.loadingMessage = false;
+    </script>
+
+</body>
+
+</html>
