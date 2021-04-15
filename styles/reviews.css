@@ -61,7 +61,7 @@
     letter-spacing: -2px;
     background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
     background-clip: unset;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -85,7 +85,7 @@
     flex-direction: column;
     row-gap: 0;
     grid-template-rows: auto;
-    grid-template-areas: 
+    grid-template-areas:
         "review-name-rating-date"
         "review-date"
         "reviewer-comment";
@@ -98,7 +98,7 @@
 .review-name-rating-date {
     display: grid;
     grid-template-rows: repeat(2, 20px);
-    grid-template-areas: 
+    grid-template-areas:
         "review-name-rating"
         "review-date";
     grid-area: review-name-rating-date;

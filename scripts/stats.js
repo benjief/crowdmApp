@@ -82,7 +82,7 @@ function formatTimes() {
         // 09:00
         if (i == 0) {
             formattedHour = "0" + (i + 9) + ":00";
-          // All the rest
+            // All the rest
         } else {
             formattedHour = (i + 9) + ":00";
         }
@@ -126,7 +126,10 @@ function getUpdateInfo(store, currentDay) {
                     var time = doc.data().Date_Time.toDate().getHours();
                 }
                 var headcount = doc.data().Current_Headcount;
-                var updateInfo = { "hour": time, "headcount": headcount };
+                var updateInfo = {
+                    "hour": time,
+                    "headcount": headcount
+                };
                 addToMasterArray(updateInfo);
             });
             calculateHourlyAverages();

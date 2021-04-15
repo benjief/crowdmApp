@@ -1,7 +1,7 @@
 /********* Stylesheet for index.html *********/
 
 .container {
-    grid-template-areas: 
+    grid-template-areas:
         "heading"
         "buttons"
         "content-card"
@@ -12,13 +12,14 @@
     grid-area: buttons;
 }
 
-#member-login-button, #employee-login-button {
+#member-login-button,
+#employee-login-button {
     width: 210px;
 }
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "costco-image"
         "card-text";
     grid-area: content-card;

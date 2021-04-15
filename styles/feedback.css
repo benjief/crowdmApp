@@ -20,7 +20,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "card-text"
         "location-select"
         "safety-question"

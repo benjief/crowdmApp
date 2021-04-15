@@ -14,7 +14,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "card-text"
         "view-stores"
         "update-headcount"
@@ -53,5 +53,3 @@
     grid-area: log-out;
     margin-bottom: 25px;
 }
-
-

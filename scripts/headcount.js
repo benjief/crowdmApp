@@ -34,8 +34,8 @@ function incrementValue(x) {
         timeout = setTimeout(function () {
             interval = setInterval(function () {
                 incrementValue(x);
-            }, 80);                     // Counting speed set in milliseconds
-        }, 600);                        // Hold down delay set in milliseconds
+            }, 80); // Counting speed set in milliseconds
+        }, 600); // Hold down delay set in milliseconds
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
@@ -66,8 +66,8 @@ function decrementValue(y) {
         timeout = setTimeout(function () {
             interval = setInterval(function () {
                 decrementValue(y);
-            }, 80);                 // Counting speed set in milliseconds
-        }, 600);                    // Hold down delay set in milliseconds.
+            }, 80); // Counting speed set in milliseconds
+        }, 600); // Hold down delay set in milliseconds.
     });
     button.addEventListener('mouseup', clearTimers);
     button.addEventListener('mouseleave', clearTimers);
@@ -106,7 +106,7 @@ function displaySuccessfulFeedback() {
    @param store - String containing the correctly formatted name for the selected store's collection
                   in Firestore */
 function getPreviousHeadcount(store) {
-    var timestamp = firebase.firestore.FieldValue.serverTimestamp(); 
+    var timestamp = firebase.firestore.FieldValue.serverTimestamp();
     db.collection("Stores").doc(store).collection("Latest_Update").doc("latest")
         .get().then((doc) => {
             previousHeadcount = doc.data().Current_Headcount;

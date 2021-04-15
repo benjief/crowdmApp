@@ -9,7 +9,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "dropdown-menu"
         "image-carousel";
     grid-area: content-card;
@@ -43,9 +43,8 @@
     .collapsed {
         font-size: 13pt;
     }
+
     .accordion-body {
         font-size: 12pt;
     }
 }
-
-

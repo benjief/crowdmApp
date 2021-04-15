@@ -61,13 +61,13 @@ function updateLastTimeOfLastUpdate(store) {
                 unitOfTime = "years";
                 timeDifference /= oneYear;
             }
-            document.getElementById("update-time-" + store).innerHTML = "Updated "
-                + Math.floor(timeDifference) + " " + unitOfTime + " ago";
+            document.getElementById("update-time-" + store).innerHTML = "Updated " +
+                Math.floor(timeDifference) + " " + unitOfTime + " ago";
             // Add last update as a url query string for use in store front page
             var currentStore = document.getElementById("store-name-" + store);
             var currentHref = currentStore.getAttribute("href");
-            currentStore.setAttribute("href", currentHref + "&updated=" + Math.floor(timeDifference)
-                + "&updateunit=" + unitOfTime);
+            currentStore.setAttribute("href", currentHref + "&updated=" + Math.floor(timeDifference) +
+                "&updateunit=" + unitOfTime);
         })
 }
 

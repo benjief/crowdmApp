@@ -21,7 +21,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "auth-container"
         "employee-message"
         "employee-login-button";
@@ -65,4 +65,3 @@
     width: 210px;
     margin-bottom: 18px;
 }
-

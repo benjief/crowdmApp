@@ -1,12 +1,11 @@
-
 /********* Stylesheet for stores.html *********/
 
 .container {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "page-heading"
         "content-card"
-        "footer"; 
+        "footer";
 }
 
 .heading-container {
@@ -19,7 +18,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "info-burnaby"
         "info-downtown"
         "info-richmond";
@@ -30,7 +29,7 @@
     display: grid;
     grid-template-columns: 40% 35% 25%;
     grid-template-rows: 30px 45px;
-    grid-template-areas: 
+    grid-template-areas:
         "update-time update-time ."
         "store-name current-headcount previous-headcount";
     width: 95%;
@@ -135,7 +134,7 @@
     .previous-headcount-container p {
         font-size: 10pt;
     }
-    
+
     .update-time-container {
         font-size: 10pt;
     }

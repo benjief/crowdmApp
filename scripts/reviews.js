@@ -49,18 +49,18 @@ function postReviews(start, end) {
     // Append a message to the DOM if no reviews have been posted
     if (!masterArray[0]) {
         var i = 0;
-        var review = "<div class='review' id='review-" + i.toString()
-            + "'></div>";
+        var review = "<div class='review' id='review-" + i.toString() +
+            "'></div>";
         // Add reviewer name, rating, date and comment to each review
         $(".review-container").append(review);
         $("#review-" + i.toString()).append("<div class='review-name-rating-date' id='review-name-rating-date-" + i.toString() + "'></div>");
         $("#review-name-rating-date-" + i.toString()).append("<div class='review-name-rating' id='review-name-rating-" + i.toString() + "'></div>");
         $("#review-name-rating-" + i.toString()).append("<p id='reviewer-name'>No reviews have been posted!</p>");
-      // Append reviews to the DOM if at least one exists
+        // Append reviews to the DOM if at least one exists
     } else {
         for (var i = start; i < end; i++) {
-            var review = "<div class='review' id='review-" + i.toString()
-                + "'></div>";
+            var review = "<div class='review' id='review-" + i.toString() +
+                "'></div>";
             // Add reviewer name, rating, date and comment to each review
             $(".review-container").append(review);
             $("#review-" + i.toString()).append("<div class='review-name-rating-date' id='review-name-rating-date-" + i.toString() + "'></div>");
@@ -89,7 +89,12 @@ function getReviews(store) {
                 var date = doc.data().Date_Time.toDate().toDateString();
                 var comment = doc.data().Reviewer_Comment;
                 // Create JSON object to house review information
-                var reviewInfo = { "name": name, "rating": rating, "date": date, "comment": comment };
+                var reviewInfo = {
+                    "name": name,
+                    "rating": rating,
+                    "date": date,
+                    "comment": comment
+                };
                 addToMasterArray(reviewInfo);
             });
             console.log(masterArray);
@@ -105,7 +110,9 @@ function getReviews(store) {
                 var loadMoreButton = "<button id='load-more-button' class='btn btn-primary button-main'" +
                     "onclick='loadAllReviews()'>Load More</button>";
                 $(".button-container").append(loadMoreButton);
-                $(".review-container").css({ marginBottom: "10px" });
+                $(".review-container").css({
+                    marginBottom: "10px"
+                });
             }
         });
 }
@@ -114,7 +121,9 @@ function getReviews(store) {
    ending at the last index of the reviews array */
 function loadAllReviews() {
     postReviews(defaultReviewsPosted, masterArray.length)
-    $("#load-more-button").css({ display: "none" });
+    $("#load-more-button").css({
+        display: "none"
+    });
 }
 
 /* Get (from Firestore), update and post average ratings for the correct location (again, pulled from a url query string)
@@ -137,14 +146,14 @@ function updateRating(store) {
             if (ratings[0]) {
                 // If ratings exist, average them
                 avgRating = sum / ratings.length;
-              // If no ratings exist, the average rating is set to 0
+                // If no ratings exist, the average rating is set to 0
             } else {
                 avgRating = 0;
             }
             // If no ratings have yet been submitted, post "-/5" (0/5 seems misleading)
             if (avgRating == 0) {
                 document.getElementById("current-rating").innerHTML = "Average Rating: -/5";
-              // If an average rating exists, post it
+                // If an average rating exists, post it
             } else {
                 document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
                     .toFixed(1) + "/5";
@@ -155,7 +164,7 @@ function updateRating(store) {
 
 /* Call functions when the page is ready 
       @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
-                     properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */ 
+                     properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 $(document).ready(function () {
     const parsedUrl = new URL(window.location.href);
     var store = parsedUrl.searchParams.get("store");

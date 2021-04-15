@@ -62,8 +62,8 @@ $(document).ready(function () {
     const parsedUrl = new URL(window.location.href);
     var store = parsedUrl.searchParams.get("store");
     var headcount = "Current Occupancy: " + parsedUrl.searchParams.get("headcount") + "/300";
-    var lastUpdate = "Updated " + parsedUrl.searchParams.get("updated") + " "
-        + parsedUrl.searchParams.get("updateunit") + " ago";
+    var lastUpdate = "Updated " + parsedUrl.searchParams.get("updated") + " " +
+        parsedUrl.searchParams.get("updateunit") + " ago";
     getStoreDetails(store, headcount, lastUpdate);
     displayButtons(store);
 });

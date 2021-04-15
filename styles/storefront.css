@@ -2,7 +2,7 @@
 
 .container {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "heading"
         "content-card"
         "footer";
@@ -20,7 +20,7 @@
 
 .main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "map"
         "store-info"
         "buttons";
@@ -48,7 +48,8 @@ iframe {
     text-align: center;
 }
 
-.store-name-container p, .store-info-container p {
+.store-name-container p,
+.store-info-container p {
     display: flex;
     height: 100%;
     align-items: center;
@@ -78,7 +79,8 @@ footer {
         height: 400px;
     }
 
-    .store-name-container p, .store-info-container p {
+    .store-name-container p,
+    .store-info-container p {
         font-size: 15pt;
     }
 }

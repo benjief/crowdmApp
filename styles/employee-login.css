@@ -21,7 +21,7 @@
 
 #main-content-card {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         "auth-container"
         "member-message"
         "member-login-button";

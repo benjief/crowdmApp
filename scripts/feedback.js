@@ -33,6 +33,7 @@ $(function () {
 
 // Store rating
 var rating;
+
 function getRating(starRating) {
     rating = starRating.value;
 }
@@ -71,16 +72,16 @@ function checkRating() {
 
 /* Write a review to Firestore; only the most up-to-date review is stored. If a user submits a subsequent
    review for the same store, their previous review will be overwritten
-   @param store - String containing the store to be reviewed*/ 
+   @param store - String containing the store to be reviewed*/
 function addReview(store) {
     db.collection("Stores").doc(store).collection("Reviews").doc(firebase.auth().currentUser.displayName).set({
-        id: firebase.auth().currentUser.displayName,
-        Reviewer_Name: firebase.auth().currentUser.displayName,
-        Reviewer_Email: firebase.auth().currentUser.email,
-        Reviewer_Rating: parseInt(rating),
-        Reviewer_Comment: document.getElementById("comment_box").value,
-        Date_Time: firebase.firestore.FieldValue.serverTimestamp()
-    })
+            id: firebase.auth().currentUser.displayName,
+            Reviewer_Name: firebase.auth().currentUser.displayName,
+            Reviewer_Email: firebase.auth().currentUser.email,
+            Reviewer_Rating: parseInt(rating),
+            Reviewer_Comment: document.getElementById("comment_box").value,
+            Date_Time: firebase.firestore.FieldValue.serverTimestamp()
+        })
         .then(() => {
             console.log("Document successfully written!");
         })
@@ -108,7 +109,8 @@ function onClickSubmit() {
         });
         $(feedback).show(0);
         $(feedback).fadeOut(2500);
-        setTimeout(function () { 
-            location.href = "/web/member/main.html"}, 2300);
+        setTimeout(function () {
+            location.href = "/web/member/main.html"
+        }, 2300);
     }
 }
