@@ -1,4 +1,5 @@
-/**************** Stores_Main****************/
+// JS for stores.html
+
 var stores = ["Burnaby", "Downtown", "Richmond"];
 
 // Read store name from Firestore and populate box headers in DOM

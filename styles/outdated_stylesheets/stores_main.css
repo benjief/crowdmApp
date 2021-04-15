@@ -1,0 +1,102 @@
+
+/********* Stylesheet for stores_main.html *********/
+.container {
+    display: grid;
+    grid-template-areas: 
+        "page-header"
+        "info-burnaby"
+        "info-downtown"
+        "info-richmond"
+        "footer";
+    width: 100%;    
+}
+
+.heading-container {
+    display: flex;
+    grid-area: page-header;
+    justify-content: center;
+}
+
+#heading {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.store-info-container {
+    display: grid;
+    grid-template-columns: 40% 23% 13% 24%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "update-time update-time update-time update-time"
+        "store-name headcount ticker previous-headcount";
+    width: 100%;
+    align-items: center;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    border: solid 1px black;
+}
+
+#info-burnaby {
+    grid-area: info-burnaby;
+}
+
+#info-downtown {
+    grid-area: info-downtown;
+}
+
+#info-richmond {
+    grid-area: info-richmond;
+}
+
+.store-name-container {
+    display: flex;
+    grid-area: store-name;
+    margin-left: 3%;
+}
+
+.headcount-container {
+    grid-area: headcount;
+}
+
+.ticker-container {
+    display: flex;
+    justify-content: flex-start;
+    grid-area: ticker;
+}
+
+.ticker {
+    height: 25px;
+    width: auto;
+    position: relative;
+    top: -3px;
+}
+
+.previous-headcount-container {
+    display: flex;
+    justify-content: flex-end;
+    grid-area: previous-headcount;
+    height: 100%;
+    margin-right: 5%;
+}
+
+.previous-headcount-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.update-time-container {
+    display: flex;
+    justify-content: flex-start;
+    grid-area: update-time;
+    height: 100%;
+    margin-left: 1%;
+    font-size: 8pt;
+}
+
+.update-time-container p {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}

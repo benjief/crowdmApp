@@ -1,3 +1,5 @@
+// JS for storefront.html
+
 // Read store data in from Firestore based on a parsed URL, and display store details on the screen
 function getStoreDetails(store, headcount, lastUpdate) {
     db.collection("Stores").doc("Costco_" + store)

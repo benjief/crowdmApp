@@ -1,3 +1,5 @@
+/********* Stylesheet for main.html (employee) *********/
+
 .container {
     grid-template-areas:
         "heading"

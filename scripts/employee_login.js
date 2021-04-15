@@ -1,3 +1,5 @@
+// JS for employee_login.html
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var uiConfig = {
@@ -19,7 +21,7 @@ var uiConfig = {
                 db.collection("Users").doc(user.uid).set({ //write to firestore
                         Name: user.displayName, //"users" collection
                         Email: user.email, //with authenticated user's ID (user.uid)
-                        User_Group: "employee"
+                        User_Group: "employee" //employee user group
                     })
                     .then(function () {
                         console.log("New user added to firestore");

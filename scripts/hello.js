@@ -1,3 +1,5 @@
+// JS for personalized greetings (main.html, feedback.html)
+
 function sayHello() {
     firebase.auth().onAuthStateChanged(function (somebody) {
         if (somebody) {

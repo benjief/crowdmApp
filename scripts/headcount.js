@@ -1,3 +1,5 @@
+// JS for headcount.html
+
 /* Set variables up to increase/decrease headcount, the selected store name, the days of the week, the current weekday, 
 and the previous headcount */
 var timeout, interval, headcount = 0;

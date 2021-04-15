@@ -1,4 +1,4 @@
-/***************** reviews *****************/
+// JS for reviews.html
 
 // Create empty array to store all reviews pulled from Firestore
 var masterArray = [];
@@ -127,8 +127,7 @@ function updateRating(store) {
                 avgRating = 0;
             }
             if (avgRating == 0) {
-                document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
-                    .toFixed(0) + "/5";
+                document.getElementById("current-rating").innerHTML = "Average Rating: -/5";
             } else {
                 document.getElementById("current-rating").innerHTML = "Average Rating: " + avgRating
                     .toFixed(1) + "/5";

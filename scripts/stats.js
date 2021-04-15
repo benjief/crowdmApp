@@ -1,4 +1,5 @@
-/***************** STATS *****************/
+// JS for stats.html
+
 const parsedUrl = new URL(window.location.href);
 var store = parsedUrl.searchParams.get("store");
 var weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

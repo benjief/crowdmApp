@@ -1,3 +1,5 @@
+// JS for feedback.html
+
 // Set up a flags to check if the users submission is valid
 var noStoreSelected;
 var noRating;
