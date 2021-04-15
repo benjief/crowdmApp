@@ -17,7 +17,7 @@ Technologies used for this project:
 ## Content
  Top level of project folder: 
 ├── .gitignore                     # Git ignore file
-├── .vs                            # Folder for 
+├── .vs                            # vs
 ├── .vscode                        # Folder for the live server settings port
 ├── jquery_plugins                 # Folder for plugins like the jquery star-rating feature
 └── README.md                      # README file
@@ -74,23 +74,23 @@ It has the following subfolders and files:
     └── outdated-scripts           # Folder for unused or obsolete files
 ├── styles                         # Folder for stylesheets
     /all-pages.css                 # Styles every page
-    /employee-login.css            # Styles specifically for 
-    /employee-main.css             # Styles specifically for 
-    /feedback.css                  # Styles specifically for 
-    /headcount.css                 # Styles specifically for 
-    /index.css                     # Styles specifically for 
-    /member-login.css              # Styles specifically for 
-    /member-main.css               # Styles specifically for 
-    /more-info.css                 # Styles specifically for 
-    /reviews.css                   # Styles specifically for 
-    /stats.css                     # Styles specifically for 
-    /storefront.css                # Styles specifically for 
-    /stores.css                    # Styles specifically for 
+    /employee-login.css            # Styles specifically for employee-login.html
+    /employee-main.css             # Styles specifically for employee's main.html
+    /feedback.css                  # Styles specifically for feedback.html
+    /headcount.css                 # Styles specifically for headcount.html
+    /index.css                     # Styles specifically for index.html
+    /member-login.css              # Styles specifically for member-login.html
+    /member-main.css               # Styles specifically for member's main.html
+    /more-info.css                 # Styles specifically for more-info.html
+    /reviews.css                   # Styles specifically for reviews.html
+    /stats.css                     # Styles specifically for stats.html
+    /storefront.css                # Styles specifically for storefront.html
+    /stores.css                    # Styles specifically for stores.html
     └── outdated-scripts           # Folder for unused or obsolete files
 Firebase hosting files:               
-├── .firebase                      #
-├── .firebase.json                 #
-├── .firebaserc                    #
-├── firestore.rules                #
-├── storage.rules                  #
-└── firestore.indexes.json         #
+├── .firebase                      # firebase
+├── .firebase.json                 # firebase json
+├── .firebaserc                    # firebaserc
+├── firestore.rules                # firestore rules
+├── storage.rules                  # storage rules
+└── firestore.indexes.json         # firestore indexes json
