@@ -6,7 +6,8 @@ var noRating;
 
 var store;
 
-// Get store selected from dropdown menu 
+/* Get store selected from dropdown menu
+   @param floatingSelect - the selected item from the dropdown list (specified in feedback.html) */
 function getSelectedStore(floatingSelect) {
     var selectedStore = floatingSelect.value;
     store = "Costco_" + selectedStore;
@@ -23,20 +24,20 @@ function textCounter(field, field2, maxlimit) {
     }
 }
 
-// Star rating bar
+// Display star rating bar
 $(function () {
     $('#star-rating').barrating({
         theme: 'fontawesome-stars'
     });
 });
 
-// Record rating
+// Store rating
 var rating;
 function getRating(starRating) {
     rating = starRating.value;
 }
 
-// Make sure a store has been selected
+// Make sure a store has been selected before allowing a user to submit a review
 function checkSelection() {
     if (!store || store === "Costco_invalid") {
         feedback.innerHTML = "Please select a valid Costco location"
@@ -52,7 +53,7 @@ function checkSelection() {
     }
 }
 
-// Make sure a rating has been given
+// Ensure that a rating has been given before allowing the user to submit a review
 function checkRating() {
     if (!rating) {
         feedback.innerHTML = "Please rate your experience"
@@ -68,7 +69,9 @@ function checkRating() {
     }
 }
 
-// Add a review to Firestore; only the most up-to-date review is stored
+/* Write a review to Firestore; only the most up-to-date review is stored. If a user submits a subsequent
+   review for the same store, their previous review will be overwritten
+   @param store - String containing the store to be reviewed*/ 
 function addReview(store) {
     db.collection("Stores").doc(store).collection("Reviews").doc(firebase.auth().currentUser.displayName).set({
         id: firebase.auth().currentUser.displayName,

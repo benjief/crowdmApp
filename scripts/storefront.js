@@ -1,6 +1,10 @@
 // JS for storefront.html
 
-// Read store data in from Firestore based on a parsed URL, and display store details on the screen
+/* Read store data in from Firestore based on a parsed URL, and display store details on the screen
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
+   @param headcount - int containing the current headcount at this location 
+   @param lastUpdate - time that has passed since the last headcount update was posted at this location */
 function getStoreDetails(store, headcount, lastUpdate) {
     db.collection("Stores").doc("Costco_" + store)
         .onSnapshot((doc) => {
@@ -27,7 +31,9 @@ function getStoreDetails(store, headcount, lastUpdate) {
         });
 }
 
-// Display buttons for reviews and historical statistics with appropriate links attached (based on store location)
+/* Display buttons for reviews and historical statistics with appropriate links attached (based on store location)
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function displayButtons(store) {
     // "View Reviews" button
     jQuery('<a/>', {
@@ -47,7 +53,11 @@ function displayButtons(store) {
     }).appendTo('.button-container');
 }
 
-// Call functions
+/* Call functions when the page is ready
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
+   @param headcount - int containing the current headcount at this location 
+   @param lastUpdate - time that has passed since the last headcount update was posted at this location */
 $(document).ready(function () {
     const parsedUrl = new URL(window.location.href);
     var store = parsedUrl.searchParams.get("store");

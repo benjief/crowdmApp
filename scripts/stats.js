@@ -38,17 +38,20 @@ function resetArrays() {
 }
 
 
-// Write the store name at the top of the screen
+/* Write the store name at the top of the screen
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) */
 function writeStoreName(store) {
     $(".page-heading").html("Stats: Costco " + store);
 }
 
-// Add JSON object to master array containing all updates
+/* Add JSON object to master array containing all updates
+   @param updateInfo - JSON object holding statistical attributes as key : value pairs (hour and headcount) */
 function addToMasterArray(updateInfo) {
     masterArray.push(updateInfo);
 }
 
-// Calculate hourly averages from headcount update documents
+// Calculate hourly averages from headcount update documents (read from Firestore)
 function calculateHourlyAverages() {
     for (var i = 0; i < hourlyAverages.length; i++) {
         var sum = 0;
@@ -70,7 +73,8 @@ function calculateHourlyAverages() {
     }
 }
 
-// Create an array of hours to populate the DOM
+/* Create an array of hours to populate the DOM (i.e. the "Time" column of the historical stats table)
+   Note that these times correspond to the opening hours of all Costco locations we're dealing with (9:00 AM - 8:30 PM) */
 function formatTimes() {
     for (var i = 0; i < hoursIn24HrFormat.length; i++) {
         // Format the hour nicely
@@ -86,7 +90,7 @@ function formatTimes() {
     }
 }
 
-// Erase times and their corresponding headcounts from the DOM if they exist
+// Erase times and their corresponding headcounts from the DOM if they exist (prevents strange behaviour upon reload/update)
 function eraseInfoFromDom() {
     var tableData = document.getElementsByClassName('hour-row');
     while (tableData[0]) {
@@ -109,7 +113,10 @@ function appendInfoToDom() {
     }
 }
 
-// Get headcount updates for the current day
+/* Get headcount updates for the current day from Firestore
+   @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                  properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
+   @param currentDay - String containing the name of the current weekday (e.g. "Friday") */
 function getUpdateInfo(store, currentDay) {
     db.collection("Stores").doc("Costco_" + store).collection(currentDay)
         // .where("Current_Headcount", "!=", null)
@@ -128,6 +135,7 @@ function getUpdateInfo(store, currentDay) {
         });
 }
 
+// Moves the weekday one day back and calls getUpdateInfo, which loads the correct historical stats for that day
 function moveDayBack() {
     if (currentDay === weekdays[0]) {
         currentDay = weekdays[weekdays.length - 1];
@@ -139,6 +147,7 @@ function moveDayBack() {
     getUpdateInfo(store, currentDay);
 }
 
+// Moves the weekday one day forward and calls getUpdateInfo, which loads the correct historical stats for that day
 function moveDayForward() {
     if (currentDay === weekdays[weekdays.length - 1]) {
         currentDay = weekdays[0];
@@ -152,6 +161,11 @@ function moveDayForward() {
     console.log(masterArray);
 }
 
+/* Call functions when the page is ready 
+      @param store - String containing the store's location (e.g. "Burnaby"). Note that this isn't
+                     properly formatted for accessing a Firestore collection ("Costco_" needs to be added first) 
+      @param currentDay - String containing the name of the current weekday (e.g. "Friday") */
+      
 $(document).ready(function () {
     writeStoreName(store);
     getUpdateInfo(store, currentDay);
