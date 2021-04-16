@@ -47,24 +47,26 @@
         </div>
     </nav>
 
-    <div id="content-container">
-        <div id="store-name-container">
-            <p id="store-name"></p>
+    <div class="container">
+        <div class="heading-container">
+            <p class="page-heading"></p>
+        </div>
+        <div id="main-content-card">
+            <div class="day-selector-container">
+                <p class="day-selector" onclick="moveDayBack()">&lt;&nbsp;&nbsp;</p>
+                <p id="current-day"></p>
+                <p class="day-selector" onclick="moveDayForward()">&nbsp;&nbsp;&gt;</p>
+            </div>
+            <div class="stats-container">
+                <table id="stats-table">
+                    <tr id="table-header">
+                        <th>Time</th>
+                        <th>Average Headcount</th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
-        <div class="day-selector-container">
-            <p class="day-selector" onclick="moveDayBack()">&lt;&nbsp;&nbsp;</p>
-            <p id="current-day"></p>
-            <p class="day-selector" onclick="moveDayForward()">&nbsp;&nbsp;&gt;</p>
-        </div>
-        <div class="stats-container">
-            <table id="stats-table">
-                <tr id="table-header">
-                    <th>Time</th>
-                    <th>Average Headcount</th>
-                </tr>
-            </table>
-        </div>
         <footer>
             <a><img id="back-button" src="/images/back_arrow.png" alt="back-arrow" onclick="history.back()"></a>
             <p id=back-button-text>Back</p>
